@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_marginTop="16dp"
+  android:layout_marginBottom="16dp"
+  android:layout_gravity="center"
+  android:background="@color/transparent"
+  android:orientation="vertical">
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="8dp"
+    >
+    <TextView
+      android:id="@+id/txt_dia"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="Nerd Mode"
+      android:textColor="@color/colorAccent"
+      android:textSize="15sp"
+      android:textStyle="bold" />
+    <ImageView
+      android:id="@+id/dialog_cancel"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_alignParentEnd="true"
+      android:padding="4dp"
+      android:layout_gravity="end"
+      app:srcCompat="@drawable/ic_cancel"
+      />
+  </RelativeLayout>
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingBottom="8dp"
+    android:layout_gravity="center"
+    android:text="This feature is in beta mode"
+    android:textColor="@color/white"
+    android:textSize="12sp"
+    android:textStyle="bold" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    >
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      android:paddingRight="4dp"
+      >
+
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:text="GPS Satellite Count"
+        android:textColor="@color/white" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:text="GSM  Signal Quality"
+        android:textColor="@color/white" />
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Latitude"
+        android:textColor="@color/white" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Longitude"
+        android:textColor="@color/white"/>
+
+      <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Speed"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="RPM"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Coolant Temperature"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Battery"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="IMAP"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Mass Air Flow Rate"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Intake Absolute Temp."
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Load"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Throttle Position"
+        android:textColor="@color/white" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Time Since Last Ping"
+        android:textColor="@color/white" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:layout_gravity="center"
+        android:gravity="end"
+        android:text="Average Ping Frequency"
+        android:textColor="@color/white" />
+
+
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:paddingLeft="4dp"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/dialog_gps_satellite"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="--"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+      <TextView
+        android:id="@+id/dialog_gsm_signal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+
+      <TextView
+        android:id="@+id/tv_dialog_latitude"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="--"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+      <TextView
+        android:id="@+id/tv_dialog_longitude"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:text="--"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+      <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"/>
+
+      <TextView
+        android:id="@+id/dialog_car_speed"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_tv_rpm"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_tv_coolant"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_tv_battery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_imap"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_map"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+
+      <TextView
+        android:id="@+id/dialog_iat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:id="@+id/dialog_tv_load"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:id="@+id/dialog_tv_throttle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <Chronometer
+        android:id="@+id/dialog_cm_last_ping"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+      <TextView
+        android:id="@+id/dialog_avg_ping_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:textStyle="bold"
+        android:text="--"
+        android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+
+</LinearLayout>

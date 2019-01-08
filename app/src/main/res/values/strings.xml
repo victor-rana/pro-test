@@ -1,0 +1,22 @@
+<resources>
+  <string name="app_name">ZymmPro</string>
+
+  <string name="text_forgot_password">Forgot password?</string>
+  <string name="text_login">Login</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="name">Name</string>
+  <string name="mobile">Mobile</string>
+  <string name="terms_and_conditions">Terms and Conditions</string>
+  <string name="i_agree">I agree to the </string>
+  <string name="signup">Signup</string>
+  <string name="no_internet">No Internet Connection</string>
+  <string name="drawer_open">Open</string>
+  <string name="drawer_close">Close</string>
+  <string name="title_history">Past Trips</string>
+  <string name="title_alert">Alerts</string>
+  <string name="title_scan">Scan</string>
+  <string name="title_pitstop">Pitstop</string>
+  <string name="title_analytics">Analytics</string>
+
+</resources>

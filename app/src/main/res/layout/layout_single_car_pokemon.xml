@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  android:id="@+id/pokemon_and_ripple"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <View
+    android:id="@+id/view_click"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone" />
+  <RelativeLayout
+    android:id="@+id/pokemon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <LinearLayout
+      android:id="@+id/layout_container_group_top"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_above="@+id/home_container_tv_top"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:orientation="horizontal"
+      android:visibility="gone"
+      android:weightSum="3">
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+
+      <LinearLayout
+        android:id="@+id/iv_nerd_mode"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:background="@drawable/drawable_textview_circle"
+          android:padding="4dp"
+          app:srcCompat="@drawable/ic_rounded_glass" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/iv_dashcam"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:background="@drawable/drawable_textview_circle"
+          android:padding="8dp"
+          app:srcCompat="@drawable/ic_dashcam" />
+      </LinearLayout>
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/home_container_tv_top"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_above="@+id/pokemon_child"
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginRight="40dp"
+      android:layout_marginBottom="20dp"
+      android:clickable="true"
+      android:focusable="true"
+      android:orientation="horizontal"
+      android:visibility="gone"
+      android:weightSum="3">
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Nerd\nMode"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Dashcam"
+        android:textColor="@color/white" />
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+      android:id="@+id/pokemon_child"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_above="@+id/view_center"
+      android:orientation="horizontal">
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+      <TextView
+        android:id="@+id/battery_realtime"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/drawable_speed_rounded_corner_top_right"
+        android:drawableTop="@drawable/ic_battery"
+        android:drawablePadding="-20dp"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <View
+        android:id="@+id/view_middle_textview"
+        android:layout_width="4dp"
+        android:layout_height="match_parent" />
+
+      <TextView
+        android:id="@+id/speed_realtime"
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/view_middle_textview"
+        android:layout_weight="1"
+        android:background="#a0000000"
+        android:drawableTop="@drawable/ic_speedometer"
+        android:drawablePadding="-20dp"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <View
+        android:id="@+id/view1_middle_textview"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+
+      <TextView
+        android:id="@+id/coolant_realtime"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/view_middle_textview"
+        android:layout_weight="1"
+        android:background="@drawable/drawable_rpm_rounded_corner_top_right"
+        android:drawableTop="@drawable/ic_thermometer"
+        android:drawablePadding="-20dp"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="--"
+        android:textColor="@color/white" />
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+    <View
+      android:id="@+id/view_center"
+      android:layout_width="match_parent"
+      android:layout_height="4dp"
+      android:layout_centerInParent="true" />
+
+    <LinearLayout
+      android:id="@+id/address_layout"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_below="@+id/view_center"
+      android:orientation="horizontal">
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+      <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <TextView
+          android:id="@+id/address_realtime"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/drawable_address_rounded_corner"
+          android:ellipsize="end"
+          android:gravity="center"
+          android:maxLines="2"
+          android:paddingLeft="4dp"
+          android:paddingRight="4dp"
+          android:text="--"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:id="@+id/address_lastupdate_time"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:background="@drawable/drawable_address_rounded_corner"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textSize="8sp" />
+      </RelativeLayout>
+
+      <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/layout_container_group"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_below="@+id/address_layout"
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginRight="40dp"
+      android:orientation="horizontal"
+      android:weightSum="3">
+
+      <LinearLayout
+        android:id="@+id/iv_takemeonlocation"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:background="@drawable/drawable_textview_circle"
+          android:padding="8dp"
+          app:srcCompat="@drawable/ic_share" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/iv_sos"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:background="@drawable/drawable_textview_circle"
+          android:padding="4dp"
+          android:src="@drawable/ic_sos" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/iv_parkcarlocator"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:background="@drawable/drawable_textview_circle"
+          android:padding="8dp"
+          android:src="@drawable/parked_car_locator" />
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_below="@+id/layout_container_group"
+      android:layout_marginLeft="40dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginRight="40dp"
+      android:orientation="horizontal"
+      android:weightSum="3">
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Share\nLocation"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Send\nSOS"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Car\nLocator"
+        android:textColor="@color/white" />
+
+    </LinearLayout>
+
+  </RelativeLayout>
+  <blackflame.com.zymepro.view.custom.RippleBackground
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ripple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@drawable/bg_ripple_background"
+    app:rb_color="#bd2da9e1"
+    app:rb_duration="4000"
+    app:rb_radius="16dp"
+    app:rb_rippleAmount="2"
+    app:rb_type="fillRipple">
+
+    <ImageView
+      android:id="@+id/centerImage"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_centerInParent="true"
+      android:src="@drawable/ic_car_big"
+      android:visibility="gone" />
+  </blackflame.com.zymepro.view.custom.RippleBackground>
+
+
+</RelativeLayout>

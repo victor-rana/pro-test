@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "630398896663",
+    "firebase_url": "https://zyme-pro.firebaseio.com",
+    "project_id": "zyme-pro",
+    "storage_bucket": "zyme-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630398896663:android:a8f48cf916b0a9ec",
+        "android_client_info": {
+          "package_name": "blackflame.com.zymepro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630398896663-vom1leqh3t0citvdrscsjpgfmijigblo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "blackflame.com.zymepro",
+            "certificate_hash": "e93c1284eaf55c06a6fd937f3b8e98dcef7b88ff"
+          }
+        },
+        {
+          "client_id": "630398896663-1ef2c46fmp6gm4amlrpurf2stcijpvk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7at_en5o2viBqsHAx22z0NGivwkfeuKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630398896663-1ef2c46fmp6gm4amlrpurf2stcijpvk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

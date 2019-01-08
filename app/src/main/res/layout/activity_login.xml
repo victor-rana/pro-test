@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.login.LoginActivity"
+  android:background="@color/black"
+  android:orientation="vertical"
+>
+  <blackflame.com.zymepro.view.custom.SwitchMultiButton
+    android:id="@+id/switch_login"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="20dp"
+    app:selectedColor="@color/colorAccent"
+    app:selectedTab="0"
+    app:strokeRadius="8dp"
+    app:strokeWidth="1dp"
+    app:textSize="14sp"
+
+    />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_login"
+    android:layout_margin="20dp"></FrameLayout>
+
+</LinearLayout>

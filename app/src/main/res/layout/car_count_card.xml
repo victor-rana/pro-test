@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/car1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/current_car"
+    android:orientation="vertical"
+    
+   >
+    
+    <TextView
+        android:id="@+id/carbrand"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="#2da9e1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    
+    <TextView
+        android:id="@+id/registration"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="#46000000"/>
+</LinearLayout>
