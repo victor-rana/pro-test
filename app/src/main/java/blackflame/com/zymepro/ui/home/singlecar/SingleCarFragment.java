@@ -1,14 +1,9 @@
 package blackflame.com.zymepro.ui.home.singlecar;
 
-import static blackflame.com.zymepro.R.id.add;
 import static blackflame.com.zymepro.R.id.car_selection_bg_opacity;
-import static blackflame.com.zymepro.R.id.image;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +13,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,14 +24,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import blackflame.com.zymepro.ui.activation.ActivityActivation;
 import blackflame.com.zymepro.Prosingleton;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
-import blackflame.com.zymepro.common.Constants;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.constant.PermissionConstants;
-import blackflame.com.zymepro.constant.PermissionConstants.Permission;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.dialog.NerdModeDialog;
 import blackflame.com.zymepro.io.http.ApiRequests;
@@ -47,7 +40,6 @@ import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.mqtt.MqttHandler;
 import blackflame.com.zymepro.ui.home.MqttDataListener;
 import blackflame.com.zymepro.ui.home.multicar.MulticarFragment;
-import blackflame.com.zymepro.ui.login.fragment.loginfragment.LoginFragment;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.PermissionUtils;
 import blackflame.com.zymepro.util.PermissionUtils.SimpleCallback;
@@ -61,7 +53,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -752,11 +743,10 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void navigationToActivation(String imei) {
-//    Intent intent = new Intent(getActivity(), ActivityActivation.class);
-//    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-//
-//      intent.putExtra("imei", imei);
-//    startActivity(intent);
+    Intent intent = new Intent(getActivity(), ActivityActivation.class);
+    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+    intent.putExtra("imei", imei);
+    startActivity(intent);
   }
 
   @Override

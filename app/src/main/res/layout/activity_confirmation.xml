@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black">
+  <LinearLayout
+    android:id="@+id/rl_allset"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    >
+    <ImageView
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_gravity="center"
+      app:srcCompat="@drawable/ic_like"
+
+      />
+    <TextView
+      android:id="@+id/tv_allset"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/all_set"
+      android:textColor="@color/white"
+      android:padding="8dp"
+      android:layout_marginTop="20dp"
+      android:gravity="center_horizontal"
+      />
+    <Button
+      android:id="@+id/btn_ready"
+      android:background="@drawable/bg_btn_rounded_blue"
+      android:gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/lets_go"
+      android:layout_marginTop="20dp"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:textColor="@color/white"
+      />
+
+  </LinearLayout>
+  <RelativeLayout
+    android:id="@+id/rl_activatio_failed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+      android:id="@+id/tv_failed"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/activation_failed"
+      android:gravity="center_horizontal"
+      android:layout_marginTop="20dp"
+      android:padding="16dp"
+      android:textColor="@color/white"/>
+    <ImageView
+      android:id="@+id/iv_failed"
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/tv_failed"
+      app:srcCompat="@drawable/ic_warning"
+
+      />
+    <TextView
+      android:id="@+id/tv_description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Make sure \n your car ignition is on \n you are in open area"
+      android:textColor="@color/white"
+      android:gravity="center"
+      android:layout_marginTop="12dp"
+      android:layout_below="@+id/iv_failed"
+      />
+    <TextView
+      android:id="@+id/btn_contact"
+      android:text="@string/contact_us"
+      android:textColor="@color/black"
+      android:background="@drawable/bg_btn_rounded_blue"
+      android:layout_centerHorizontal="true"
+      android:layout_above="@+id/btn_tryagain"
+      android:layout_marginBottom="12dp"
+      android:padding="12dp"
+      android:paddingLeft="12dp"
+      android:paddingRight="12dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+    <Button
+      android:id="@+id/btn_troubleshoot"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/troubleshooting"
+      android:background="@drawable/bg_rounded_grey"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:layout_marginBottom="20dp"/>
+    <Button
+      android:id="@+id/btn_tryagain"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Try Again"
+      android:paddingLeft="8dp"
+      android:paddingRight="8dp"
+      android:background="@drawable/bg_rounded_grey"
+      android:layout_above="@+id/btn_troubleshoot"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="8dp"/>
+
+
+  </RelativeLayout>
+
+</RelativeLayout>

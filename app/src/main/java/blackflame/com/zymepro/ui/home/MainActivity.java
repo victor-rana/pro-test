@@ -1,6 +1,7 @@
 package blackflame.com.zymepro.ui.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,7 @@ import blackflame.com.zymepro.ui.home.multicar.MulticarFragment;
 import blackflame.com.zymepro.ui.home.navigation.NavigationFragment;
 import blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment;
 import blackflame.com.zymepro.ui.login.fragment.loginfragment.LoginFragment;
+import blackflame.com.zymepro.ui.setting.SettingActivity;
 import blackflame.com.zymepro.util.ActivityUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
@@ -70,8 +72,7 @@ NavigationFragment navigationFragment;
     setting.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-
-
+        startActivity(new Intent(MainActivity.this, SettingActivity.class));
 
       }
     });
@@ -89,9 +90,13 @@ NavigationFragment navigationFragment;
       @Override
       public void onClick(View v) {
 
-
       }
     });
+
+
+
+
+
 
 
   }

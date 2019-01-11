@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black"
+  android:orientation="vertical">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/btn_carinfo_continue"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="2"
+      android:gravity="center"
+      android:text="Car Details"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:textStyle="bold"/>
+
+    <android.support.design.widget.TextInputEditText
+      android:id="@+id/tv_name"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="1"
+      android:background="@null"
+      android:drawableLeft="@drawable/ic_avatar"
+      android:drawablePadding="8dp"
+      android:gravity="start|center"
+      android:hint="My Batmobile"
+      android:inputType="text"
+      android:maxLines="1"
+      android:textColor="@color/white"
+      android:textColorHint="#4cffffff"
+      android:textSize="16sp"
+      />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:background="@color/white"/>
+
+    <android.support.design.widget.TextInputEditText
+      android:id="@+id/tv_regnumber"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="1"
+      android:background="@null"
+      android:drawableLeft="@drawable/ic_number_plate"
+      android:drawablePadding="8dp"
+      android:gravity="start|center"
+      android:hint="DL XX AC XXXX"
+      android:inputType="textCapCharacters"
+      android:maxLines="1"
+      android:textColor="@color/white"
+      android:textColorHint="#4cffffff"
+      android:textSize="16sp"
+      />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:background="@color/white"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="1"
+      android:background="@drawable/bg_rounded_grey_car_info"
+      android:orientation="horizontal"
+      android:padding="8dp">
+
+      <TextView
+        android:id="@+id/tv_brand"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Brand"
+        android:textColor="@color/white"/>
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#1e1f1f"/>
+
+      <TextView
+        android:id="@+id/tv_model"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Model"
+        android:textColor="@color/white"/>
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#1e1f1f"/>
+
+      <TextView
+        android:id="@+id/tv_cc"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="CC"
+        android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/tv_state"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="1"
+      android:background="@drawable/bg_rounded_grey_car_info"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="Select state"
+      android:textColor="@color/white"/>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="20dp"
+      android:layout_weight="1"
+      android:gravity="center_horizontal|center"
+      android:orientation="horizontal"
+      android:paddingLeft="16dp">
+
+      <RadioGroup
+        android:id="@+id/rg_fueltype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp">
+
+        <RadioButton
+          android:id="@+id/btn_radio_diesel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:button="@drawable/bg_radio_button_drawable"
+          android:paddingLeft="8dp"
+          android:text="Diesel"
+          android:textColor="@color/white"/>
+
+        <RadioButton
+          android:id="@+id/btn_radio_petrol"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:button="@drawable/bg_radio_button_drawable"
+          android:drawablePadding="10dp"
+          android:paddingLeft="8dp"
+          android:text="Petrol"
+          android:textColor="@color/white"
+          />
+
+      </RadioGroup>
+
+    </LinearLayout>
+  </LinearLayout>
+  <Button
+    android:id="@+id/btn_carinfo_continue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/bg_btn_rounded_blue"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:text="Continue"
+    android:textColor="@color/white"/>
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,6 +37,25 @@ public class ApiRequests {
         error = new VolleyErrorListener();
     }
 
+  public void uploadImei(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.LINK_DEVICE;
+      String url = RequestParam.LINK_DEVICE.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+
     public void sign_up(Context context, AppRequest appRequest, JSONObject jsonObject) {
         if (context != null) {
 
@@ -52,6 +72,106 @@ public class ApiRequests {
             appRequest.onRequestStarted(requests, requestParam);
         }
     }
+
+  public void register_car(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.REGISTER_CAR;
+      String url = RequestParam.REGISTER_CAR.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+  public void updateCar(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.UPDATE_CAR;
+      String url = RequestParam.UPDATE_CAR.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.PUT, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+  public void updateUser(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.UPDATE_PROFILE;
+      String url = RequestParam.UPDATE_PROFILE.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+  public void updatePassword(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.UPDATE_PASSWORD;
+      String url = RequestParam.UPDATE_PASSWORD.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+  public void uploadSetting(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.UPLOAD_SETTING;
+      String url = RequestParam.UPLOAD_SETTING.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+  public void get_setting(Context context, AppRequest appRequest,String carId) {
+    if (context != null) {
+      requestParam = RequestParam.GET_SETTING;
+      String url = RequestParam.GET_SETTING.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+
+
     public void login(Context context, AppRequest appRequest, JSONObject jsonObject) {
         if (context != null) {
 
@@ -69,6 +189,22 @@ public class ApiRequests {
         }
     }
 
+
+  public void get_profile(Context context, AppRequest appRequest) {
+    if (context != null) {
+      requestParam = RequestParam.LOAD_PROFILE;
+      String url = RequestParam.LOAD_PROFILE.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
     public void get_status(Context context, AppRequest appRequest) {
         if (context != null) {
             requestParam = RequestParam.STATUS;
@@ -84,7 +220,70 @@ public class ApiRequests {
         }
     }
 
-    public void get_address(Context context, AppRequest appRequest,double lat,double lon) {
+  public void getBrands(Context context, AppRequest appRequest) {
+    if (context != null) {
+      requestParam = RequestParam.LOAD_BRANDS;
+      String url = RequestParam.LOAD_BRANDS.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+  public void getModels(Context context, AppRequest appRequest,String model) {
+    if (context != null) {
+      requestParam = RequestParam.LOAD_MODELS;
+      String url = RequestParam.LOAD_MODELS.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url+model, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+  public void get_last_connection(Context context, AppRequest appRequest,String imei) {
+    if (context != null) {
+      requestParam = RequestParam.STATUS;
+      String url = RequestParam.LAST_CONNECTION.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url+imei, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+  public void get_gps_status(Context context, AppRequest appRequest,String carId) {
+    if (context != null) {
+      requestParam = RequestParam.STATUS;
+      String url = RequestParam.GPS_STATUS.getBaseComleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+  public void get_address(Context context, AppRequest appRequest,double lat,double lon) {
         if (context != null) {
             requestParam = RequestParam.STATUS;
             String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&sensor=true+&key=AIzaSyApjqH7n5NtCjitmRG7ZiFgAsnPICWlrOM";;
@@ -121,6 +320,9 @@ public class ApiRequests {
      * <p/>
      * *
      */
+
+
+
     class VolleyErrorListener implements Response.ErrorListener {
         private AppRequest listener;
         private BaseTask<?> task;
@@ -132,13 +334,11 @@ public class ApiRequests {
             this.task = task;
             this.api_name = api_name;
         }
-
         void setRequestLister(AppRequest listener, BaseTaskJson<JSONObject> task, String api_name) {
             this.listener = listener;
             this.task1 = task;
             this.api_name = api_name;
         }
-
         @Override
         public void onErrorResponse(VolleyError error) {
 

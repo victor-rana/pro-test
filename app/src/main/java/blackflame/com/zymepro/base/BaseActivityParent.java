@@ -1,5 +1,6 @@
 package blackflame.com.zymepro.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -133,5 +135,11 @@ public class BaseActivityParent extends AppCompatActivity {
     fragTransaction.detach(currentFragment);
     fragTransaction.attach(currentFragment);
     fragTransaction.commitAllowingStateLoss();
+  }
+
+
+  public  void hideSoftKeyboard() {
+    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
   }
 }

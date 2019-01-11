@@ -5,7 +5,10 @@ import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -25,6 +28,20 @@ public class BaseActivity extends BaseActivityParent {
     //fragmentManager =getSupportFragmentManager();
 
   }
+  public void setToolbar(Toolbar toolbar,TextView tv,String title){
+    tv.setText(title);
+
+    if (toolbar != null) {
+      try {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
+      }catch (NullPointerException e){}
+    }
+  }
+
+
+
 
   public void removeLocationUpdate(){
     Log.e("BaseActivity", "removeLocationUpdate: "+"removeLocation Call");
@@ -131,5 +148,18 @@ public class BaseActivity extends BaseActivityParent {
     fragTransaction.detach(currentFragment);
     fragTransaction.attach(currentFragment);
     fragTransaction.commitAllowingStateLoss();
+  }
+
+  @Override
+  public boolean onOptionsItemSelected (MenuItem item){
+
+    int id = item.getItemId();
+    switch (id) {
+      case android.R.id.home:
+
+        finish();
+    }
+
+    return super.onOptionsItemSelected(item);
   }
 }

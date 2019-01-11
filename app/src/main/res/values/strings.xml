@@ -18,5 +18,31 @@
   <string name="title_scan">Scan</string>
   <string name="title_pitstop">Pitstop</string>
   <string name="title_analytics">Analytics</string>
+  <string name="instruction_ignition">Please make sure your car\'s ignition is on and your car is not in an underground parking</string>
+  <string name="title_instruction">Activating Zyme Pro</string>
+  <string name="establish_connection">Establishing connection with device...</string>
+  <string name="two_minute">This may take up to 2 minutes</string>
+  <string name="all_set">All set</string>
+  <string name="lets_go">Let\'s go!</string>
+  <string name="activation_failed">Activation Failed</string>
+  <string name="contact_us">Contact us</string>
+  <string name="troubleshooting">Troubleshooting</string>
+  <string name="dash">--</string>
+  <string name="notifications">Notifications</string>
+  <string name="trip_notifications">Trip Notifications</string>
+  <string name="trip_start">Trip Start</string>
+  <string name="trip_end">Trip End</string>
+  <string name="fatigue_driving">Fatigue Driving</string>
+  <string name="device_unplugged">Device Unplugged</string>
+  <string name="collision_alert">Collision Alert</string>
+  <string name="geofence_breach">Geofence Breach</string>
+  <string name="over_speeding">Over Speeding</string>
+  <string name="rash_driving">Rash Driving</string>
+  <string name="geofence">Geofence</string>
+  <string name="unplugged">Unplugged</string>
+  <string name="theft_alert">Theft Alert</string>
+  <string name="towing_alert">Towing Alert</string>
+  <string name="taking_rest">Seems like your car was taking some rest</string>
+  <string name="no_trips">No trips found on this date</string>
 
 </resources>

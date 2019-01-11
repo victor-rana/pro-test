@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:weightSum="3"
+    >
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="60dp"
+      android:gravity="center"
+      >
+
+      <ImageView
+        android:id="@+id/image_plugdevice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="vertical">
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|bottom"
+        android:padding="8dp"
+        android:text="Insert the device into the OBD port of your car"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+      <TextView
+        android:id="@+id/cannotfindobd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="Can't find the OBD port?"
+        android:textColor="#2da9e1"
+        android:textStyle="bold"/>
+
+    </LinearLayout>
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:textColor="@color/white"
+      android:gravity="center"
+      android:textSize="16sp"
+      android:text="After plugging the device firmly into the OBD port, please switch on the ignition of your car and click continue"/>
+
+  </LinearLayout>
+  <Button
+    android:id="@+id/btn_progress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="100dp"
+    android:background="@drawable/bg_btn_rounded_blue"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:text="Continue"
+    android:textColor="@color/white"/>
+
+</RelativeLayout>

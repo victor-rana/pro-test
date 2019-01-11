@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <android.support.v7.widget.CardView
+    android:id="@+id/card_view2"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_margin="8dp"
+    card_view:cardBackgroundColor="#1e1f1f"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="12dp">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="#00000000"
+      android:orientation="vertical"
+      >
+      <ImageView
+        android:id="@+id/iv_profile_addcar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_add"
+        android:layout_centerInParent="true"
+        />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Car"
+        android:padding="8dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_below="@+id/iv_profile_addcar"
+        />
+
+
+    </RelativeLayout>
+  </android.support.v7.widget.CardView>
+</LinearLayout>

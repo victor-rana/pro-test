@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+
+  android:background="@color/black"
+  android:orientation="vertical"
+>
+  <include layout="@layout/toolbar_setting" />
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_setting"
+    android:cacheColorHint="#ff1e1f1f">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="4dp"
+        android:text="@string/notifications"
+        android:textColor="@color/setting_view_background" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+      <blackflame.com.zymepro.view.custom.RippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:visibility="gone"
+        app:mrl_rippleAlpha="0.2"
+        app:mrl_rippleColor="#585858"
+        app:mrl_rippleDelayClick="true"
+        app:mrl_rippleHover="true"
+        app:mrl_rippleOverlay="true">
+
+        <LinearLayout
+          android:id="@+id/btn_trip_notif"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#1e1f1f"
+          android:orientation="horizontal">
+
+          <ImageView
+            android:id="@+id/iv_tripnotification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            app:srcCompat="@drawable/ic_down_arrow_white" />
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="start|center"
+            android:padding="16dp"
+            android:text="@string/trip_notifications"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+        </LinearLayout>
+      </blackflame.com.zymepro.view.custom.RippleLayout>
+
+      <blackflame.com.zymepro.view.custom.RippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        app:mrl_rippleAlpha="0.2"
+        app:mrl_rippleColor="#585858"
+        app:mrl_rippleDelayClick="true"
+        app:mrl_rippleHover="true"
+        app:mrl_rippleOverlay="true">
+
+
+        <LinearLayout
+          android:id="@+id/btn_alert_notif"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#1e1f1f"
+          android:orientation="horizontal">
+
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="start|center"
+            android:padding="16dp"
+            android:text="Alert Notifications"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+          <ImageView
+            android:id="@+id/iv_alert_notification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp"
+            app:srcCompat="@drawable/ic_down_arrow_white" />
+
+
+        </LinearLayout>
+      </blackflame.com.zymepro.view.custom.RippleLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+      <include layout="@layout/layout_alert_notification"/>
+
+
+
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="4dp"
+        android:text="Trip Notifications"
+        android:textColor="@color/setting_view_background" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1e1f1f"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:orientation="horizontal">
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.SwitchCompat
+              android:id="@+id/setting_switch_trip_start"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1" />
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="Trip Start"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+
+          <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.SwitchCompat
+              android:id="@+id/setting_switch_trip_end"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1" />
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="Trip End"
+              android:textColor="@color/white" />
+          </LinearLayout>
+
+          <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.SwitchCompat
+              android:id="@+id/setting_switch_fatigue_driving"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_marginRight="4dp"
+              android:layout_weight="1"
+              android:gravity="center" />
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="Driver Fatigue"
+              android:textColor="@color/white"
+
+              />
+          </LinearLayout>
+        </LinearLayout>
+      </LinearLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="4dp"
+        android:text="Engine Notifications"
+        android:textColor="@color/setting_view_background" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1e1f1f"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp">
+
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:padding="4dp"
+          android:weightSum="5">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <ImageView
+              android:id="@+id/iv_battery_dec"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/ic_minus" />
+
+            <TextView
+              android:id="@+id/tv_battry_voltage"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="4"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white"
+              android:textStyle="bold" />
+
+            <ImageView
+              android:id="@+id/iv_battery_inc"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/ic_plus" />
+          </LinearLayout>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:text="Battery (V)"
+            android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:padding="4dp"
+          android:weightSum="5">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <ImageView
+              android:id="@+id/iv_coolant_dec"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/ic_minus" />
+
+            <TextView
+              android:id="@+id/tv_coolant_value"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="4"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white"
+              android:textStyle="bold" />
+
+            <ImageView
+              android:id="@+id/iv_coolant_inc"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/ic_plus" />
+          </LinearLayout>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_marginTop="4dp"
+            android:text="Coolant (°C)"
+            android:textColor="@color/white" />
+
+        </LinearLayout>
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_transparent_white_transparent"
+          />
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical"
+          android:padding="4dp"
+          android:weightSum="5">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <ImageView
+              android:id="@+id/iv_idling_dec"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="match_parent"
+              app:srcCompat="@drawable/ic_minus" />
+
+            <TextView
+              android:id="@+id/textview_longidling"
+              android:layout_width="0dp"
+              android:layout_weight="4"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white"
+              android:textStyle="bold" />
+
+            <ImageView
+              android:id="@+id/iv_idling_inc"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              app:srcCompat="@drawable/ic_plus" />
+          </LinearLayout>
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Idling (min)"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="4dp"
+        android:text="Map Style"
+        android:textColor="@color/setting_view_background" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1e1f1f"
+        android:orientation="vertical">
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:background="@color/setting_view_background" />
+
+        <blackflame.com.zymepro.view.custom.SwitchMultiButton
+          android:id="@+id/switchmultibutton1"
+          android:layout_width="match_parent"
+          android:layout_height="40dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_margin="16dp"
+          app:selectedColor="@color/colorAccent"
+          app:selectedTab="0"
+          app:strokeRadius="8dp"
+          app:strokeWidth="1dp"
+          app:textSize="14sp" />
+
+
+        <TextView
+          android:id="@+id/tv_custom_map"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Browse custom style"
+          android:visibility="gone"
+          android:textColor="@color/colorAccent"
+          android:layout_gravity="center_horizontal"
+          android:gravity="center"
+          android:textSize="16sp"
+
+          />
+
+
+
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="#1e1f1f"
+          android:gravity="center"
+          >
+
+          <TextView
+            android:id="@+id/tv__traffic_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:padding="16dp"
+            android:text="Live Traffic Feed"
+            android:textColor="@color/white" />
+
+          <android.support.v7.widget.SwitchCompat
+            android:id="@+id/setting_switch_life_traffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv__traffic_feed"
+            />
+        </RelativeLayout>
+      </LinearLayout>
+
+
+
+
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/setting_view_background" />
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="4dp"
+        android:text="Emergency Contact Numbers"
+        android:textColor="@color/setting_view_background" />
+
+
+
+
+
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="#1e1f1f"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1">
+
+          <RelativeLayout
+            android:id="@+id/rl_sos_first"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+              android:id="@+id/image_one"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+              android:id="@+id/tv_name_first"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="8dp"
+              android:background="@drawable/drawable_circuclar_blue"
+              android:gravity="center"
+              android:textColor="@color/white"
+              android:visibility="gone" />
+
+            <TextView
+              android:id="@+id/title_add_one"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_above="@+id/sos_number1"
+              android:gravity="center"
+              android:text="Add"
+              android:textColor="@color/white" />
+
+            <TextView
+              android:id="@+id/sos_number1"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:gravity="center"
+              android:text="Contact"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+          <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+          <RelativeLayout
+            android:id="@+id/rl_sos_second"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+              android:id="@+id/image_two"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+              android:id="@+id/tv_name_second"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="8dp"
+              android:background="@drawable/drawable_circuclar_blue"
+              android:gravity="center"
+              android:textColor="@color/white"
+              android:visibility="gone" />
+
+            <TextView
+              android:id="@+id/title_add_two"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_above="@+id/sos_number2"
+              android:gravity="center"
+              android:text="Add"
+              android:textColor="@color/white" />
+
+            <TextView
+              android:id="@+id/sos_number2"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:gravity="center"
+              android:text="Contact"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1">
+
+          <RelativeLayout
+            android:id="@+id/rl_sos_third"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+              android:id="@+id/image_three"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+              android:id="@+id/tv_name_third"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="8dp"
+              android:background="@drawable/drawable_circuclar_blue"
+              android:gravity="center"
+              android:textColor="@color/white"
+              android:visibility="gone" />
+
+            <TextView
+              android:id="@+id/title_add_three"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_above="@+id/sos_number3"
+              android:gravity="center"
+              android:text="Add"
+              android:textColor="@color/white" />
+
+            <TextView
+              android:id="@+id/sos_number3"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:gravity="center"
+              android:text="Contact"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+          <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+          <RelativeLayout
+            android:id="@+id/rl_sos_fourth"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <ImageView
+              android:id="@+id/image_four"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              app:srcCompat="@drawable/ic_add" />
+
+            <TextView
+              android:id="@+id/tv_name_forth"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="8dp"
+              android:background="@drawable/drawable_circuclar_blue"
+              android:gravity="center"
+              android:textColor="@color/white"
+              android:visibility="gone" />
+
+            <TextView
+              android:id="@+id/title_add_four"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_above="@+id/sos_number4"
+              android:gravity="center"
+              android:text="Add"
+              android:textColor="@color/white" />
+
+            <TextView
+              android:id="@+id/sos_number4"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:gravity="center"
+              android:text="Contact"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+        </LinearLayout>
+
+      </LinearLayout>
+
+
+    </LinearLayout>
+
+  </ScrollView>
+</RelativeLayout>

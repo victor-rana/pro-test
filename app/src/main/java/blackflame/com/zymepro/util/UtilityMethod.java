@@ -289,4 +289,47 @@ public class UtilityMethod {
   }
 
 
+  public static String get12HourTime(int selectedHour,int selectedMinutes){
+    String status = " AM";
+
+    if(selectedHour > 11)
+    {
+      // If the hour is greater than or equal to 12
+      // Then the current AM PM status is PM
+      status = " PM";
+    }
+
+    // Initialize a new variable to hold 12 hour format hour value
+    int hour_of_12_hour_format;
+
+    if(selectedHour > 11){
+
+      // If the hour is greater than or equal to 12
+      // Then we subtract 12 from the hour to make it 12 hour format time
+      hour_of_12_hour_format = selectedHour - 12;
+    }
+    else {
+      hour_of_12_hour_format = selectedHour;
+    }
+    String time;
+    if(selectedMinutes==0){
+      time=  hour_of_12_hour_format + ":" + "00"+status;
+
+    }else{
+      time=hour_of_12_hour_format + ":" + selectedMinutes+status;
+    }
+
+    return time;
+  }
+
+
+  public static String getTime(int seconds){
+    int  hours = seconds / 3600;
+
+    int   minutes = (seconds % 3600) / 60;
+    String    timeString = get12HourTime(hours,minutes);
+
+    return timeString;}
+
+
 }

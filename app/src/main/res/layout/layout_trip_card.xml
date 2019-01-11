@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="#000000"
+  android:orientation="vertical">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginTop="8dp"
+    >
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:weightSum="10">
+
+
+
+      <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:background="@drawable/bg_left_rounded_grey"
+        android:orientation="vertical"
+
+        >
+
+        <LinearLayout
+          android:id="@+id/container_trip_time"
+          android:layout_width="match_parent"
+          android:layout_height="30dp"
+          android:orientation="horizontal"
+          android:paddingLeft="12dp"
+          android:paddingRight="12dp"
+          android:paddingTop="4dp">
+
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+              android:layout_width="28dp"
+              android:layout_height="28dp"
+              android:layout_gravity="center"
+              android:padding="4dp"
+              app:srcCompat="@drawable/ic_trip_count" />
+
+            <TextView
+              android:id="@+id/trip_counter"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
+              android:background="#1e1f1f"
+              android:gravity="center"
+              android:text=""
+              android:textColor="#fff" />
+          </LinearLayout>
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:gravity="end">
+
+            <ImageView
+              android:layout_width="28dp"
+              android:layout_height="28dp"
+              android:layout_gravity="center"
+              android:padding="4dp"
+              app:srcCompat="@drawable/ic_clock_blue" />
+
+            <TextView
+              android:id="@+id/StartDate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="#1e1f1f"
+              android:gravity="center"
+              android:layout_gravity="center_vertical"
+              android:text=""
+              android:textColor="#fff" />
+            <TextView
+              android:id="@+id/end_time"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="#1e1f1f"
+              android:gravity="center"
+              android:layout_marginLeft="4dp"
+              android:layout_gravity="center_vertical"
+              android:text=""
+              android:textColor="#fff" />
+          </LinearLayout>
+        </LinearLayout>
+
+        <View
+          android:id="@+id/view_below_trip_container"
+          android:layout_below="@+id/container_trip_time"
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_marginBottom="4dp"
+          android:layout_marginLeft="12dp"
+          android:layout_marginRight="12dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <LinearLayout
+          android:layout_below="@+id/view_below_trip_container"
+          android:layout_width="match_parent"
+          android:layout_height="90dp"
+          android:baselineAligned="false"
+          android:orientation="horizontal"
+          android:paddingBottom="8dp"
+          android:paddingLeft="8dp"
+          android:paddingTop="4dp"
+          android:weightSum="8">
+
+
+
+
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/trip_path" />
+          </LinearLayout>
+
+          <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:orientation="vertical"
+            android:paddingLeft="8dp">
+
+            <TextView
+              android:id="@+id/StartAddress"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:text=""
+              android:textColor="#fff" />
+
+            <TextView
+              android:id="@+id/endAddress"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:ellipsize="end"
+              android:maxLines="1"
+              android:text=""
+              android:textColor="#fff" />
+
+          </RelativeLayout>
+
+        </LinearLayout>
+        <blackflame.com.zymepro.expandable.ExpandableLayout
+          android:id="@+id/expandable_layout"
+          android:layout_below="@+id/view_below_trip_container"
+          android:layout_above="@+id/expand_layout"
+          android:layout_width="match_parent"
+          android:layout_height="90dp"
+          android:background="#1e1f1f"
+          app:el_duration="50"
+
+          android:layout_alignParentBottom="true"
+          app:el_expanded="false"
+          >
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:id="@+id/tripTime"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:text="Trip Time"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+              android:layout_width="0.5dp"
+              android:layout_height="match_parent"
+              android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:id="@+id/distance"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:text="Distance"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+              android:layout_width="0.5dp"
+              android:layout_height="match_parent"
+              android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:id="@+id/max_speed"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:text="Max Speed"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+              android:layout_width="0.5dp"
+              android:layout_height="match_parent"
+              android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                android:id="@+id/idling_time"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="--"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:gravity="center"
+                android:text="Idle Time"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            </LinearLayout>
+          </LinearLayout>
+
+
+        </blackflame.com.zymepro.expandable.ExpandableLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+          android:layout_above="@+id/expand_layout"
+          />
+
+        <RelativeLayout
+          android:id="@+id/expand_layout"
+          android:layout_width="match_parent"
+          android:layout_height="30dp"
+          android:layout_alignParentBottom="true"
+
+          >
+          <TextView
+            android:id="@+id/expand_button"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_rounded_trip_card"
+
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="Quick View"
+            android:layout_toLeftOf="@id/arrow_expand"
+            android:textColor="@color/white" />
+          <ImageView
+            android:id="@+id/arrow_expand"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_up_arrow"/>
+        </RelativeLayout>
+
+
+
+
+      </RelativeLayout>
+
+      <ImageView
+        android:id="@+id/show"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/bg_right_rounded_blue"
+        android:scaleType="center"
+        app:srcCompat="@drawable/ic_right_arrow" />
+    </LinearLayout>
+
+
+
+
+  </RelativeLayout>
+
+
+</LinearLayout>

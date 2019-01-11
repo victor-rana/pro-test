@@ -1,0 +1,357 @@
+<LinearLayout android:id="@+id/alert_notif_container"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="#1e1f1f"
+  android:orientation="vertical"
+  android:paddingLeft="40dp"
+  android:paddingRight="12dp"
+  android:visibility="gone"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/rash_driving"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_rash_driving"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/over_speeding"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_over_speeding"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/layout_overspeeding_alarm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:visibility="gone">
+
+
+    <SeekBar
+      android:id="@+id/seekbar_overspeeding"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:layout_weight="3"
+      android:max="16"
+      android:minHeight="16dp"
+      android:progress="12"
+      android:progressBackgroundTint="@color/setting_view_background"
+      android:progressTint="@color/colorAccent"
+      android:thumbTint="#fff"
+
+      />
+
+    <TextView
+      android:id="@+id/textview_overspeeding"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="8dp"
+      android:layout_weight="1"
+      android:gravity="end"
+      android:textColor="@color/white"
+      android:textSize="12sp" />
+
+  </LinearLayout>
+
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/device_unplugged"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_unplugged"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/towing_alert"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_towing"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/collision_alert"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_collision_alert"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/geofence_breach"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_geofence_breach"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <blackflame.com.zymepro.view.custom.RippleLayout
+    android:id="@+id/geofenceset"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="12dp"
+    android:visibility="gone"
+    app:mrl_rippleAlpha="0.2"
+    app:mrl_rippleColor="#585858"
+    app:mrl_rippleDelayClick="true"
+    app:mrl_rippleHover="true"
+    app:mrl_rippleOverlay="true">
+
+
+    <TextView
+      android:id="@+id/btn_setGeofence"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:background="@drawable/bg_rounded_grey"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="Click here to set Geofence"
+      android:textColor="@color/white"
+      android:textSize="12sp" />
+
+
+  </blackflame.com.zymepro.view.custom.RippleLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/setting_view_background" />
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f">
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:gravity="start|center"
+      android:padding="16dp"
+      android:text="@string/theft_alert"
+      android:textColor="@color/white" />
+
+    <android.support.v7.widget.SwitchCompat
+      android:id="@+id/setting_switch_theft_alert"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="4dp"
+      android:layout_weight="1" />
+  </LinearLayout>
+
+  <LinearLayout
+    android:id="@+id/layout_theft_alarm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1e1f1f"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:visibility="gone">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="Tap to set inactive hours"
+      android:textColor="@color/white"
+      android:textSize="12sp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+
+      <TextView
+        android:id="@+id/setting_edittext_time_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_rounded_grey"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="23:00"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp" />
+
+      <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="to"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:id="@+id/setting_edittext_time_end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_rounded_grey"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="06:00"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="12sp" />
+
+      <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+    </LinearLayout>
+
+  </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black"
+  tools:context="blackflame.com.zymepro.ui.activation.ActivityActivation">
+
+  <TextView
+    android:id="@+id/activation_header"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/title_instruction"
+    android:textColor="@color/white"
+    android:layout_centerHorizontal="true"
+    android:textSize="16sp"
+    android:layout_marginTop="20dp"
+    android:textStyle="bold"
+    />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="12dp"
+      android:text="@string/instruction_ignition"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      />
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_margin="20dp"
+      >
+
+
+      <ProgressBar
+        android:id="@+id/progressBar_alert"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/bg_progress_circular" />
+
+
+    </RelativeLayout>
+
+    <TextView
+      android:id="@+id/activation_description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="12dp"
+      android:text="@string/establish_connection"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      />
+  </LinearLayout>
+
+
+
+
+  <TextView
+    android:id="@+id/tv_after_over"
+    android:layout_above="@+id/tv_take_time"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:padding="8dp"
+    android:gravity="center"
+    android:visibility="gone"
+    android:text="Connection not established yet? \n Please try to take a small trip of about 1-2 kms around your area to help with the same"
+    android:textAlignment="center"
+    android:textColor="@color/colorAccent"
+    android:textStyle="bold"
+
+    />
+
+
+  <TextView
+    android:id="@+id/tv_take_time"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:text="@string/two_minute"
+    android:textAlignment="center"
+    android:textColor="@color/white"
+    android:textStyle="bold"
+
+    />
+</RelativeLayout>

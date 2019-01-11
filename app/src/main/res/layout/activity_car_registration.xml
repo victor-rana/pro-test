@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:background="@color/black"
+  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <blackflame.com.zymepro.view.custom.StepIndicator
+    android:id="@+id/step_indicator_car_info"
+    app:siRadius="12dp"
+    app:siStepCount="4"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    app:siBackgroundColor="@color/white"
+    app:siStepColor="@color/colorAccent"
+    app:siTextColor="@color/white"
+    app:siStrokeWidth="8dp"
+    app:siSecondaryTextColor="@color/black"
+    app:siCurrentStepColor="@color/colorAccent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+  <blackflame.com.zymepro.view.custom.ZymeProViewPager
+    android:id="@+id/viewPager_car_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    />
+
+</LinearLayout>

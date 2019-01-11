@@ -17,12 +17,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import blackflame.com.zymepro.R;
+import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.db.CommonPreference;
+import blackflame.com.zymepro.ui.profile.ActivityProfile;
+
 /**
  * Created by Prashant on 29-03-2017.
  */
 
-public class NavigationFragment extends Fragment {
+public class NavigationFragment extends CommonFragment {
 
     View containerView;
     DrawerLayout mDrawerLayout;
@@ -165,8 +168,8 @@ public class NavigationFragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), Profile.class);
-//                startActivity(i);
+                Intent i = new Intent(getActivity(), ActivityProfile.class);
+                startActivity(i);
             }
         });
 

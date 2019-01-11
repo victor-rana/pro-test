@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="@color/black"
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    >
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="The one-time activation of your device will take less than a minute"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      android:textAlignment="center"
+      android:layout_marginTop="20dp"
+      android:layout_marginBottom="40dp"/>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text=" Scan device code"
+      android:textColor="@color/white"
+      android:textSize="16sp"/>
+
+    <ImageView
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="center_horizontal"
+      app:srcCompat="@drawable/ic_drop_down_arrow"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="Plug device in your car"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      />
+
+    <ImageView
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="center_horizontal"
+      app:srcCompat="@drawable/ic_drop_down_arrow"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="Start your car"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      />
+
+    <ImageView
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="center_horizontal"
+      app:srcCompat="@drawable/ic_drop_down_arrow"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text=" Register your car"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      />
+
+    <ImageView
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_gravity="center_horizontal"
+      app:srcCompat="@drawable/ic_drop_down_arrow"
+      />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="Activate device"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      />
+
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/btn_carinfo_start"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/bg_btn_rounded_blue"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:text="Let's begin"
+    android:textColor="@color/white"/>
+
+</RelativeLayout>
