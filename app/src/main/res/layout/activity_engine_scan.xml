@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.enginescan.EngineScanActivity"
+  android:background="@color/black"
+  android:orientation="vertical">
+  <include layout="@layout/toolbar_common" />
+<include layout="@layout/layout_scan_top_car"/>
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@drawable/gradient_black_white_black" />
+  <include layout="@layout/layout_scan_card_bottom"/>
+
+</LinearLayout>

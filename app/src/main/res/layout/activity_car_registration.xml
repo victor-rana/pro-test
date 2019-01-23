@@ -5,22 +5,21 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical"
   android:background="@color/black"
-  app:layout_behavior="@string/appbar_scrolling_view_behavior"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <blackflame.com.zymepro.view.custom.StepIndicator
     android:id="@+id/step_indicator_car_info"
-    app:siRadius="12dp"
-    app:siStepCount="4"
+    app:zpRadius="12dp"
+    app:zpStepCount="4"
     android:layout_marginTop="20dp"
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
-    app:siBackgroundColor="@color/white"
-    app:siStepColor="@color/colorAccent"
-    app:siTextColor="@color/white"
-    app:siStrokeWidth="8dp"
-    app:siSecondaryTextColor="@color/black"
-    app:siCurrentStepColor="@color/colorAccent"
+    app:zpBackgroundColor="@color/white"
+    app:zpStepColor="@color/colorAccent"
+    app:zpTextColor="@color/white"
+    app:zpStrokeWidth="8dp"
+    app:zpSecondaryTextColor="@color/black"
+    app:zpCurrentStepColor="@color/colorAccent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
   <blackflame.com.zymepro.view.custom.ZymeProViewPager

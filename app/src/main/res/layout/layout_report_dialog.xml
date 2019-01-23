@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select date range for report generation"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"
+            />
+
+
+        <RadioGroup
+            android:id="@+id/rg_time_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            >
+            <RadioButton
+                android:id="@+id/rb_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Today"
+                android:layout_margin="8dp"
+                android:button="@drawable/bg_radio_button_drawable"
+                android:paddingLeft="8dp"
+                android:textColor="@color/white"/>
+            <RadioButton
+                android:id="@+id/rb_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:button="@drawable/bg_radio_button_drawable"
+                android:paddingLeft="8dp"
+                android:text="Yesterday"
+                android:layout_margin="8dp"
+
+                android:textColor="@color/white"/>
+            <RadioButton
+                android:id="@+id/rb_last_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:button="@drawable/bg_radio_button_drawable"
+                android:paddingLeft="8dp"
+                android:text="Last 7 days"
+                android:layout_margin="8dp"
+
+                android:textColor="@color/white"/>
+            <RadioButton
+                android:id="@+id/rb_last_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Last 30 days"
+                android:layout_margin="8dp"
+                android:button="@drawable/bg_radio_button_drawable"
+                android:paddingLeft="8dp"
+                android:textColor="@color/white"/>
+            <RadioButton
+                android:id="@+id/rb_custom_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Custom date range"
+                android:layout_margin="8dp"
+                android:button="@drawable/bg_radio_button_drawable"
+                android:paddingLeft="8dp"
+                android:textColor="@color/white"/>
+        </RadioGroup>
+
+
+
+
+    </LinearLayout>
+
+
+
+  <LinearLayout
+      android:id="@+id/container_custom_range"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/btn_last_month"
+      android:orientation="horizontal"
+      android:visibility="gone">
+      <TextView
+          android:id="@+id/btn_report_start"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"
+          android:text="Start Date"
+          android:layout_margin="8dp"
+          android:padding="8dp"
+
+          android:gravity="center"
+          android:textColor="@color/white"
+          android:background="@color/grey"/>
+      <TextView
+          android:id="@+id/btn_report_end"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="End date"
+          android:layout_margin="8dp"
+          android:padding="8dp"
+          android:gravity="center"
+          android:textColor="@color/white"
+          android:background="@color/grey"/>
+
+
+
+  </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/btn_pdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Download PDF"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/btn_csv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Download CSV"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

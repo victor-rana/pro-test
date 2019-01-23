@@ -1,0 +1,157 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black">
+  <include layout="@layout/toolbar_geofence"/>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_geofence">
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbar_common"
+      >
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:background="#1e1f1f"
+          android:orientation="horizontal">
+        </LinearLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="3"
+          android:background="#1e1f1f"/>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:background="#2da9e1"
+          android:orientation="horizontal"
+          android:paddingBottom="8dp">
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="0.5"
+          android:orientation="vertical">
+          <TextView
+            android:id="@+id/activity_geofence_title_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textColor="@color/white"
+            android:text="@string/geofence_not_set"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"/>
+          <TextView
+            android:id="@+id/activity_geofence_address_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/click_edit_to_set_geofence"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        </LinearLayout>
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_marginLeft="30dp"
+          android:layout_marginRight="30dp"
+          android:layout_weight="2.9">
+
+          <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            card_view:cardCornerRadius="4dp">
+            <fragment
+              android:id="@+id/log_geofence"
+              android:name="com.google.android.gms.maps.SupportMapFragment"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".MapsActivity"/>
+          </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="0.6"
+          android:orientation="vertical">
+
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+              android:id="@+id/geofence_radius_text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textSize="16sp"
+              android:text="@string/radius"
+              android:textColor="@color/white"/>
+            <TextView
+              android:id="@+id/geofence_radius"
+              android:layout_toRightOf="@+id/geofence_radius_text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textSize="16sp"
+              android:text="-- km"
+              android:textColor="@color/white"/>
+
+          </RelativeLayout>
+          <SeekBar
+            android:id="@+id/seekbar_radius"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:thumbTint="#fff"
+            android:progressTint="#1e1f1f"
+            android:progressBackgroundTint="#b4b9b9"
+
+            />
+
+        </LinearLayout>
+      </LinearLayout>
+    </FrameLayout>
+
+  </RelativeLayout>
+
+</RelativeLayout>

@@ -19,7 +19,10 @@ import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.db.CommonPreference;
+import blackflame.com.zymepro.ui.ai.AlexaActivity;
+import blackflame.com.zymepro.ui.ai.GoogleActivity;
 import blackflame.com.zymepro.ui.profile.ActivityProfile;
+import blackflame.com.zymepro.ui.shopping.ZymeShop;
 
 /**
  * Created by Prashant on 29-03-2017.
@@ -96,7 +99,6 @@ public class NavigationFragment extends CommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout=inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-
         CommonPreference.initializeInstance(getActivity());
         mlisListView = layout.findViewById(R.id.listview);
         profile= layout.findViewById(R.id.profile);
@@ -111,8 +113,8 @@ public class NavigationFragment extends CommonFragment {
             @Override
             public void onClick(View v) {
 
-//                Intent i = new Intent(getActivity(), AlexaActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(getActivity(), AlexaActivity.class);
+                startActivity(i);
         
             }
         });
@@ -120,8 +122,8 @@ public class NavigationFragment extends CommonFragment {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), ShoppingActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(getActivity(), ZymeShop.class);
+                startActivity(i);
 
             }
         });
@@ -130,8 +132,8 @@ public class NavigationFragment extends CommonFragment {
             @Override
             public void onClick(View v) {
 
-//                Intent i = new Intent(getActivity(), GoogleHomeActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(getActivity(), GoogleActivity.class);
+                startActivity(i);
     
             }
         });

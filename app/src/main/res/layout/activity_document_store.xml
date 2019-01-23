@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  android:id="@+id/activity_data_submit"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#000"
+  >
+
+  <include layout="@layout/toolbar_document_save"/>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_datasubmit"
+    >
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000"
+        android:orientation="horizontal">
+      </LinearLayout>
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="#000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#2da9e1"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/spinnerdocument"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:background="@drawable/bg_rounded_grey_car_info"
+          android:gravity="center"
+          android:padding="8dp"
+          android:text="@string/select_document"
+          android:textColor="@color/white"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:visibility="gone"
+          android:background="#a0ffffff"/>
+
+      </LinearLayout>
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="3"
+        >
+
+        <android.support.v7.widget.CardView
+          android:id="@+id/card_view"
+          xmlns:card_view="http://schemas.android.com/apk/res-auto"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center"
+          card_view:cardBackgroundColor="#1e1f1f"
+          card_view:cardCornerRadius="4dp">
+          <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+          <LinearLayout
+            android:id="@+id/container_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+              android:id="@+id/imageViewclick"
+              android:layout_width="match_parent"
+              android:layout_height="100dp"
+              android:layout_gravity="center"
+              android:layout_marginLeft="4dp"
+              android:layout_marginRight="4dp"
+              android:padding="20dp"
+              android:src="@drawable/ic_instagram"/>
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/add_document"
+              android:textColor="@color/white"
+              android:gravity="center"/>
+          </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+      </RelativeLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+          android:id="@+id/documentname"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:background="@null"
+          android:gravity="center"
+          android:hint="@string/document_name"
+          android:textSize="14sp"
+          android:textCursorDrawable="@null"
+          android:maxLines="1"
+          android:padding="8dp"
+          android:textColor="@color/white"
+          android:textColorHint="#a0ffffff"/>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#a0ffffff"/>
+      </LinearLayout>
+    </LinearLayout>
+  </FrameLayout>
+</RelativeLayout>

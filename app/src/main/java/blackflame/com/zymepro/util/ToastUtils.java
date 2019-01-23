@@ -27,10 +27,15 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
+import blackflame.com.zymepro.Prosingleton;
 import java.lang.reflect.Field;
 
 
 public final class ToastUtils {
+
+
+
+
   private static final int     COLOR_DEFAULT = 0xFEFFFFFF;
   private static final Handler HANDLER       = new Handler(Looper.getMainLooper());
   private static final String  NULL          = "null";
@@ -103,6 +108,8 @@ public final class ToastUtils {
    * @param text The text.
    */
   public static void showShort(final CharSequence text) {
+    //Toast.makeText(Prosingleton.getAppContext(), text, Toast.LENGTH_SHORT).show();
+
     show(text == null ? NULL : text, Toast.LENGTH_SHORT);
   }
 

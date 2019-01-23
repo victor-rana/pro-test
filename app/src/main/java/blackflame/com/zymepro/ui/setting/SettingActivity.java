@@ -33,6 +33,8 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.ui.geofence.GeofenceActivity;
+import blackflame.com.zymepro.ui.setting.mapstyle.MapStyleSetting;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.view.custom.RippleLayout;
 import blackflame.com.zymepro.view.custom.SwitchMultiButton;
@@ -96,8 +98,8 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
     GlobalReferences.getInstance().baseActivity=this;
     presenter=new SettingInteractor(this);
     SettingPreferences.initializeInstance(this);
-    carId=CommonPreference.getInstance().getCarId();
 
+    carId=CommonPreference.getInstance().getCarId();
     initViews();
   }
   private void initViews(){
@@ -126,6 +128,7 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
     textview_model = findViewById(R.id.toolbar_setting_model);
     tv_seeting_save = findViewById(R.id.toolbar_setting_save);
     tv_custom_map=findViewById(R.id.tv_custom_map);
+    tv_custom_map.setOnClickListener(this);
     textView_battery = findViewById(R.id.tv_battry_voltage);
     textView_coolant = findViewById(R.id.tv_coolant_value);
     iv_battery_dec = findViewById(R.id.iv_battery_dec);
@@ -370,6 +373,8 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
         }
         break;
       case R.id.btn_setGeofence:
+        startActivity(new Intent(SettingActivity.this, GeofenceActivity.class));
+
         break;
 
       case R.id.iv_battery_inc:
@@ -618,6 +623,10 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
               })
               .show();
         }
+        break;
+
+      case R.id.tv_custom_map:
+        startActivity(new Intent(SettingActivity.this, MapStyleSetting.class));
         break;
 
 

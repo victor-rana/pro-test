@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_weight="1"
+  android:background="#1e1f1f"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="7.5">
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_collision"
+      android:layout_width="100dp"
+      android:layout_height="match_parent"
+      android:background="#1e1f1f"
+      app:cardBackgroundColor="@color/transparent"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="4dp"
+      app:cardUseCompatPadding="true">
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_marginBottom="8dp"
+          android:layout_above="@+id/view_collision"
+          android:layout_centerHorizontal="true"
+          android:scaleType="centerCrop"
+          app:srcCompat="@drawable/ic_collision" />
+
+
+        <View
+          android:id="@+id/view_collision"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <TextView
+          android:id="@+id/alert_type_collision"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/alert_count_collision"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="Collision "
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/alert_count_collision"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/view_collision"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white" />
+
+      </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_theft"
+      android:layout_width="100dp"
+      android:layout_height="match_parent"
+      android:background="#1e1f1f"
+      app:cardBackgroundColor="@color/transparent"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="4dp"
+      app:cardUseCompatPadding="true">
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_above="@+id/view_theft"
+          android:layout_centerHorizontal="true"
+          android:layout_marginBottom="8dp"
+          android:alpha="0.7"
+          android:src="@drawable/ic_theft" />
+
+
+        <View
+          android:id="@+id/view_theft"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <TextView
+          android:id="@+id/alert_type_rashdriving"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/alert_count_theft"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="Theft"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/alert_count_theft"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/view_theft"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white" />
+
+
+      </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_geofence"
+      android:layout_width="100dp"
+
+      android:layout_height="match_parent"
+      android:background="#1e1f1f"
+      app:cardBackgroundColor="@color/transparent"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="4dp"
+      app:cardUseCompatPadding="true">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_marginBottom="8dp"
+          android:layout_above="@+id/view_geofence"
+          android:layout_centerHorizontal="true"
+          app:srcCompat="@drawable/ic_geofence" />
+
+
+        <View
+          android:id="@+id/view_geofence"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <TextView
+          android:id="@+id/alert_type_geofence"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/alert_count_geofence"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="Geofence"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/alert_count_geofence"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/view_geofence"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white" />
+
+
+      </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_unplug"
+      android:layout_width="100dp"
+      android:layout_height="match_parent"
+      android:background="#1e1f1f"
+      app:cardBackgroundColor="@color/transparent"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="4dp"
+      app:cardUseCompatPadding="true">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_marginBottom="8dp"
+          android:layout_above="@+id/view_unplugged"
+          android:layout_centerHorizontal="true"
+          app:srcCompat="@drawable/ic_unplugged" />
+
+        <View
+          android:id="@+id/view_unplugged"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <TextView
+          android:id="@+id/alert_type_unplugged"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/alert_count_unplugged"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="Unplug"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/alert_count_unplugged"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/view_unplugged"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white" />
+      </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_towing_alert"
+      android:layout_width="100dp"
+      android:layout_height="match_parent"
+      android:background="#1e1f1f"
+      app:cardBackgroundColor="@color/transparent"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="4dp"
+      app:cardUseCompatPadding="true">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+        <ImageView
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_marginBottom="8dp"
+          android:layout_above="@+id/view_towing_alert"
+          android:layout_centerHorizontal="true"
+          app:srcCompat="@drawable/ic_tow" />
+
+        <View
+          android:id="@+id/view_towing_alert"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:layout_centerInParent="true"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+        <TextView
+          android:id="@+id/alert_type_towing_alert"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/alert_count_towing_alert"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="Towing Alert"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/alert_count_towing_alert"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/view_towing_alert"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white" />
+      </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+  </LinearLayout>
+
+</HorizontalScrollView>

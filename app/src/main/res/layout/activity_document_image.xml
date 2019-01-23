@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/activity_document_image"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#000">
+
+  <include layout="@layout/toolbar_common" />
+
+  <GridView
+    android:id="@+id/gridview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_common"
+    android:gravity="center"
+    android:horizontalSpacing="10dp"
+    android:numColumns="2"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="10dp" />
+
+
+  <LinearLayout
+    android:id="@+id/ll_no_documet"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <ImageView
+      android:id="@+id/image_no_doc"
+
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_gravity="center"
+      app:srcCompat="@drawable/ic_wallet" />
+
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="8dp"
+      android:gravity="center"
+      android:padding="4dp"
+      android:text="No document added yet\n\n"
+      android:textColor="@color/white" />
+
+    <TextView
+      android:id="@+id/tv_add_documet"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="12dp"
+      android:gravity="center"
+      android:padding="4dp"
+      android:text="Proceed to add documents"
+      android:textColor="@color/colorAccent" />
+  </LinearLayout>
+
+</RelativeLayout>

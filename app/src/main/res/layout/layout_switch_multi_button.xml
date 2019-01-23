@@ -1,0 +1,16 @@
+<blackflame.com.zymepro.view.custom.SwitchMultiButton
+  android:id="@+id/multibutton_alerts"
+  android:layout_width="match_parent"
+  android:layout_height="40dp"
+  android:layout_gravity="center_horizontal"
+  android:layout_marginLeft="8dp"
+  android:layout_marginTop="16dp"
+  android:layout_marginRight="8dp"
+  android:layout_marginBottom="16dp"
+  app:selectedColor="@color/colorAccent"
+  app:selectedTab="0"
+  app:strokeRadius="8dp"
+  app:strokeWidth="1dp"
+  app:textSize="12sp"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"/>

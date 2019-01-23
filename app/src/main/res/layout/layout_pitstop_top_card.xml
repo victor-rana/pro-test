@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:baselineAligned="false"
+  android:layout_weight=".6"
+  android:orientation="horizontal"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_mechanic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_wrench"
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mechanic"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_fuel_station"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_fuel_station"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gas Station"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_store"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_shopping_cart"
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Store"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_parking"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_parking"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="Parking"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_car_service"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_car_wash_machine"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Car Wash"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_hotel"
+
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_bed"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hotel"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_bank"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_rupee"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bank/ATM"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_laundry"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_laundry"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Laundry"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_food"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_restaurent"
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_hospital"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_medical"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hospital"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="center"
+      android:orientation="vertical"
+      android:gravity="center"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_police_station"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_circle_pitstop">
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:scaleType="center"
+          app:srcCompat="@drawable/ic_police"
+
+          />
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Police Station"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
+
+
+
+  </LinearLayout>
+
+
+</HorizontalScrollView>

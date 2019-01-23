@@ -2,9 +2,12 @@ package blackflame.com.zymepro.ui.home.singlecar;
 
 import static blackflame.com.zymepro.ui.home.singlecar.SingleInteractor.TAG;
 import static blackflame.com.zymepro.util.UtilityMethod.getDate;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.db.CommonPreference;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -125,12 +128,10 @@ ArrayList<CarcountModel> list;
       if (response.getJSONArray("results").length() > 0) {
         String addre = null;
         String result=null;
-
         addre = ((JSONArray) response.get("results")).getJSONObject(0).getString("formatted_address");
 
         String[] address_array = addre.split(",");
         StringBuffer buffer = new StringBuffer();
-
         for (int i = 0; i < address_array.length - 2; i++) {
           result = result + address_array[i];
           if (i == address_array.length - 3) {
@@ -140,11 +141,7 @@ ArrayList<CarcountModel> list;
           }
         }
 
-
         view.updateAddress(buffer.toString());
-
-        Log.e(TAG, "onResponse: Address"+buffer.toString() );
-
       }
 
 
@@ -154,8 +151,24 @@ ArrayList<CarcountModel> list;
     }
   }
 
+  public void parseLocation(JSONObject response){
+    try {
 
-  public void parseData(JSONObject data){
+      JSONObject carData = response.getJSONObject("msg");
+      //final String status=carData.getString("status");
+      JSONArray array = carData.getJSONArray("last_location");
+      double lastLatitude = array.getDouble(0);
+      double lastLongitude = array.getDouble(1);
+
+      view.navigateToPitstop(lastLatitude,lastLongitude);
+
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+
+    }
+  }
+  public void parseData(JSONObject data,String registration){
     try {
       String registration_number=null;
       String car_last_status=null;
@@ -250,11 +263,10 @@ ArrayList<CarcountModel> list;
 
       }
     }catch (JSONException ex){
-      Log.e(TAG, "parseData: "+ex.getCause() );
+
+  //    Log.e(TAG, "parseData: "+ex.getCause() );
     }
   }
-
-
 
 
   public void handleLastStatus(String status){
@@ -290,7 +302,6 @@ ArrayList<CarcountModel> list;
       }
     }
   }
-
 
   @Override
   public void onSetActivationCard() {
@@ -375,6 +386,7 @@ ArrayList<CarcountModel> list;
     void setRealtimeData(int coolant,int rpm,int speed,String voltage,String status);
     void updateRealtimeLocation(double latitude,double longitude);
     void updateNerdMode(JSONObject jsonObject);
+    void navigateToPitstop(double latitude,double longitude);
 
 
   }

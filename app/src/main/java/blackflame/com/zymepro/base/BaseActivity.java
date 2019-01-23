@@ -12,6 +12,7 @@ import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.GlobalReferences;
+import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.db.Pref;
 
 public class BaseActivity extends BaseActivityParent {
@@ -25,6 +26,7 @@ public class BaseActivity extends BaseActivityParent {
     super.onCreate(savedInstanceState, persistentState);
     GlobalReferences.getInstance().baseActivity =this;
     GlobalReferences.getInstance().pref  = new Pref(this);
+    CommonPreference.initializeInstance(this);
     //fragmentManager =getSupportFragmentManager();
 
   }
@@ -43,9 +45,8 @@ public class BaseActivity extends BaseActivityParent {
 
 
 
-  public void removeLocationUpdate(){
-    Log.e("BaseActivity", "removeLocationUpdate: "+"removeLocation Call");
-  }
+
+
 
   @Override
   protected void onPostResume() {

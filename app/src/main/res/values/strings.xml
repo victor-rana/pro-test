@@ -44,5 +44,58 @@
   <string name="towing_alert">Towing Alert</string>
   <string name="taking_rest">Seems like your car was taking some rest</string>
   <string name="no_trips">No trips found on this date</string>
+  <string name="select_date">Select Date</string>
+  <string name="tap_marker">Please select a marker to see details</string>
+  <string name="licence">Licence</string>
+  <string name="registration_ncertificate">Registration Certificate</string>
+  <string name="puc">PUC</string>
+  <string name="insurance">Insurance</string>
+  <string name="keep_track">Keep track of all your important documents at one place. Press the button below to add documents</string>
+  <string name="select_document">Select document</string>
+  <string name="add_document">Click to add document image</string>
+  <string name="document_name">Document name</string>
+  <string name="sort">Sort</string>
+  <string name="love_our_app">Love our App?</string>
+  <string name="invite_your_friends">Invite your Friends!</string>
+  <string name="your_referral_code">Your Referral Code</string>
+  <string name="made_with">Made with</string>
+  <string name="in_india">in India</string>
+  <string name="share">SHARE</string>
+  <string name="website">www.getzyme.com</string>
+  <string name="mail">support@getzyme.com</string>
+  <string name="privacy">Privacy Policy</string>
+  <string name="geofence_not_set">Geofence not set</string>
+  <string name="click_edit_to_set_geofence">Click edit to set geofence</string>
+  <string name="radius">Radius:</string>
+  <string name="notification_channel_alert_name">Theft Alert</string>
+  <string name="notification_channel_app_name">Alerts</string>
+  <string name="support_text">Uh Oh! There was an error in the transaction. If money was deducted from your account, it will be credited back in 3-4 working days. For any queries, please drop a line at support@getzyme.com</string>
+  <string name="max">Max:</string>
+  <string name="km_h">km/h</string>
+  <string name="rpm">RPM</string>
+  <string name="label_permissions">Please enable Microphone and Storage permissions.</string>
+  <string name="map_1">Military Dark</string>
+  <string name="map_2">Exotic Original</string>
+  <string name="map_3">Nature Green</string>
+  <string name="map_4">Colorful Bliss</string>
+  <string name="map_5">Black n White</string>
+  <string name="map_6">Golden Hue</string>
+  <string name="map_7">Watery Blue</string>
+  <string name="map_8">Pink Hues</string>
+  <string name="map_9">Midnight Commander</string>
+  <string name="map_10">Sober Vintage</string>
 
+
+  <array name="style_name">
+    <item>@string/map_1</item>
+    <item>@string/map_2</item>
+    <item>@string/map_3</item>
+    <item>@string/map_4</item>
+    <item>@string/map_5</item>
+    <item>@string/map_6</item>
+    <item>@string/map_7</item>
+    <item>@string/map_8</item>
+    <item>@string/map_9</item>
+    <item>@string/map_10</item>
+  </array>
 </resources>

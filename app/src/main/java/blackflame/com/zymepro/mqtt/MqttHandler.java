@@ -27,7 +27,6 @@ public class MqttHandler {
  static String subscriptionTopic;
 static MqttDataListener listener;
   public static void registerMqtt(final String imei,MqttDataListener dataListener){
-    Log.e(TAG, "registerMqtt: IMEI"+imei );
     listener=dataListener;
     if (NetworkUtils.isConnected()) {
       subscriptionTopic = CommonPreference.getInstance().getSubscriptionTopic();
@@ -156,12 +155,12 @@ static MqttDataListener listener;
         @Override
         public void messageArrived(String topic, MqttMessage message) {
          // mCounter_publish_data+=1;
-          Log.e(TAG, "messageArrived: "+ new String(message.getPayload()) );
+         // Log.e(TAG, "messageArrived: "+ new String(message.getPayload()) );
           try{
             JSONObject data= new JSONObject(new String(message.getPayload()));
             listener.setData(data,topic);
           }catch (Exception ex){
-            Log.e(TAG, "messageArrived: "+ex.getCause() );
+            //Log.e(TAG, "messageArrived: "+ex.getCause() );
           }
         }
 

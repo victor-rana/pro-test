@@ -41,7 +41,32 @@ public interface Constants {
     UPDATE_PROFILE(13, Method.POST, "/API/v1/user/profile/", "update_profile"),
     UPDATE_PASSWORD(14, Method.POST, "/API/v1/user/change-password", "update_password"),
     UPLOAD_SETTING(15,Method.POST,"/API/v1/alert/setting","upload_setting"),
-    GET_SETTING(16,Method.GET,"/API/v1/alert/","get_setting");
+    GET_SETTING(16,Method.GET,"/API/v1/alert/","get_setting"),
+    LOAD_TRIP(17,Method.GET,"/API/v1/trip/","get_trip"),
+    GET_PDF_URL(18,Method.GET,"/API/v1/report/get-pdf/","get_pdf_url"),
+    GET_CSV_URL(19,Method.GET,"/API/v1/report/get-csv/","get_csv_url"),
+    GET_TRIP_DETAILS(20,Method.GET,"/API/v1/trip/","trip_details"),
+    GET_ALERT_LIST(21,Method.GET,"/API/v1/alert/","alert"),
+    GET_PREVIOUS_ERROR(22,Method.GET,"/API/v1/device/old-engine-diagnostics/","previous_error"),
+    GET_CURRENT_ERROR(23,Method.GET,"/API/v1/device/engine-diagnostics/","current_error"),
+    GET_NEAR_BY(24,Method.GET,"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=","near_by"),
+    PITSTOP(25, Method.GET, "/API/v1/device/status/car/", "pitstop"),
+    GET_FUEL_PRICE(26,Method.GET,"/API/v1/user/getprices/","price"),
+    LOAD_ANALYTICS(27,Method.GET,"/API/v1/analytics/","analytics"),
+    LOAD_PAST_NOTIFICATION(28,Method.GET,"/API/v1/notification/","past_notification"),
+    LOAD_GEOTAG(29,Method.GET,"/API/v1/user/geotag/","load_geotag"),
+    DELETE_GEOTAG(30,Method.DELETE,"/API/v1/user/geotag/","delete_geotag"),
+    LOAD_MESSAGE_FROM_TEAM(31,Method.GET,"/API/v1/user/message","message_from_team"),
+    LOAD_REFER_MESSAGE(32,Method.GET,"/API/v1/user/refer-data/","refer"),
+    GET_EXISTING_URL(33,Method.GET,"/API/v1/sharing/existing-url/","existing"),
+    GENERATE_URL(34,Method.POST,"/API/v1/sharing/generate-url/","generate"),
+    DEACTIVATE_URL(35,Method.DELETE,"/API/v1/sharing/deactivate/","delete_url"),
+    SAVE_GEO_TAG(36,Method.GET,"/API/v1/user/geotag","save_geotag"),
+    UPDATE_PAYMENT(37,Method.POST,"/API/v1/user/recharge","payment_success"),
+    UPDATE_FAILED(38,Method.POST,"/API/v1/user/recharge","payment_failed"),
+    UPDATE_MOBILE_SETTING(39,Method.POST,"/API/v1/user/mobile/","mobile_Setting"),
+    GET_GEO_FENCE(40,Method.GET,"/API/v1/user/geofence/","get_geofence"),
+    SAVE_GEOFENCE(41,Method.POST,"/API/v1/user/geofence/","save_geofence");
     private int id;
     private int method;
     private String postFix;

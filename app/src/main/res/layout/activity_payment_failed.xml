@@ -1,0 +1,53 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="#000"
+  android:orientation="vertical">
+
+
+  <ImageView
+    android:id="@+id/iv_success"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true"
+    android:paddingBottom="20dp"
+    android:layout_above="@+id/tv_increased_month"
+    app:srcCompat="@drawable/ic_card_error"/>
+
+  <TextView
+    android:id="@+id/tv_increased_month"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/support_text"
+    android:textColor="@color/white"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    />
+
+  <TextView
+    android:id="@+id/drop_mail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/tv_increased_month"
+    android:gravity="center"
+    android:text="Drop us a mail"
+    android:textColor="#2da9e1"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="8dp"/>
+
+
+
+  <Button
+    android:id="@+id/btn_home"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:text="Go back home"
+    android:textColor="@color/white"
+    android:background="@drawable/bg_rectangle_button"
+    />
+</RelativeLayout>

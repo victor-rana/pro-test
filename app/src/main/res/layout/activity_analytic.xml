@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black"
+ >
+  <include layout="@layout/toolbar_common" />
+  <View
+    android:id="@+id/view_white"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/frame_date"
+    android:background="@color/white" />
+ <include
+   android:id="@+id/frame_date"
+   layout="@layout/layout_analytic_top_date_card"/>
+
+  <include
+
+    layout="@layout/layout_analytic_graph_card"
+    />
+  <include layout="@layout/layout_progress_bar"/>
+</RelativeLayout>

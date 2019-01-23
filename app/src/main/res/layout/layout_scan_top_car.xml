@@ -1,0 +1,190 @@
+<RelativeLayout
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_weight="1"
+  android:background="@drawable/gradient_vertical_transparent_darkorange_transparent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+  <ImageView
+    android:id="@+id/image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    android:src="@drawable/car_scan" />
+
+  <View
+    android:id="@+id/view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_scan_car_animation"
+    android:visibility="invisible" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1" />
+
+    <RelativeLayout
+      android:id="@+id/rl_backgroung_btn"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="3"
+      android:background="#a0000000">
+
+      <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_border_transparent"
+        android:text="scan"
+        android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:id="@+id/rl_diagnostic_status"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="3"
+      android:paddingLeft="32dp"
+      android:paddingRight="32dp"
+      android:visibility="gone">
+
+
+      <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a0000000"
+        android:orientation="horizontal"
+
+
+        >
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_engine"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Scan \n Successful"
+            android:textColor="@color/white" />
+
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@drawable/gradient_black_white_black" />
+
+          <TextView
+            android:id="@+id/tv_battry_voltage"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_battery"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Battery \n OK"
+            android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_white_black_white" />
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_memory_chip"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Adapter \n OK"
+            android:textColor="@color/white" />
+
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@drawable/gradient_black_white_black" />
+
+          <TextView
+            android:id="@+id/tv_coolant_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_thermometer"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Coolant \n OK"
+            android:textColor="@color/white" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <ImageView
+        android:id="@+id/iv_rescan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_reload" />
+    </RelativeLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1" />
+
+  </LinearLayout>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e4000000"
+    android:visibility="gone">
+
+    <android.support.v7.widget.CardView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      app:cardCornerRadius="8dp">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_diagnostics_scan_engine"
+        android:padding="16dp"
+        android:text="Scan Engine"
+        android:textColor="@color/white"
+
+        />
+    </android.support.v7.widget.CardView>
+
+  </RelativeLayout>
+
+</RelativeLayout>

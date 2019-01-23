@@ -160,7 +160,7 @@
           </RelativeLayout>
 
         </LinearLayout>
-        <blackflame.com.zymepro.expandable.ExpandableLayout
+        <blackflame.com.zymepro.view.custom.ExpandableLayout
           android:id="@+id/expandable_layout"
           android:layout_below="@+id/view_below_trip_container"
           android:layout_above="@+id/expand_layout"
@@ -168,7 +168,6 @@
           android:layout_height="90dp"
           android:background="#1e1f1f"
           app:el_duration="50"
-
           android:layout_alignParentBottom="true"
           app:el_expanded="false"
           >
@@ -312,7 +311,7 @@
           </LinearLayout>
 
 
-        </blackflame.com.zymepro.expandable.ExpandableLayout>
+        </blackflame.com.zymepro.view.custom.ExpandableLayout>
 
         <View
           android:layout_width="match_parent"
@@ -334,7 +333,6 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@drawable/bg_rounded_trip_card"
-
             android:foreground="?selectableItemBackground"
             android:gravity="center"
             android:padding="4dp"

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#000">
+
+  <include layout="@layout/toolbar_common"/>
+
+  <LinearLayout
+    android:id="@+id/datecontainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+
+    >
+
+    <android.support.v4.widget.Space
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="0.25" />
+
+    <ImageView
+      android:id="@+id/date_previous"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="0.5"
+      app:srcCompat="@drawable/ic_left_arrow"
+
+      />
+
+
+    <TextView
+      android:id="@+id/selectDate"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="2"
+      android:background="@drawable/bg_rectangle_button"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="@string/select_date"
+      android:textColor="@color/white" />
+
+    <ImageView
+      android:id="@+id/date_forward"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="0.5"
+      app:srcCompat="@drawable/ic_right_arrow_small" />
+
+    <android.support.v4.widget.Space
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_weight="0.25" />
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/datecontainer"
+    android:layout_below="@+id/toolbar_common"
+    android:orientation="vertical">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:background="@drawable/gradient_vertical_transparent_grey_grey">
+
+      <TextView
+        android:id="@+id/title_drive_behavior"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:padding="4dp"
+        android:text="Driver Behaviour"
+        android:textColor="#2da9e1" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/title_drive_behavior"
+        android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_alert_driver_behaviour"/>
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:background="@drawable/gradient_vertical_transparent_grey_grey">
+
+      <TextView
+        android:id="@+id/title_car_safety"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="Car Safety"
+        android:textColor="#2da9e1" />
+
+      <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_alignRight="@+id/title_car_safety"
+        android:layout_below="@+id/title_car_safety"
+        android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+    </RelativeLayout>
+
+    <include layout="@layout/layout_alert_car_safety"/>
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:background="@drawable/gradient_vertical_transparent_grey_grey">
+
+      <TextView
+        android:id="@+id/title_engine_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="Engine Alert"
+        android:textColor="#2da9e1" />
+
+      <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/title_engine_alert"
+        android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+    </RelativeLayout>
+
+
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="#1e1f1f">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+          android:id="@+id/card_low_battery"
+          android:layout_width="100dp"
+          android:layout_height="match_parent"
+          android:background="#1e1f1f"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="8dp"
+          app:cardElevation="4dp"
+          app:cardUseCompatPadding="true">
+
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+            <ImageView
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginBottom="8dp"
+              android:scaleType="centerCrop"
+              android:layout_above="@+id/view_low_battery"
+              android:layout_centerHorizontal="true"
+              app:srcCompat="@drawable/ic_low_battery" />
+
+
+            <View
+              android:id="@+id/view_low_battery"
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_centerInParent="true"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+            <TextView
+              android:id="@+id/alert_type_low_battery"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/alert_count_battery"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="Low Battery"
+              android:textColor="@color/white"
+              android:textSize="12sp"
+              android:textStyle="bold" />
+
+            <TextView
+              android:id="@+id/alert_count_battery"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/view_low_battery"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:id="@+id/card_high_coolant"
+          android:layout_width="100dp"
+          android:layout_height="match_parent"
+          android:background="#1e1f1f"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="8dp"
+          app:cardElevation="4dp"
+          app:cardUseCompatPadding="true">
+
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+
+            <ImageView
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginBottom="8dp"
+              android:alpha="0.7"
+              android:layout_above="@+id/view_high_coolant"
+              android:layout_centerHorizontal="true"
+              app:srcCompat="@drawable/ic_high_coolant" />
+
+            <View
+              android:id="@+id/view_high_coolant"
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_centerInParent="true"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+            <TextView
+              android:id="@+id/alert_type_high_coolant"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/alert_count_high_coolant"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="High Coolant"
+              android:textColor="@color/white"
+              android:textSize="12sp"
+              android:textStyle="bold" />
+
+            <TextView
+              android:id="@+id/alert_count_high_coolant"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/view_high_coolant"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:id="@+id/card_long_idling"
+          android:layout_width="100dp"
+          android:layout_height="match_parent"
+          android:background="#1e1f1f"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="8dp"
+          app:cardElevation="4dp"
+          app:cardUseCompatPadding="true">
+
+          <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black">
+
+
+            <ImageView
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_marginBottom="8dp"
+              android:layout_above="@+id/view_long_idling"
+              android:layout_centerHorizontal="true"
+              app:srcCompat="@drawable/ic_long_idling" />
+
+            <View
+              android:id="@+id/view_long_idling"
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_centerInParent="true"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:background="@drawable/gradient_horizontal_transparent_white_transparent" />
+
+            <TextView
+              android:id="@+id/alert_type_long_idling"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/alert_count_long_idling"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="Long Idling"
+              android:textColor="@color/white"
+              android:textSize="12sp"
+              android:textStyle="bold" />
+
+            <TextView
+              android:id="@+id/alert_count_long_idling"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/view_long_idling"
+              android:layout_marginTop="4dp"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+          </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+      </LinearLayout>
+
+    </HorizontalScrollView>
+
+  </LinearLayout>
+
+  <FrameLayout
+    android:id="@+id/progressBarHolder"
+    android:animateLayoutChanges="true"
+    android:visibility="gone"
+    android:alpha="0.4"
+    android:background="#000000"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <ProgressBar
+      style="?android:attr/progressBarStyleLarge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminate="true"
+      android:layout_gravity="center" />
+  </FrameLayout>
+
+
+</RelativeLayout>

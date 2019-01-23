@@ -37,6 +37,7 @@ import blackflame.com.zymepro.ui.home.MainActivity;
 import blackflame.com.zymepro.ui.home.singlecar.CarcountAdapter;
 import blackflame.com.zymepro.ui.home.singlecar.CarcountModel;
 import blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment;
+import blackflame.com.zymepro.util.GMapUtil;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -130,49 +131,14 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
         gmap.setOnMarkerClickListener(MulticarFragment.this);
         gmap.setOnMapClickListener(MulticarFragment.this);
         gmap.setOnInfoWindowClickListener(MulticarFragment.this);
-        try{
-          String map_type= CommonPreference.getInstance().getMapType();
-          if(map_type==null){
-            boolean success = gmap.setMapStyle(
-                MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_map));
-            if (!success) {
-              // Handle map style load failure
-            }
 
-          }else if(map_type.equals("NORMAL")){
-            boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_map));
-            if (!success) {
-              // Handle map style load failure
-            }
-          }else if(map_type.equals("NIGHT")){
-            boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_night_mode));
-            if (!success) {
-              // Handle map style load failure
-            }
-
-          }else if(map_type.equals("SATELLITE")){
-            gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-          }else {
-            boolean success = gmap.setMapStyle(
-                MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_map));
-            if (!success) {
-              // Handle map style load failure
-            }
-          }
-        } catch (Resources.NotFoundException e) {
-          // Oops, looks like the map style resource couldn't be found!
-        }
+        GMapUtil.setMapStyle(gmap);
         CameraPosition cameraPosition = new CameraPosition.Builder()
             .target(new LatLng(24.8937, 78.9629))
             .zoom(4)
             .bearing(0)
             .build();
         gmap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
-
-
         gmap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
           @Override
           public View getInfoWindow(Marker marker) {
@@ -257,6 +223,12 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
     });
 
 
+    if ( getActivity() instanceof MainActivity){
+      MainActivity   activity = (MainActivity) getActivity();
+      activity.setting.setVisibility(View.GONE);
+      activity.refresh.setVisibility(View.VISIBLE);
+      activity.share_live_tracking.setVisibility(View.GONE);
+    }
 
 
   }

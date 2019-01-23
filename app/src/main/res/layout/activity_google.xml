@@ -1,0 +1,98 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#000"
+  android:orientation="vertical">
+  <include layout="@layout/toolbar_common"/>
+
+  <TextView
+    android:id="@+id/tv_home_text"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_height="wrap_content"
+    android:text="Now use your Zyme Pro with Google Home! \n Simply link your Zyme Pro with Google Home and ask Google Home about your car!"
+    android:textColor="@color/white"
+    android:gravity="center"
+    android:layout_margin="8dp"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/toolbar_common"/>
+  <ImageView
+    android:id="@+id/home_logo"
+    android:layout_below="@+id/tv_home_text"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_margin="20dp"
+    android:src="@drawable/google_home_logo"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center"/>
+
+
+  <TextView
+    android:id="@+id/tv_home_pro"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hey Google, ask Zyme Pro"
+    android:textStyle="bold"
+    android:textSize="18sp"
+    android:textColor="@color/white"
+    android:textAlignment="textStart"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="4dp"
+    android:layout_below="@+id/home_logo"/>
+  <TextView
+    android:id="@+id/tv_home_detail"
+    android:layout_below="@+id/tv_home_pro"
+    android:textColor="#e0e0e0"
+    android:gravity="center_horizontal"
+    android:layout_margin="8dp"
+    android:lineSpacingExtra="8dp"
+    android:textStyle="italic"
+    android:text="'Where is my car?'\n'How's my car's engine health?'\n'Where is the nearest petrol pump?' \n'What is the petrol price today?' \n'How far is the closest car wash?' \n'Where is the nearest hospital?' \n'Is my car active currently?'"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+  <LinearLayout
+    android:layout_above="@+id/btn_home_start"
+    android:layout_marginBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="24dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text= "Don't have Google Home?"
+      android:textColor="@color/white"
+      android:layout_gravity="center_horizontal"
+      />
+
+    <TextView
+      android:id="@+id/tv_home_by_now"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="4dp"
+      android:text="Buy now"
+      android:textColor="@color/colorAccent"
+
+      />
+  </LinearLayout>
+  <Button
+    android:id="@+id/btn_home_start"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorAccent"
+    android:text="Get Started"
+    android:textColor="@color/white"/>
+
+
+
+
+</RelativeLayout>

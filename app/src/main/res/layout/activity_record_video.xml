@@ -1,0 +1,263 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/parentlayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#FFFFFF"
+>
+
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dashcam">
+
+    <FrameLayout
+
+      android:id="@+id/camera_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <io.fotoapparat.view.CameraView
+        android:id="@+id/camera_view1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="0.5"
+          android:orientation="vertical">
+
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#b4000000"
+            android:orientation="vertical"
+            android:weightSum="16">
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:text="@string/max"
+              android:textColor="@color/white" />
+
+            <TextView
+              android:id="@+id/maxSpeed"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:text="@string/dash"
+              android:textColor="@color/colorAccent"
+              android:textSize="18sp" />
+
+            <TextView
+              android:id="@+id/kmphtext1"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:text="@string/km_h"
+              android:textColor="@color/white" />
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="11"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <com.github.anastr.speedviewlib.ProgressiveGauge
+                android:id="@+id/progress_speed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:sv_maxSpeed="140"
+                app:sv_minSpeed="0"
+                app:sv_orientation="VERTICAL"
+                app:sv_speedTextColor="#fff"
+                app:sv_speedTextPosition="BOTTOM_RIGHT"
+                app:sv_speedTextSize="0dp"
+                app:sv_speedometerBackColor="@color/grey"
+                app:sv_speedometerColor="#f7941e"
+                app:sv_unit="RPM"
+                app:sv_unitTextColor="#00ffffff"
+                app:sv_unitTextSize="16dp"
+                app:sv_unitUnderSpeedText="true" />
+
+
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/currentSpeed"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:text="0"
+              android:textColor="@color/colorAccent"
+              android:textSize="18sp" />
+
+            <TextView
+              android:id="@+id/kmphtext2"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+              android:text="@string/km_h"
+
+              android:textColor="@color/white" />
+          </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="2.6"
+          android:background="@color/transparent">
+          <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/zymelogo1"/>
+        </RelativeLayout>
+
+        <android.support.v4.widget.Space
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="2.6"
+          android:visibility="gone"/>
+
+
+
+
+
+
+        <LinearLayout
+          android:id="@+id/llayout"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_gravity="end"
+          android:layout_weight="0.5"
+          android:background="#b4000000"
+          android:orientation="vertical"
+          android:weightSum="16">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/max"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/maxRpm"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/dash"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+          <TextView
+            android:id="@+id/rpmtext1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/rpm"
+            android:textColor="@color/white" />
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="11"
+            android:gravity="center"
+            android:scaleX="-1">
+
+            <com.github.anastr.speedviewlib.ProgressiveGauge
+              android:id="@+id/progress_rpm"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:sv_maxSpeed="6000"
+              app:sv_minSpeed="0"
+              app:sv_orientation="VERTICAL"
+              app:sv_speedTextColor="#fff"
+              app:sv_speedTextPosition="BOTTOM_RIGHT"
+              app:sv_speedTextSize="0dp"
+              app:sv_speedometerBackColor="@color/grey"
+              app:sv_speedometerColor="#f7941e"
+              app:sv_unit="RPM"
+              app:sv_unitTextColor="#00ffffff"
+              app:sv_unitTextSize="16dp"
+              app:sv_unitUnderSpeedText="true" />
+
+          </LinearLayout>
+
+          <TextView
+            android:id="@+id/currentRpm"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+          <TextView
+            android:id="@+id/rpmtext2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/rpm"
+            android:textColor="@color/white" />
+        </LinearLayout>
+      </LinearLayout>
+    </FrameLayout>
+
+    <ImageView
+      android:id="@+id/toggle"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_gravity="bottom|center_horizontal"
+      android:layout_marginBottom="12dp"
+      app:srcCompat="@drawable/ic_record" />
+
+
+
+    <TextView
+      android:id="@+id/tvRecord"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="4dp"
+      android:background="#b4000000"
+      android:drawableLeft="@drawable/ic_filled_circle"
+      android:drawablePadding="8dp"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="Rec"
+      android:textColor="@color/white"
+      android:visibility="gone" />
+
+  </FrameLayout>
+</RelativeLayout>

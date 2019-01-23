@@ -1,20 +1,29 @@
 package blackflame.com.zymepro.ui.home.singlecar;
 
-import static blackflame.com.zymepro.R.id.car_selection_bg_opacity;
 
+import static blackflame.com.zymepro.constant.PermissionConstants.getPermissions;
+
+import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings.Global;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
+import android.telephony.SmsManager;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -24,9 +33,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import blackflame.com.zymepro.R;
+import blackflame.com.zymepro.db.SettingPreferences;
 import blackflame.com.zymepro.ui.activation.ActivityActivation;
 import blackflame.com.zymepro.Prosingleton;
-import blackflame.com.zymepro.R;
+
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -38,14 +51,25 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.mqtt.MqttHandler;
+import blackflame.com.zymepro.ui.alerts.AlertActivity;
+import blackflame.com.zymepro.ui.analytic.AnalyticActivity;
+import blackflame.com.zymepro.ui.carregistration.CarRegistration;
+import blackflame.com.zymepro.ui.dashcam.recordvideo.RecordVideoActivity;
+import blackflame.com.zymepro.ui.enginescan.EngineScanActivity;
+import blackflame.com.zymepro.ui.history.HistoryActivity;
+import blackflame.com.zymepro.ui.home.MainActivity;
 import blackflame.com.zymepro.ui.home.MqttDataListener;
 import blackflame.com.zymepro.ui.home.multicar.MulticarFragment;
+import blackflame.com.zymepro.ui.pitstop.PitstopActivity;
+import blackflame.com.zymepro.util.GMapUtil;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.PermissionUtils;
 import blackflame.com.zymepro.util.PermissionUtils.SimpleCallback;
 import blackflame.com.zymepro.util.ToastUtils;
 import blackflame.com.zymepro.util.UtilityMethod;
 import blackflame.com.zymepro.view.custom.RippleBackground;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeWarningDialog;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -54,18 +78,21 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
+
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMarkerClickListener,OnMapReadyCallback,SimpleCallback,SinglePresenter.View ,AppRequest ,MqttDataListener {
+public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMarkerClickListener,OnMapReadyCallback,SimpleCallback,SinglePresenter.View ,AppRequest ,MqttDataListener,OnClickListener {
 
 
+  private static final int REQ_PERMISSION = 100;
   MapView mMapView;
   LinearLayout history, alert, pitstop, enginescan,analytics;
   LinearLayout linearLayout_bottom;
@@ -97,7 +124,10 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   String registration,status;
   String TAG=SingleCarFragment.class.getCanonicalName();
   NerdModeDialog dialog_nerd_mode;
+  boolean isSosClicked=false;
 
+
+  PendingIntent sentPending, deliveredPending;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,6 +138,8 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     initViews(view);
     presenter=new SinglePresenter(this,new SingleInteractor());
     presenter.handleBundle(getArguments());
+    sentPending = PendingIntent.getBroadcast(getActivity(), 0, new Intent("SENT"), 0);
+    deliveredPending = PendingIntent.getBroadcast(getActivity(), 0, new Intent("DELIVERED"), 0);
     return view;
   }
   public void initViews(View view){
@@ -117,12 +149,19 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     history = view.findViewById(R.id.ll_triphistory);
     alert = view.findViewById(R.id.ll_alert);
     analytics=view.findViewById(R.id.ll_analytics);
+
+    pitstop.setOnClickListener(this);
+    enginescan.setOnClickListener(this);
+    alert.setOnClickListener(this);
+    history.setOnClickListener(this);
+    analytics.setOnClickListener(this);
+
     setRipple(enginescan);
     setRipple(history);
     setRipple(alert);
     setRipple(analytics);
     setRipple(pitstop);
-    view_bg_opacity = view.findViewById(car_selection_bg_opacity);
+    view_bg_opacity = view.findViewById(R.id.car_selection_bg_opacity);
     textView_selectedCar = view.findViewById(R.id.tv_selected_car);
     textView_parked = view.findViewById(R.id.textview_parked);
     listview_carCount = view.findViewById(R.id.listview_car_count);
@@ -134,17 +173,22 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     linearLayout_home_container_top= view.findViewById(R.id.home_container_tv_top);
     iv_nerd_mode= view.findViewById(R.id.iv_nerd_mode);
     iv_dashcam= view.findViewById(R.id.iv_dashcam);
+    iv_dashcam.setOnClickListener(this);
     linearLayout_group = view.findViewById(R.id.layout_container_group);
     imageView_zoomin = view.findViewById(R.id.zoom_in);
     imageView_zoomout = view.findViewById(R.id.zoom_out);
     linearLayout_sos = view.findViewById(R.id.iv_sos);
     linearLayout_carllocation = view.findViewById(R.id.iv_parkcarlocator);
     linearLayout_sharelocation = view.findViewById(R.id.iv_takemeonlocation);
+
+    linearLayout_sos.setOnClickListener(this);
+    linearLayout_carllocation.setOnClickListener(this);
+    linearLayout_sharelocation.setOnClickListener(this);
     cardView_parked = view.findViewById(R.id.containertop_textview);
     iv_more = view.findViewById(R.id.iv_more);
     cardView_parked.setClickable(false);
     cardView_active = view.findViewById(R.id.containertop);
-    iv_dashcam= view.findViewById(R.id.iv_dashcam);
+
     linearLayout_nerd_mode= view.findViewById(R.id.layout_container_group_top);
     linearLayout_pokemon_child = view.findViewById(R.id.pokemon_child);
     view_clicked = view.findViewById(R.id.view_click);
@@ -167,7 +211,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       e.printStackTrace();
     }
     if (!PermissionUtils.isGranted(PermissionConstants.LOCATION)&& !PermissionUtils.isGranted(PermissionConstants.CONTACTS)){
-      PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.LOCATION));
+      PermissionUtils.permission(getPermissions(PermissionConstants.LOCATION));
       PermissionUtils.sInstance.callback(this);
       PermissionUtils.sInstance.request();
     }
@@ -193,48 +237,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
           gmap.setTrafficEnabled(false);
         }
 
-        try{
-
-          String map_type = CommonPreference.getInstance().getMapType();
-          if (gmap != null) {
-            int id=UtilityMethod.getStyle(CommonPreference.getInstance().getMapType());
-
-            if (map_type == null) {
-              gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-              boolean success = gmap.setMapStyle(
-                  MapStyleOptions.loadRawResourceStyle(getActivity(), id));
-              if (!success) {
-                // Handle map style load failure
-              }
-
-            } else if (map_type.equals("NORMAL")) {
-              gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-              boolean success = gmap.setMapStyle(
-                  MapStyleOptions.loadRawResourceStyle(getActivity(), id));
-              if (!success) {
-                // Handle map style load failure
-              }
-            } else if (map_type.equals("NIGHT")) {
-              gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-              boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),id));
-              if (!success) {
-                // Handle map style load failure
-              }
-
-            } else if (map_type.equals("SATELLITE")) {
-              gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-            } else {
-              gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-              boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),id));
-              if (!success) {
-                // Handle map style load failure
-              }
-            }
-          }
-        } catch(Resources.NotFoundException e){
-
-        }
+        GMapUtil.setMapStyle(gmap);
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
             .target(new LatLng(24.8937, 78.9629))
@@ -249,7 +252,12 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
 
 
-
+        if ( getActivity() instanceof MainActivity){
+          MainActivity   activity = (MainActivity) getActivity();
+          activity.setting.setVisibility(View.VISIBLE);
+          activity.refresh.setVisibility(View.GONE);
+          activity.share_live_tracking.setVisibility(View.VISIBLE);
+        }
 
 
       }
@@ -274,9 +282,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
     onSelectCar();
     onOpacity();
-
     cardParkedClick();
-    onAlert();
     viewBacgroundBlack();
     zoomIn();
     zoomout();
@@ -342,44 +348,9 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
         if (gmap!=null)
           gmap.setTrafficEnabled(false);
       }
+      GMapUtil.setMapStyle(gmap);
 
-      String map_type = CommonPreference.getInstance().getMapType();
-      if (gmap != null) {
-        int id=UtilityMethod.getStyle(CommonPreference.getInstance().getMapType());
 
-        if (map_type == null) {
-          gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-          boolean success = gmap.setMapStyle(
-              MapStyleOptions.loadRawResourceStyle(getActivity(), id));
-          if (!success) {
-            // Handle map style load failure
-          }
-
-        } else if (map_type.equals("NORMAL")) {
-          gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-          boolean success = gmap.setMapStyle(
-              MapStyleOptions.loadRawResourceStyle(getActivity(), id));
-          if (!success) {
-            // Handle map style load failure
-          }
-        } else if (map_type.equals("NIGHT")) {
-          gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-          boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),id));
-          if (!success) {
-            // Handle map style load failure
-          }
-
-        } else if (map_type.equals("SATELLITE")) {
-          gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-        } else {
-          gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-          boolean success = gmap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(),id));
-          if (!success) {
-            // Handle map style load failure
-          }
-        }
-      }
     } catch(Resources.NotFoundException e){
       // Log.e(TAG, "onResume: "+e.getMessage() );
       // Oops, looks like the map style resource couldn't be found!
@@ -400,6 +371,16 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
         view_bg_opacity.setVisibility(listview_carCount.isShown()
             ? View.VISIBLE
             : View.GONE);
+
+
+
+
+
+
+
+
+
+
 
       }
     });
@@ -530,8 +511,13 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void onGranted() {
-    Log.e(TAG, "onGranted: "+"Granted" );
+  //  Log.e(TAG, "onGranted: "+"Granted" );
     //fetchStatusData();
+
+    if (isSosClicked){
+      getSos();
+      isSosClicked=false;
+    }
   }
 
   @Override
@@ -546,19 +532,6 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     mMapView.onPause();
   }
 
-  private void onAlert() {
-    alert.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-//        Intent intent = new Intent(getActivity(), AlertActivity.class);
-//        intent.putExtra("coming",0);
-//        startActivity(intent);
-//        screenName="Alert Activity";
-//        //overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
-//        getActivity().overridePendingTransition(R.anim.fade_in_animation, R.anim.fade_out_animation);
-      }
-    });
-  }
 
 
   public void zoomIn() {
@@ -695,7 +668,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   @Override
   public void setActivationCard() {
     status="NOT_ACTIVATED";
-    Log.e(TAG, "setActivationCard: "+status );
+   // Log.e(TAG, "setActivationCard: "+status );
     isCardclickable = true;
     cardView_parked.setClickable(true);
     textView_parked.setFocusable(true);
@@ -730,15 +703,14 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   @Override
   public void registerMqtt(String imei) {
     MqttHandler.registerMqtt(imei,this);
-    Log.e(TAG, "registerMqtt: call" );
 
   }
 
   @Override
   public void navigateToRegistration() {
-//    Intent intent = new Intent(getActivity(), CarInfoActivity.class);
-//    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-//    startActivity(intent);
+    Intent intent = new Intent(getActivity(), CarRegistration.class);
+    intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+    startActivity(intent);
   }
 
   @Override
@@ -844,6 +816,9 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     relativeLayout_selectedcar.setVisibility(View.VISIBLE);
     linearLayout_nerd_mode.setVisibility(View.VISIBLE);
     linearLayout_home_container_top.setVisibility(View.VISIBLE);
+    tv_speed.setVisibility(View.VISIBLE);
+    tv_coolant_realtime.setVisibility(View.VISIBLE);
+    tv_battery_realtime.setVisibility(View.VISIBLE);
   }
 
 
@@ -883,6 +858,50 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     super.onLowMemory();
     mMapView.onLowMemory();
   }
+  private void sendSos(JSONObject data){
+    try {
+
+      JSONObject object_setting = data.getJSONObject("msg");
+
+      SmsManager sms = SmsManager.getDefault();
+
+      String message = "HELP! My car is stuck. Its location is " + "http://maps.google.com/?q=" + lastLatitude + "," + lastLongitude;
+
+      if (object_setting.has("sos_1")) {
+        JSONArray array_sos = object_setting.getJSONArray("sos_1");
+        SettingPreferences.getInstance().setSOSArray(array_sos.toString());
+        int length = array_sos.length();
+        MsgReceiver.registerReceiver(GlobalReferences.getInstance().baseActivity);
+        if (length > 0) {
+          for (int i = 0; i < length; i++) {
+            JSONObject object = array_sos.getJSONObject(i);
+            if (object.has("name")) {
+              String number = object.getString("number");
+              if (!number.equals("null")) {
+
+
+                if (number != null) {
+                  try {
+                    sms.sendTextMessage(number, null, message, sentPending, deliveredPending);
+                    //Toast.makeText(getActivity(), "SMS sent on "+number,Toast.LENGTH_LONG).show();
+                  } catch (Exception ex) {
+                    // Toast.makeText(getActivity(),"SMS failed on "+number+" please try again.",Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          Toast.makeText(getActivity(), "There is no SOS number stored", Toast.LENGTH_SHORT).show();
+        }
+      }
+
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+  }
 
 
     @Override
@@ -896,11 +915,23 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       JSONObject data=listener.getJsonResponse();
 
      if(listener.getTag().equals("status")){
-       presenter.parseData(data);
+       presenter.parseData(data,registration);
      }else if(listener.getTag().equals("address")){
        presenter.parseAddress(data);
+     }else if (listener.getTag().equals("pitstop")){
+       presenter.parseLocation(listener.getJsonResponse());
+
+     }else if (listener.getTag().equals("get_setting")){
+       sendSos(listener.getJsonResponse());
+
      }
+
+
+
   }
+
+
+
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
@@ -937,13 +968,14 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       }
     });
 
-    Log.e(TAG, "setData: "+topic+"  "+data );
+   // Log.e(TAG, "setData: "+topic+"  "+data );
   }
 
   @Override
   public void setTripData(String status, double avgSpeed, String time, double distance) {
     tv_time.setText(time);
-    tv_avgspeed.setText("" + avgSpeed + " km/h");
+   String avg_speed= String.format("%.0f", avgSpeed);
+    tv_avgspeed.setText("" + avg_speed + " km/h");
     tv_status.setText("" + status);
     tv_distance.setText("" + distance + " km");
 
@@ -976,6 +1008,192 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       dialog_nerd_mode.upDateView(jsonObject);
     }
   }
+
+
+  @Override
+  public void onClick(View v) {
+    switch(v.getId()){
+      case R.id.ll_triphistory:
+        Intent history=new Intent(GlobalReferences.getInstance().baseActivity,HistoryActivity.class);
+        startActivity(history);
+        break;
+      case R.id.ll_alert:
+        Intent alert=new Intent(GlobalReferences.getInstance().baseActivity,AlertActivity.class);
+        startActivity(alert);
+        break;
+      case R.id.ll_enginescan:
+        Intent scan=new Intent(GlobalReferences.getInstance().baseActivity,EngineScanActivity.class);
+        startActivity(scan);
+        break;
+      case R.id.ll_pitstop:
+        String carId=CommonPreference.getInstance().getCarId();
+        ApiRequests.getInstance().get_location(GlobalReferences.getInstance().baseActivity,SingleCarFragment.this,carId);
+        break;
+
+      case R.id.ll_analytics:
+
+        final String id = CommonPreference.getInstance().getCarId();
+        if (NetworkUtils.isConnected()) {
+
+          int count = CommonPreference.getInstance().getDeviceCount();
+          if (count == 1) {
+            boolean isActivated = CommonPreference.getInstance().getDeviceActivated();
+            if (isActivated) {
+
+              Intent intent=new Intent(getActivity(),AnalyticActivity.class);
+              intent.putExtra("carId",id);
+              startActivity(intent);
+
+
+            } else {
+              Toast.makeText(getActivity(), "Please activate the device to access this feature", Toast.LENGTH_SHORT).show();
+            }
+          } else {
+            boolean isActivated = CommonPreference.getInstance().getThisDeviceLinked();
+            if (isActivated) {
+              Intent intent=new Intent(getActivity(),AnalyticActivity.class);
+              intent.putExtra("carId",id);
+              startActivity(intent);
+            } else {
+              ToastUtils.showShort("Please activate the device to access this feature");
+            }
+          }
+        }else{
+
+          ToastUtils.showShort("Please check your internet connection");
+
+        }
+        break;
+
+      case R.id.iv_takemeonlocation:
+        v.startAnimation(buttonClick);
+        UtilityMethod.onShare(GlobalReferences.getInstance().baseActivity,lastLatitude,lastLongitude);
+        break;
+      case R.id.iv_parkcarlocator:
+        v.startAnimation(buttonClick);
+
+        if (lastLatitude != 0.0) {
+          try {
+            String url = "http://maps.google.com/maps?f=d&daddr=" + lastLatitude + "," + lastLongitude + "&dirflg=d";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+            startActivity(intent);
+          }catch (ActivityNotFoundException ex){
+
+          }
+
+        }
+        break;
+
+      case R.id.iv_sos:
+        isSosClicked=true;
+        if (PermissionUtils.isGranted(getPermissions(PermissionConstants.SMS))){
+          getSos();
+        }else{
+          PermissionUtils.permission(PermissionConstants.SMS);
+          PermissionUtils.sInstance.callback(this);
+          PermissionUtils.sInstance.request();
+        }
+
+
+        break;
+      case R.id.iv_dashcam:
+        showDialogForDashcam();
+        break;
+
+    }
+
+  }
+
+
+  private void showDialogForDashcam() {
+    if(Build.VERSION.SDK_INT <21){
+
+      new AwesomeWarningDialog(getActivity())
+          .setTitle("Dashcam")
+          .setMessage("This feature can be accessed only with Android Lollipop")
+          .setColoredCircle(R.color.dialogNoticeBackgroundColor)
+          .setDialogIconAndColor(R.drawable.ic_notice, R.color.white)
+          .setCancelable(true)
+          .setButtonText("Ok")
+          .setButtonBackgroundColor(R.color.dialogNoticeBackgroundColor)
+          .setButtonText(getString(R.string.dialog_ok_button))
+          .setWarningButtonClick(new Closure() {
+            @Override
+            public void exec() {
+              // click
+            }
+          })
+          .show();
+
+    } else if(Build.VERSION.SDK_INT == 21||Build.VERSION.SDK_INT ==22){
+      new AwesomeWarningDialog(getActivity())
+          .setTitle("Dashcam")
+          .setMessage("Please DO NOT check 'Dont't show again' or 'Cancel' check box on the permission dialog which you will see when recording starts to avoid System UI crash. \n If you already have, remove and re-install the application.\n" +
+              "This is a bug in Android 5.1 and can not be fixed by us.")
+          .setColoredCircle(R.color.colorAccent)
+          .setDialogIconAndColor(R.drawable.ic_notice, R.color.white)
+          .setCancelable(true)
+          .setButtonText("Try it")
+          .setButtonBackgroundColor(R.color.colorAccent)
+          .setButtonText(getString(R.string.dialog_ok_button))
+          .setWarningButtonClick(new Closure() {
+            @Override
+            public void exec() {
+              // click
+              if (Build.VERSION.SDK_INT > 21) {
+//                                Intent intent = new Intent(MainActivity.this, Dashcam.class);
+//                                startActivity(intent);
+                checkDashcamPermission();
+
+
+              } else {
+                Toast.makeText(getActivity(), "This feature can be accessed only with Android Lollipop ", Toast.LENGTH_SHORT).show();
+
+              }
+            }
+          })
+
+          .show();
+
+    }else {
+      checkDashcamPermission();
+    }
+
+  }
+  private void checkDashcamPermission() {
+
+    if (ActivityCompat.checkSelfPermission(getActivity(),android. Manifest.permission.CAMERA
+    ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+    ) == PackageManager.PERMISSION_GRANTED ) {
+
+
+
+      openDashcam();
+
+    } else
+      ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQ_PERMISSION);
+
+  }
+  private void openDashcam(){
+    startActivity(new Intent(getActivity(),RecordVideoActivity.class));
+  }
+
+
+  private void getSos(){
+    String carId=CommonPreference.getInstance().getCarId();
+    ApiRequests.getInstance().get_setting(GlobalReferences.getInstance().baseActivity,SingleCarFragment.this,carId);
+  }
+
+
+  @Override
+  public void navigateToPitstop(double latitude, double longitude) {
+    Intent intent = new Intent(getActivity(), PitstopActivity.class);
+    intent.putExtra("latitude", lastLatitude);
+    intent.putExtra("longitude", lastLongitude);
+    startActivity(intent);
+  }
+
 
 
 }

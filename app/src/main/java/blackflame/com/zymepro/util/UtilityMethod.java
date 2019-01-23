@@ -2,11 +2,17 @@ package blackflame.com.zymepro.util;
 
 
 
+import static blackflame.com.zymepro.util.ActivityUtils.startActivity;
+
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.TypedValue;
 
@@ -16,7 +22,9 @@ import blackflame.com.zymepro.R;
 
 import blackflame.com.zymepro.ui.login.LoginActivity;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 public class UtilityMethod {
@@ -289,6 +297,61 @@ public class UtilityMethod {
   }
 
 
+  public static String getDate(Date date)
+  {String dateString;
+    try
+    {
+      SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+      dateString = formatter.format(date.getTime());
+
+      //Log.d("OurDate", OurDate);
+    }
+    catch (Exception e)
+    {
+      dateString = "00-00-0000 00:00";
+    }
+    return dateString;
+  }
+  public static String getTime(Date OurDate)
+  {String dateString;
+    try
+    {
+      SimpleDateFormat formatter = new SimpleDateFormat("hh:mm aa");
+      dateString = formatter.format(OurDate.getTime());
+
+
+      //Log.d("OurDate", OurDate);
+    }
+    catch (Exception e)
+    {
+      dateString = "00-00-0000 00:00";
+    }
+    return dateString;
+  }
+
+
+  public static String getDatewithMonth(String OurDate)
+  {
+    try
+    {
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date value = formatter.parse(OurDate);
+
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy"); //this format changeable
+      dateFormatter.setTimeZone(TimeZone.getDefault());
+      OurDate = dateFormatter.format(value);
+
+      //Log.d("OurDate", OurDate);
+    }
+    catch (Exception e)
+    {
+      OurDate = "00-00-0000 00:00";
+    }
+    return OurDate;
+  }
+
+
   public static String get12HourTime(int selectedHour,int selectedMinutes){
     String status = " AM";
 
@@ -330,6 +393,103 @@ public class UtilityMethod {
     String    timeString = get12HourTime(hours,minutes);
 
     return timeString;}
+
+
+  public static String getTime(String OurDate)
+  {
+    try
+    {
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date value = formatter.parse(OurDate);
+
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a"); //this format changeable
+      dateFormatter.setTimeZone(TimeZone.getDefault());
+      OurDate = dateFormatter.format(value);
+
+      //Log.d("OurDate", OurDate);
+    }
+    catch (Exception e)
+    {
+      OurDate = "00-00-0000 00:00";
+    }
+    return OurDate;
+  }
+
+
+  public static String humanReadableByteCount(long bytes, boolean si) {
+    int unit = si ? 1000 : 1024;
+    if (bytes < unit) return bytes + " B";
+    int exp = (int) (Math.log(bytes) / Math.log(unit));
+    String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
+    return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+  }
+
+  public static void openLink(String url){
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    startActivity(browserIntent);
+  }
+
+  public static void onShare(Context context,double latitude, double longitude) {
+
+    List<Intent> targetShareIntents = new ArrayList<>();
+    Intent shareIntent = new Intent();
+    shareIntent.setAction(Intent.ACTION_SEND);
+    shareIntent.setType("text/plain");
+    String message = "http://maps.google.com/?q=" + latitude + "," + longitude;
+
+    List<ResolveInfo> resInfos = context.getPackageManager().queryIntentActivities(shareIntent, 0);
+    if (!resInfos.isEmpty()) {
+      for (ResolveInfo resInfo : resInfos) {
+        String packageName = resInfo.activityInfo.packageName;
+//                Log.i("Package Name", packageName);
+        if (packageName.contains("com.twitter.android") || packageName.contains("com.facebook.katana") || packageName.contains("com.kakao.story") || packageName.contains("com.whatsapp") || packageName.contains("com.instagram.android")) {
+          Intent intent = new Intent();
+          intent.setComponent(new ComponentName(packageName, resInfo.activityInfo.name));
+          intent.setAction(Intent.ACTION_SEND);
+          intent.setType("text/plain");
+
+          intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
+          intent.putExtra(android.content.Intent.EXTRA_TEXT, " My car is currently at " + message);
+          intent.setPackage(packageName);
+          intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+          targetShareIntents.add(intent);
+        }
+      }
+      if (!targetShareIntents.isEmpty()) {
+
+        Intent chooserIntent = Intent.createChooser(targetShareIntents.remove(0), "Choose app to share");
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetShareIntents.toArray(new Parcelable[]{}));
+        startActivity(chooserIntent);
+      } else {
+
+        // showDialaog(this);
+      }
+    }
+
+  }
+
+
+  public static String getDisplayTime(String OurDate) {
+    try
+    {
+
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date value = formatter.parse(OurDate);
+
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm aaa"); //this format changeable
+      dateFormatter.setTimeZone(TimeZone.getDefault());
+      OurDate = dateFormatter.format(value);
+
+      //Log.d("OurDate", OurDate);
+    }
+    catch (Exception e)
+    {
+      OurDate = "00-00-0000 00:00";
+    }
+    return OurDate;
+  }
 
 
 }

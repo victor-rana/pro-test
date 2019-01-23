@@ -25,7 +25,9 @@ import blackflame.com.zymepro.ui.carregistration.CarRegistration;
 import blackflame.com.zymepro.ui.profile.adapter.ProfileRecyclerAdapter;
 import blackflame.com.zymepro.ui.profile.listener.ProfileCardClickListener;
 import blackflame.com.zymepro.ui.profile.model.ProfileModel;
+import blackflame.com.zymepro.ui.profile.payment.PaymentActivity;
 import blackflame.com.zymepro.ui.profile.update.UpdateProfile;
+import blackflame.com.zymepro.ui.profile.updateuser.UpdateUser;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
 
@@ -84,10 +86,10 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
         if (tv_name.getText().toString().equals("--") || !isNetworkAvailable) {
           ToastUtils.showShort("Please check your internet connection");
         } else {
-//          Intent intent=new Intent(Profile.this,UpdateUserProfile.class);
-//          intent.putExtra("name",tv_name.getText().toString());
-//          intent.putExtra("mobile",tv_mobile.getText().toString());
-//          startActivity(intent);
+          Intent intent=new Intent(ActivityProfile.this,UpdateUser.class);
+          intent.putExtra("name",tv_name.getText().toString());
+          intent.putExtra("mobile",tv_mobile.getText().toString());
+          startActivity(intent);
 
         }
 
@@ -185,12 +187,12 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
 
     }else {
       ProfileModel model = list_cardata.get(position);
-//      Intent intent = new Intent(ActivityProfile.this, PaymentActivity.class);
-//      intent.putExtra("name", tv_name.getText().toString().trim());
-//      intent.putExtra("email", email);
-//      intent.putExtra("mobile", mobileNumber);
-//      intent.putExtra("imei", model.getImei());
-//      startActivity(intent);
+      Intent intent = new Intent(ActivityProfile.this, PaymentActivity.class);
+      intent.putExtra("name", tv_name.getText().toString().trim());
+      intent.putExtra("email", email);
+      intent.putExtra("mobile", mobileNumber);
+      intent.putExtra("imei", model.getImei());
+      startActivity(intent);
       finish();
 
     }

@@ -1,0 +1,59 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="#000"
+  android:orientation="vertical">
+
+  <TextView
+    android:id="@+id/tv_payment_success"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:text="Payment Successful"
+    android:textColor="@color/white"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    />
+
+  <ImageView
+    android:id="@+id/iv_success"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerInParent="true"
+    android:paddingBottom="20dp"
+    app:srcCompat="@drawable/tick_inside_circle"/>
+
+  <TextView
+    android:id="@+id/tv_increased_month"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Subscription time increased by "
+    android:textColor="@color/white"
+    android:layout_below="@+id/iv_success"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    />
+  <TextView
+    android:id="@+id/tv_payment_id"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_below="@+id/tv_increased_month"
+    android:gravity="center"
+    android:layout_margin="20dp"
+
+    />
+  <Button
+    android:id="@+id/button_home"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:text="Home"
+    android:textColor="@color/white"
+    android:background="@drawable/bg_rectangle_button"
+    />
+</RelativeLayout>

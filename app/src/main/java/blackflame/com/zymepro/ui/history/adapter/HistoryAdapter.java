@@ -2,6 +2,7 @@ package blackflame.com.zymepro.ui.history.adapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import blackflame.com.zymepro.Prosingleton;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.ui.history.model.TripHistory;
+import blackflame.com.zymepro.ui.tripdetails.TripDetailsActivity;
 import blackflame.com.zymepro.view.custom.ExpandableLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -122,14 +124,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
           int position = (Integer) v.getTag();
           TripHistory helper = mhistory_arraylist.get(position);
-//          int trip_id = helper.getTripId();
-//          Intent intent = new Intent(activity, ShowDetailHistory.class);
-//          intent.putExtra("TripID",trip_id);
-//          intent.putExtra("date",helper.getStartTime());
-//          intent.putExtra("time_consumed",helper.getTime_consumed());
-//          intent.putExtra("startAddress",helper.getStartAddress());
-//          intent.putExtra("endAddress",helper.getEndAddress());
-//          activity.startActivity(intent);
+          int trip_id = helper.getTripId();
+          Intent intent = new Intent(activity, TripDetailsActivity.class);
+          intent.putExtra("trip_id",trip_id);
+          intent.putExtra("date",helper.getStartTime());
+          intent.putExtra("time_consumed",helper.getTime_consumed());
+          intent.putExtra("startAddress",helper.getStartAddress());
+          intent.putExtra("endAddress",helper.getEndAddress());
+          activity.startActivity(intent);
         }
       });
 

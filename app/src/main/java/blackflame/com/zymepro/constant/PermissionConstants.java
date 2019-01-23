@@ -24,7 +24,7 @@ public final class PermissionConstants {
       permission.READ_CALENDAR, permission.WRITE_CALENDAR
   };
   private static final String[] GROUP_CAMERA        = {
-      permission.CAMERA
+      permission.CAMERA,permission.READ_EXTERNAL_STORAGE,permission.WRITE_EXTERNAL_STORAGE
   };
   private static final String[] GROUP_CONTACTS      = {
       permission.READ_CONTACTS, permission.WRITE_CONTACTS
@@ -36,9 +36,7 @@ public final class PermissionConstants {
       permission.RECORD_AUDIO
   };
   private static final String[] GROUP_PHONE         = {
-      permission.READ_PHONE_STATE, permission.READ_PHONE_NUMBERS, permission.CALL_PHONE,
-      permission.READ_CALL_LOG, permission.WRITE_CALL_LOG, permission.ADD_VOICEMAIL,
-      permission.USE_SIP, permission.PROCESS_OUTGOING_CALLS, permission.ANSWER_PHONE_CALLS
+       permission.CALL_PHONE
   };
   private static final String[] GROUP_PHONE_BELOW_O = Arrays.copyOf(
       GROUP_PHONE, GROUP_PHONE.length - 1
@@ -47,8 +45,7 @@ public final class PermissionConstants {
       permission.BODY_SENSORS
   };
   private static final String[] GROUP_SMS           = {
-      permission.SEND_SMS, permission.RECEIVE_SMS, permission.READ_SMS,
-      permission.RECEIVE_WAP_PUSH, permission.RECEIVE_MMS,
+      permission.SEND_SMS,  permission.READ_SMS
   };
   private static final String[] GROUP_STORAGE       = {
       permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE

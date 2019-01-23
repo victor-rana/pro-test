@@ -1,0 +1,40 @@
+<RelativeLayout android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:background="@color/black"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <include layout="@layout/toolbar_common" />
+
+  <blackflame.com.zymepro.view.custom.swiperefresh.SwipyRefreshLayout
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:srl_direction="bottom"
+    android:layout_below="@+id/toolbar_common"
+    android:layout_above="@+id/tv_pullup"
+    >
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/notification_list"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="0dp"
+      android:layout_marginRight="0dp"
+      android:scrollbars="vertical"
+      />
+
+  </blackflame.com.zymepro.view.custom.swiperefresh.SwipyRefreshLayout>
+
+  <TextView
+    android:id="@+id/tv_pullup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#1e1f1f"
+    android:text="Pull up to load more data"
+    android:textColor="@color/white"
+    android:gravity="center"
+    android:padding="6dp"
+    />
+
+</RelativeLayout>

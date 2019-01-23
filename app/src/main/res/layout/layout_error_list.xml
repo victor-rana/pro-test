@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:background="@color/black"
+  >
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Error code information"
+    android:textColor="@color/colorAccent"
+    android:gravity="center"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
+    />
+  <ListView
+    android:id="@+id/lv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/gradient_black_white_black"
+    android:dividerHeight="1dp"/>
+  <Button
+    android:id="@+id/btn_ok"
+    android:background="@color/colorAccent"
+    android:textColor="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Ok"
+    android:textStyle="bold"/>
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@color/grey"
+  android:orientation="vertical">
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Disclaimer"
+    android:textColor="@color/colorAccent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="8dp"/>
+
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="8dp"
+    android:text="Please note that your car’s information will be accessible on the generated URL for the duration selected in the application. You can deactivate the URL at any time after generation.\n\n
+ Please be sure to share the URL only with trusted friends and family as the generated URL can be used to track your car's data in real time.\n\n
+ Users with the generated URL will have the following information about your car (whenever applicable)- \n
+- Realtime location \n
+- Car status \n
+- Trip time \n
+- Trip distance \n
+- Avg. speed \n
+- Car speed\n
+- Car RPM"/>
+
+  <CheckBox
+    android:id="@+id/remember"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:button="@drawable/drawable_checkbox"
+    android:checked="false"
+    android:text="Remember my choice"
+    android:textColor="@color/white"
+    android:padding="4dp"
+    android:layout_marginTop="32dp"
+    />
+
+  <Button
+    android:id="@+id/btn_ok"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Ok"
+    android:layout_marginTop="32dp"
+    android:background="@drawable/bg_rectangle_button"
+    android:layout_gravity="center"
+    android:textColor="@color/white"
+    android:layout_marginBottom="8dp"
+    />
+
+
+
+</LinearLayout>

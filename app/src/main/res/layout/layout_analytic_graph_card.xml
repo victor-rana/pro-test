@@ -1,0 +1,345 @@
+<ScrollView
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_below="@+id/frame_date"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+    <include
+      layout="@layout/analytic_summary_data"/>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="250dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+      <include
+        android:id="@+id/multi_maxspeed_maxrpm"
+        layout="@layout/layout_switch_multi_button"/>
+
+
+      <TextView
+        android:id="@+id/chart_unit_maxrpm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="4dp"
+        android:gravity="start|center"
+        android:text=""
+        android:textColor="@color/log_units"
+        android:textSize="12sp" />
+
+
+      <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp" />
+
+
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="250dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+
+      <include
+        android:id="@+id/switchmultibutton1"
+        layout="@layout/layout_switch_multi_button"/>
+
+      <TextView
+        android:id="@+id/chart_unit_distance_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="4dp"
+        android:gravity="start|center"
+        android:text=""
+        android:textColor="@color/log_units"
+        android:textSize="12sp" />
+
+      <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart_speed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="400dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+
+      <include
+        android:id="@+id/multibutton_alerts"
+        layout="@layout/layout_switch_multi_button"/>
+
+
+      <com.github.mikephil.charting.charts.RadarChart
+        android:id="@+id/chart_alerts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="250dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+      <include
+        android:id="@+id/multi_speed_rpm"
+        layout="@layout/layout_switch_multi_button"/>
+      <TextView
+        android:id="@+id/chart_unit_alert_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="4dp"
+        android:gravity="start|center"
+        android:text=""
+        android:textColor="@color/log_units"
+        android:textSize="12sp" />
+
+      <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart_alert_day"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="450dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+      <include
+        android:id="@+id/multi_speed_time"
+        layout="@layout/layout_switch_multi_button"/>
+      <TextView
+        android:id="@+id/chart_unit_pie_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="4dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/log_units"
+        android:textSize="12sp" />
+
+
+      <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_above="@+id/seekBar1" />
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/chart_background"
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0-40 km/h"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:background="@color/bar_color" />
+
+
+        </RelativeLayout>
+
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="40-80 km/h"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:background="@color/chart_2" />
+
+
+        </RelativeLayout>
+
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="80-120 km/h"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:background="@color/chart_3" />
+
+
+        </RelativeLayout>
+
+        <View
+          android:layout_width="0.5dp"
+          android:layout_height="match_parent"
+          android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=">120 km/h"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:background="@color/chart_4" />
+
+
+        </RelativeLayout>
+
+
+      </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="20dp" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="300dp"
+      android:background="@color/chart_background"
+      android:orientation="vertical">
+
+      <TextView
+        android:id="@+id/multibutton_time"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_rectangle_button"
+        android:gravity="center"
+        android:text="Active time/Idle time"
+        android:textColor="@color/white" />
+
+      <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart_idle_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp" />
+    </LinearLayout>
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="30dp" />
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/chart_background"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="This feature is currently in beta mode and the data shown on this page is approximated to nearest integer values for ease of graphical representation. Slight discrepency from actual data can be expected."
+      android:textColor="@color/log_units"
+      android:textSize="12sp" />
+
+    <Space
+      android:layout_width="match_parent"
+      android:layout_height="30dp" />
+  </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,454 @@
+<LinearLayout
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+
+
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5"
+    android:orientation="horizontal"
+    android:background="@color/black"
+    >
+
+    <ImageView
+      android:id="@+id/btn_capture"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:layout_weight="1"
+      android:padding="8dp"
+      app:srcCompat="@drawable/ic_route"
+      />
+
+    <LinearLayout
+      android:id="@+id/alertDetails"
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:layout_weight="3"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:padding="8dp">
+
+      <TextView
+        android:id="@+id/startaddress"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="From: "
+        android:textColor="@color/white"/>
+
+      <TextView
+        android:id="@+id/endaddress"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="To: "
+        android:textColor="@color/white"/>
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_weight="2.5">
+
+    <android.support.v7.widget.CardView
+      android:id="@+id/card_view"
+      xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      card_view:cardCornerRadius="4dp"
+      card_view:cardElevation="4dp"
+      >
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+          android:id="@+id/tabs"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:tabMode="fixed"
+          android:background="@color/grey"
+          card_view:tabIndicatorHeight="4dp"
+          app:tabGravity="fill"
+          app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+          card_view:tabSelectedTextColor="@color/colorAccent"
+          card_view:tabTextColor="@color/white"/>
+
+
+        <android.support.v4.view.ViewPager
+          android:id="@+id/viewpager"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@color/grey"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+
+      </LinearLayout>
+    </android.support.v7.widget.CardView>
+  </LinearLayout>
+
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/trip_time"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Trip Time"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/distance"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Distance"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/fuel_cost"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Fuel Cost"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/avg_speed"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Avg. Speed"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+
+      </LinearLayout>
+    </LinearLayout>
+
+  </RelativeLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0.5dp"
+      android:layout_weight="1"
+      android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+      />
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0.5dp"
+      android:layout_weight="1"
+      android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+      />
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0.5dp"
+      android:layout_weight="1"
+      android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+      />
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0.5dp"
+      android:layout_weight="1"
+      android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+      />
+  </LinearLayout>
+
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.5"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal">
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/maxspeed"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Max. Speed"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/maxrpm"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Max RPM"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/alerts"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Alerts"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+      </LinearLayout>
+
+      <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_transparent_white_transparent"
+        />
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/idletime"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="2"
+          android:gravity="center"
+          android:text="--"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:alpha="0.5"
+          android:gravity="center"
+          android:text="Idle Time"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          />
+
+      </LinearLayout>
+    </LinearLayout>
+
+  </RelativeLayout>
+
+</LinearLayout>

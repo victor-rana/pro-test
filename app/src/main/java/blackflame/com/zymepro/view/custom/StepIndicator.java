@@ -22,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import blackflame.com.zymepro.R;
 
+
 public class StepIndicator extends View {
 
 
@@ -131,15 +132,15 @@ public class StepIndicator extends View {
     }
 
     try {
-      radius = (int) attr.getDimension(R.styleable.StepIndicator_siRadius, dp2px(DEFAULT_STEP_RADIUS));
-      strokeWidth = (int) attr.getDimension(R.styleable.StepIndicator_siStrokeWidth, dp2px(DEFAULT_STOKE_WIDTH));
-      stepsCount = attr.getInt(R.styleable.StepIndicator_siStepCount, DEFAULT_STEP_COUNT);
-      stepColor = attr.getColor(R.styleable.StepIndicator_siStepColor, ContextCompat
+      radius = (int) attr.getDimension(R.styleable.StepIndicator_zpRadius, dp2px(DEFAULT_STEP_RADIUS));
+      strokeWidth = (int) attr.getDimension(R.styleable.StepIndicator_zpStrokeWidth, dp2px(DEFAULT_STOKE_WIDTH));
+      stepsCount = attr.getInt(R.styleable.StepIndicator_zpStepCount, DEFAULT_STEP_COUNT);
+      stepColor = attr.getColor(R.styleable.StepIndicator_zpStepColor, ContextCompat
           .getColor(context, DEFAULT_STEP_COLOR));
-      currentColor = attr.getColor(R.styleable.StepIndicator_siCurrentStepColor, ContextCompat.getColor(context, DEFAULT_CURRENT_STEP_COLOR));
-      backgroundColor = attr.getColor(R.styleable.StepIndicator_siBackgroundColor, ContextCompat.getColor(context, DEFAULT_BACKGROUND_COLOR));
-      textColor = attr.getColor(R.styleable.StepIndicator_siTextColor, ContextCompat.getColor(context, DEFAULT_TEXT_COLOR));
-      secondaryTextColor = attr.getColor(R.styleable.StepIndicator_siSecondaryTextColor, ContextCompat.getColor(context, DEFAULT_SECONDARY_TEXT_COLOR));
+      currentColor = attr.getColor(R.styleable.StepIndicator_zpCurrentStepColor, ContextCompat.getColor(context, DEFAULT_CURRENT_STEP_COLOR));
+      backgroundColor = attr.getColor(R.styleable.StepIndicator_zpBackgroundColor, ContextCompat.getColor(context, DEFAULT_BACKGROUND_COLOR));
+      textColor = attr.getColor(R.styleable.StepIndicator_zpTextColor, ContextCompat.getColor(context, DEFAULT_TEXT_COLOR));
+      secondaryTextColor = attr.getColor(R.styleable.StepIndicator_zpSecondaryTextColor, ContextCompat.getColor(context, DEFAULT_SECONDARY_TEXT_COLOR));
     } finally {
       attr.recycle();
     }

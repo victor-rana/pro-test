@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black">
+
+  <include layout="@layout/toolbar_common" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@+id/toolbar_common"
+    >
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Choose Subscription Duration"
+      android:textColor="@color/white"
+      android:gravity="center"
+      android:padding="12dp"
+      android:textStyle="bold"
+      android:background="@color/grey"
+      />
+
+    <LinearLayout
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:id="@+id/rg_month"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:background="@color/grey"
+      >
+
+      <LinearLayout
+        android:id="@+id/btn_three_month"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RadioButton
+          android:id="@+id/radio_three_month"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:clickable="false"
+          android:focusable="false"
+          android:button="@drawable/bg_radio_button_drawable"
+          android:paddingLeft="8dp"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="3 months"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="₹ 400/-"
+          android:textColor="@color/white" />
+
+      </LinearLayout>
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_white_black" />
+
+      <LinearLayout
+        android:id="@+id/btn_six_month"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RadioButton
+          android:id="@+id/radio_six_month"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:clickable="false"
+          android:focusable="false"
+          android:button="@drawable/bg_radio_button_drawable"
+          android:paddingLeft="8dp"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="6 months"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="₹ 600/-"
+          android:textColor="@color/white" />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textStyle="italic"
+          android:text="Save 25%"
+          android:textSize="12sp"
+          android:layout_marginTop="4dp"
+          android:textColor="@color/colorAccent"
+          android:gravity="center"
+          />
+
+      </LinearLayout>
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_vertical_black_white_black" />
+
+      <LinearLayout
+        android:id="@+id/btn_twelve_month"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RadioButton
+          android:id="@+id/radio_twelve_month"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:clickable="false"
+          android:focusable="false"
+          android:button="@drawable/bg_radio_button_drawable"
+          android:paddingLeft="8dp"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="12 months"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="4dp"
+          android:gravity="center"
+          android:text="₹ 900/-"
+          android:textColor="@color/white" />
+
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textStyle="italic"
+          android:text="Save 44%"
+          android:textSize="12sp"
+          android:layout_marginTop="4dp"
+          android:textColor="@color/colorAccent"
+          android:gravity="center"
+          />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Customer Details"
+      android:textColor="@color/white"
+      android:padding="12dp"
+      android:layout_marginTop="20dp"
+      android:gravity="center"
+      android:textStyle="bold"
+      />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Name : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Email : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Phone Number : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Amount : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Renewal days : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="GST @ 18% : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Net Payable : "
+          android:gravity="end"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          />
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <TextView
+          android:id="@+id/name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <TextView
+          android:id="@+id/email"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <TextView
+          android:id="@+id/phone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <Space
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          />
+        <TextView
+          android:id="@+id/tv_amount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <TextView
+          android:id="@+id/tv_renewal_days"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <TextView
+          android:id="@+id/tv_gst"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+        <TextView
+          android:id="@+id/tv_amount_payable"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="--"
+          android:textColor="@color/white"
+          android:padding="4dp"
+          android:maxLines="1"
+          />
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/pay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:text="proceed to pay"
+
+    android:textColor="@color/white" />
+
+  <FrameLayout
+    android:id="@+id/progressBarHolder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="#000000"
+    android:alpha="0.7"
+    android:visibility="gone">
+    <ProgressBar
+      style="?android:attr/progressBarStyleLarge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:indeterminate="true" />
+  </FrameLayout>
+
+</RelativeLayout>
+

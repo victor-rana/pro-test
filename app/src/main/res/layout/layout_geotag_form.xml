@@ -1,0 +1,214 @@
+<LinearLayout
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_weight="1.5"
+  android:padding="8dp"
+  android:orientation="vertical"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Set Geotag"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:textColor="@color/white"
+    />
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Location"
+    android:textColor="@color/log_units"
+    android:layout_marginTop="8dp"
+    />
+  <EditText
+    android:id="@+id/et_add_tag_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1"
+    android:background="@null"
+    android:hint="Address"
+    android:textColor="@color/white"
+    android:textColorHint="@color/log_units"
+    android:padding="4dp"
+    android:ellipsize="end"
+    android:inputType="text"
+
+
+
+
+    />
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/white"
+    />
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Tag Name"
+    android:layout_marginTop="8dp"
+    android:textColor="@color/log_units"
+    android:paddingBottom="4dp"
+    />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <RelativeLayout
+      android:id="@+id/layout_other_text"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      >
+      <EditText
+        android:id="@+id/et_add_other_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_placeholder_pin"
+        android:layout_toLeftOf="@+id/tv_add_tag_cancel"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:textColorHint="@color/log_units"
+        android:hint="Friend's house"
+        android:scrollHorizontally="true"
+        android:inputType="text"
+        android:background="@null"
+        />
+      <TextView
+        android:id="@+id/tv_add_tag_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/et_add_other_text"
+        android:layout_marginRight="4dp"
+        android:padding="4dp"
+        />
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/et_add_other_text"/>
+
+    </RelativeLayout>
+    <LinearLayout
+      android:id="@+id/container_home_tag"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+      <RelativeLayout
+        android:id="@+id/add_geotag_home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+          android:id="@+id/iv_home_add_geo_tag"
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          app:srcCompat="@drawable/ic_home"
+          android:padding="6dp"
+          />
+        <TextView
+          android:id="@+id/tv_title_home_add_geotag"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Home"
+          android:layout_toRightOf="@id/iv_home_add_geo_tag"
+          android:textColor="@color/white"
+          android:layout_centerVertical="true"
+          android:paddingLeft="4dp"
+          android:paddingRight="4dp"
+          android:textSize="16sp"/>
+        <View
+          android:id="@+id/view_home"
+          android:layout_width="match_parent"
+          android:layout_height="3dp"
+          android:background="@color/white"
+          android:layout_below="@+id/iv_home_add_geo_tag"
+          android:layout_alignRight="@+id/tv_title_home_add_geotag"
+          />
+      </RelativeLayout>
+      <RelativeLayout
+        android:id="@+id/add_geotag_office"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+          android:id="@+id/iv_office_add_geo_tag"
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          app:srcCompat="@drawable/ic_office"
+          android:padding="6dp"
+          />
+        <TextView
+          android:id="@+id/tv_title_office_add_geotag"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Office"
+          android:layout_toRightOf="@id/iv_office_add_geo_tag"
+          android:layout_centerVertical="true"
+          android:textColor="@color/white"
+          android:paddingLeft="4dp"
+          android:paddingRight="4dp"
+          android:textSize="16sp"/>
+        <View
+          android:id="@+id/view_office"
+          android:layout_width="match_parent"
+          android:layout_height="3dp"
+          android:background="@color/white"
+          android:layout_below="@+id/iv_office_add_geo_tag"
+          android:layout_alignRight="@+id/tv_title_office_add_geotag"
+          />
+      </RelativeLayout>
+      <RelativeLayout
+        android:id="@+id/add_geotag_other"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+          android:id="@+id/iv_other_add_geo_tag"
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          app:srcCompat="@drawable/ic_placeholder_pin"
+          android:padding="6dp"
+          />
+        <TextView
+          android:id="@+id/tv_title_other_add_geotag"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Other"
+          android:layout_toRightOf="@id/iv_other_add_geo_tag"
+          android:layout_centerVertical="true"
+          android:textColor="@color/white"
+          android:paddingLeft="4dp"
+          android:textSize="16sp"
+          android:paddingRight="4dp"/>
+        <View
+          android:id="@+id/view_other"
+          android:layout_width="match_parent"
+          android:layout_height="3dp"
+          android:background="@color/white"
+          android:layout_below="@+id/iv_other_add_geo_tag"
+          android:layout_alignRight="@+id/tv_title_other_add_geotag"
+          />
+      </RelativeLayout>
+    </LinearLayout>
+
+
+  </FrameLayout>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

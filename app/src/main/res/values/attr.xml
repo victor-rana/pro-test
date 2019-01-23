@@ -19,25 +19,22 @@
       <enum name="fillRipple" value="0"/>
       <enum name="strokeRipple" value="1"/>
     </attr>
-    <declare-styleable name="StepIndicator">
-      <attr name="siStepCount" format="integer" />
-      <attr name="siRadius" format="dimension" />
-      <attr name="siStrokeWidth" format="dimension" />
-      <attr name="siStepColor" format="color" />
-      <attr name="siCurrentStepColor" format="color" />
-      <attr name="siBackgroundColor" format="color" />
-      <attr name="siTextColor" format="color" />
-      <attr name="siSecondaryTextColor" format="color" />
-    </declare-styleable>
-
-
-    <declare-styleable name="ExpandableLayout">
-      <attr name="el_duration" format="integer" />
-      <attr name="el_expanded" format="boolean" />
-      <attr name="el_parallax" format="float" />
-      <attr name="android:orientation"/>
-    </declare-styleable>
-
+  </declare-styleable>
+  <declare-styleable name="ExpandableLayout">
+    <attr name="el_duration" format="integer" />
+    <attr name="el_expanded" format="boolean" />
+    <attr name="el_parallax" format="float" />
+    <attr name="android:orientation"/>
+  </declare-styleable>
+  <declare-styleable name="StepIndicator">
+    <attr name="zpStepCount" format="integer" />
+    <attr name="zpRadius" format="dimension" />
+    <attr name="zpStrokeWidth" format="dimension" />
+    <attr name="zpStepColor" format="color" />
+    <attr name="zpCurrentStepColor" format="color" />
+    <attr name="zpBackgroundColor" format="color" />
+    <attr name="zpTextColor" format="color" />
+    <attr name="zpSecondaryTextColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="RippleLayout">
@@ -53,5 +50,45 @@
     <attr name="mrl_ripplePersistent" format="boolean" localization="suggested" />
     <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
     <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
+  </declare-styleable>
+
+
+  <declare-styleable name="DotProgressBar">
+    <attr name="startColor" format="color"/>
+    <attr name="endColor" format="color"/>
+    <attr name="duration" format="integer"/>
+    <attr name="amount" format="integer"/>
+    <attr name="animationDirection" format="enum">
+      <enum name="right" value="1"/>
+      <enum name="left" value="-1"/>
+    </attr>
+  </declare-styleable>
+
+
+  <declare-styleable name="SwipyRefreshLayout">
+    <attr name="srl_direction">
+      <enum name="top" value="0" />
+      <enum name="bottom" value="1" />
+      <enum name="both" value="2" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="CircleSeekbar">
+    <attr name="wheel_max_process" format="integer" />
+    <attr name="wheel_cur_process" format="integer" />
+    <attr name="wheel_reached_color" format="color" />
+    <attr name="wheel_reached_width" format="dimension" />
+    <attr name="wheel_reached_has_corner_round" format="boolean"/>
+    <attr name="wheel_unreached_color" format="color" />
+    <attr name="wheel_unreached_width" format="dimension" />
+    <attr name="wheel_pointer_color" format="color" />
+    <attr name="wheel_pointer_radius" format="dimension" />
+    <attr name="wheel_has_pointer_shadow" format="boolean" />
+    <attr name="wheel_has_wheel_shadow" format="boolean" />
+    <attr name="wheel_pointer_shadow_radius" format="dimension" />
+    <attr name="wheel_shadow_radius" format="dimension" />
+    <attr name="wheel_has_cache" format="boolean" />
+    <attr name="wheel_can_touch" format="boolean" />
+    <attr name="wheel_scroll_only_one_circle" format="boolean" />
   </declare-styleable>
 </resources>

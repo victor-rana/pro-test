@@ -1,0 +1,481 @@
+<android.support.v7.widget.CardView
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_weight="2"
+  app:cardBackgroundColor="#212121"
+  app:cardElevation="8dp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      android:padding="4dp">
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Last updated on:"
+        android:textColor="@color/white" />
+
+      <TextView
+        android:id="@+id/tv_last_scan_date"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="5"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_transmission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Transmission"
+              android:textColor="@color/white" />
+
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_transmission"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+
+            <LinearLayout
+              android:id="@+id/lineradot1"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:id="@+id/dot_progress_bar_sixty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_transmission"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_air_fuel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Air and Fuel Meter"
+              android:textColor="@color/white" />
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_air_fuel"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+
+            <LinearLayout
+              android:id="@+id/lineradot2"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_air_fuel"
+
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_speed_control"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Speed Control Unit"
+              android:textColor="@color/white" />
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_speed_control"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+            <LinearLayout
+              android:id="@+id/lineradot3"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_speed_control"
+
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_auxillary_emission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Auxillary Emissions"
+              android:textColor="@color/white" />
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_auxillary_emission"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+            <LinearLayout
+              android:id="@+id/lineradot4"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_auxillary_emmission"
+
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_ignition_system"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Ignition System"
+              android:textColor="@color/white" />
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_ignition_system"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+            <LinearLayout
+              android:id="@+id/lineradot5"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_ignition_system"
+
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="8dp"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/transparent"
+          app:cardCornerRadius="4dp">
+
+          <LinearLayout
+            android:id="@+id/ll_diagnostic_computer_control"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_vertical_black_transparent_black"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <TextView
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="2"
+              android:gravity="center"
+              android:text="Computer Output Unit"
+              android:textColor="@color/white" />
+
+            <ImageView
+              android:id="@+id/iv_diagnostics_computer_output"
+              android:layout_width="wrap_content"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="invisible" />
+
+            <LinearLayout
+              android:id="@+id/lineradot6"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="2"
+              android:visibility="gone">
+
+
+              <blackflame.com.zymepro.view.custom.DotProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                app:amount="3"
+                app:endColor="@color/white"
+                app:startColor="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+              android:id="@+id/tv_diagnostic_error_computer_output"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:text="--"
+              android:textColor="@color/white" />
+
+          </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+      </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
+
+      <TextView
+        android:id="@+id/tv_diagnostics_near_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="8dp"
+        android:text="Pitstop"
+        android:textColor="@color/colorAccent" />
+
+
+    </RelativeLayout>
+
+
+  </LinearLayout>
+
+</android.support.v7.widget.CardView>

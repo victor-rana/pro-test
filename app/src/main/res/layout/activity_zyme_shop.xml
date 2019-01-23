@@ -1,0 +1,413 @@
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="#000"
+  android:orientation="vertical">
+  <include layout="@layout/toolbar_common"/>
+  <ScrollView
+    android:layout_below="@+id/toolbar_common"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        >
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_air"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:id="@+id/iv_air"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_air"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:textStyle="normal"
+              android:text="Alexa"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="Car/Room Air Purifier"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 4599/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:textStyle="normal"
+
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_hud"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_hud"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:textStyle="normal"
+              android:text="Alexa"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="HUD Mobile Cradle"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 1499/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        >
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_volt"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_volt"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="Car Quick Charger"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 499/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_cam"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_dashcam"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="1080P Dashcam"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 3999/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+
+        >
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_pro"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_pro"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="Zyme Pro"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 5999/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+          android:id="@+id/btn_buy_lite"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          app:cardBackgroundColor="@color/grey"
+          app:cardCornerRadius="8dp"
+          android:layout_margin="8dp"
+          app:cardPreventCornerOverlap="false"
+          app:cardUseCompatPadding="true"
+          app:cardElevation="8dp"
+          >
+          <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:src="@drawable/banner_lite"
+              android:scaleType="fitXY"
+
+              />
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:textColor="@color/black"
+              android:layout_gravity="bottom"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:background="@color/colorAccent"
+              >
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:textSize="12sp"
+                android:text="Zyme Lite"
+                android:layout_marginBottom="4dp" />
+              <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+                />
+              <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INR 2499/-"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+            </LinearLayout>
+          </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+      </LinearLayout>
+
+    </LinearLayout>
+  </ScrollView>
+  <Button
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:text="Force Crash!"
+    android:onClick="forceCrash"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

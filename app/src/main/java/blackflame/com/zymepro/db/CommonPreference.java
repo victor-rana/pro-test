@@ -44,6 +44,12 @@ public class CommonPreference {
   private static final String REPLACEMENT_CARID="replacement_carid";
   private static final String PLAYER_ID="player_id";
   public static final String DEVICELINKED="devicelinked";
+  public static final String GEOFENCE_RADIUS="radius";
+  public static final String GEOFENCE_LATITUDE="latitude";
+  public static final String GEOFENCE_LONGITUDE="longitude";
+
+
+  static final String GEOFENCESEND="Geofencesend";
 
 
 
@@ -375,4 +381,43 @@ public class CommonPreference {
   }
   public String getPlayerId(){
     return mPref.getString(PLAYER_ID, null);}
+
+
+  public void setGeofence(boolean value){
+    mPref.edit()
+        .putBoolean(GEOFENCESEND, value)
+        .apply();
+  }
+  public boolean isGeofenceSet(){
+    return mPref.getBoolean(GEOFENCESEND, false);
+  }
+
+public void setGeofenceRadius(int radius){
+  mPref.edit()
+      .putInt(DEVICECOUNT, radius)
+      .apply();
+
+}
+public int getGeonceRadius(){
+  return mPref.getInt(GEOFENCE_RADIUS, 0);
+}
+  public void setGeofenceLatitude(String latitude){
+    mPref.edit()
+        .putString(GEOFENCE_LATITUDE, latitude)
+        .apply();
+
+  }
+  public String getGeofenceLatitude(){
+    return mPref.getString(GEOFENCE_LATITUDE, null);
+  }
+
+  public void setGeofenceLongitude(String latitude){
+    mPref.edit()
+        .putString(GEOFENCE_LONGITUDE, latitude)
+        .apply();
+
+  }
+  public String getGeofenceLongitude(){
+    return mPref.getString(GEOFENCE_LONGITUDE, null);
+  }
 }

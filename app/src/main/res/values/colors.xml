@@ -21,5 +21,26 @@
   <color name="text_default">#000000</color>
   <color name="secondary_text_default">#ffffff</color>
 
+    <!--graph color-->
+  <color name="chart_4">#4af4bf</color>
+  <color name="chart_3">#8aaa8a</color>
+  <color name="chart_2">#4e878c</color>
+  <color name="chart_1">#7FC2CF</color>
+
+  <!--dot progressbar color-->
+  <color name="light_blue_A700">#0091EA</color>
+  <color name="light_blue_A400">#00B0FF</color>
+
+  <color name="log_units">#a0a0a0</color>
+  <color name="bar_color">#9FFFCB</color>
+  <color name="start_color_first">#4E878C</color>
+  <color name="start_color_second">#458b95</color>
+  <color name="start_color_third">#fc6c27</color>
+  <color name="start_color_forth">#51e4b8</color>
+
+<!--Circle seekbar-->
+  <color name="def_wheel_color">#4E4988</color>
+  <color name="def_reached_color">#FFD844</color>
+  <color name="def_pointer_color">#FFFFFF</color>
 
 </resources>

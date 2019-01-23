@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <include layout="@layout/toolbar_common" />
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/toolbar_common">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="#1e1f1f" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#2da9e1"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:weightSum="10"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="2"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/tv_detail_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:layout_gravity="end"
+            android:gravity="bottom|center_vertical|end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+          <TextView
+            android:id="@+id/tv_detail_trip_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:layout_gravity="center|end"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_marginLeft="2dp"
+          android:layout_marginRight="8dp"
+          android:layout_weight="0.5">
+
+          <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/gradient_vertical_transparent_white_transparent" />
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:paddingBottom="4dp">
+
+              <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/view_circle_address_start" />
+            </LinearLayout>
+
+            <Space
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1" />
+
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:paddingTop="4dp">
+
+              <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/view_circle_address_start" />
+            </LinearLayout>
+
+          </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="7"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/tv_detail_start_address"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="bottom|center_vertical"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+          <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+          <TextView
+            android:id="@+id/tv_detail_end_address"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="--"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="2.7">
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/card_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_gravity="center"
+          card_view:cardCornerRadius="4dp">
+
+          <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map_trip_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="1"
+            tools:context=".MapsActivity" />
+
+
+        </android.support.v7.widget.CardView>
+      </RelativeLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal"
+          android:layout_marginEnd="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          >
+
+          <TextView
+            android:id="@+id/tv_zero_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            />
+
+          <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_toLeftOf="@+id/tv_trip_duration"
+            android:layout_toRightOf="@+id/tv_zero_time"
+            style="@style/CustomProgressBarReplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:thumb="@drawable/view_circle_address_start" />
+
+          <TextView
+            android:id="@+id/tv_trip_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"
+            />
+        </RelativeLayout>
+
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="3"
+          android:layout_marginLeft="40dp"
+          android:layout_marginRight="40dp"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/iv_reduce_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:text="Slower"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_border_transparent"
+            app:srcCompat="@drawable/ic_minus" />
+
+
+          <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+              android:id="@+id/iv_play"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="8dp"
+              app:srcCompat="@drawable/ic_play" />
+
+            <ImageView
+              android:id="@+id/iv_pause"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="8dp"
+              android:visibility="gone"
+              app:srcCompat="@drawable/ic_pause" />
+
+
+          </RelativeLayout>
+
+
+          <TextView
+            android:id="@+id/iv_increase_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_border_transparent"
+            android:text="Faster"
+            android:textStyle="bold"
+            app:srcCompat="@drawable/ic_plus" />
+
+        </LinearLayout>
+
+
+      </LinearLayout>
+    </LinearLayout>
+  </FrameLayout>
+
+</RelativeLayout>
+
+
+
