@@ -25,7 +25,7 @@
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/containertop"
       xmlns:card_view="http://schemas.android.com/apk/res-auto"
       android:layout_width="match_parent"
@@ -175,7 +175,7 @@
 
       </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
 

@@ -13,7 +13,7 @@
     android:orientation="horizontal"
     android:weightSum="7.5">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/card_collision"
       android:layout_width="100dp"
       android:layout_height="match_parent"
@@ -73,10 +73,10 @@
 
       </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/card_theft"
       android:layout_width="100dp"
       android:layout_height="match_parent"
@@ -136,9 +136,9 @@
 
       </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/card_geofence"
       android:layout_width="100dp"
 
@@ -199,9 +199,9 @@
 
       </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/card_unplug"
       android:layout_width="100dp"
       android:layout_height="match_parent"
@@ -258,9 +258,9 @@
           android:text="--"
           android:textColor="@color/white" />
       </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
       android:id="@+id/card_towing_alert"
       android:layout_width="100dp"
       android:layout_height="match_parent"
@@ -317,7 +317,7 @@
           android:textColor="@color/white" />
       </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
   </LinearLayout>

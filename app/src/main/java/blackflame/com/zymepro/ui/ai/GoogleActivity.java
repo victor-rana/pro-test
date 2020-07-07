@@ -5,7 +5,7 @@ import static blackflame.com.zymepro.util.UtilityMethod.openLink;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
+import blackflame.com.zymepro.util.Analytics;
 
 public class GoogleActivity extends BaseActivity implements OnClickListener {
   Button btn_start_home;
@@ -22,6 +23,7 @@ public class GoogleActivity extends BaseActivity implements OnClickListener {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_google);
     GlobalReferences.getInstance().baseActivity=this;
+    initViews();
 
   }
   private void initViews(){
@@ -61,5 +63,10 @@ public class GoogleActivity extends BaseActivity implements OnClickListener {
 
     }
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(GoogleActivity.this,"GoogleActivity");
   }
 }

@@ -14,6 +14,7 @@ public class MainPresenter implements MainInteractor.OnPerformtaskListener {
 
   public void routeFromNotification(Bundle bundle){
 
+    this.interactor.checkData(bundle,this);
   }
 
   @Override
@@ -30,12 +31,14 @@ public class MainPresenter implements MainInteractor.OnPerformtaskListener {
   @Override
   public void openSinglecar(Bundle bundle) {
 
+    view.openSingleCar(bundle);
+
   }
 
   public interface View{
 
     void openDefaultState();
-    void openSingleCar(Bundle bundle);
+     void openSingleCar(Bundle bundle);
     void openRateUs();
     void navigateToHome();
     void doLogout();

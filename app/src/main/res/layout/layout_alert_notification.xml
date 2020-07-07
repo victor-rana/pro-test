@@ -31,7 +31,7 @@
       android:text="@string/rash_driving"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_rash_driving"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
       android:text="@string/over_speeding"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_over_speeding"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
       android:text="@string/device_unplugged"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_unplugged"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
       android:text="@string/towing_alert"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_towing"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
       android:text="@string/collision_alert"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_collision_alert"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
       android:text="@string/geofence_breach"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_geofence_breach"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
       android:text="@string/theft_alert"
       android:textColor="@color/white" />
 
-    <android.support.v7.widget.SwitchCompat
+    <androidx.appcompat.widget.SwitchCompat
       android:id="@+id/setting_switch_theft_alert"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal">
 
-      <android.support.v4.widget.Space
+      <androidx.legacy.widget.Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />
@@ -345,7 +345,7 @@
         android:textColorHint="@color/white"
         android:textSize="12sp" />
 
-      <android.support.v4.widget.Space
+      <androidx.legacy.widget.Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5" />

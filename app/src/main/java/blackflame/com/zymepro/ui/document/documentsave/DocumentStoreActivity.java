@@ -12,11 +12,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import blackflame.com.zymepro.Prosingleton;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -34,6 +34,7 @@ import blackflame.com.zymepro.constant.PermissionConstants;
 import blackflame.com.zymepro.db.DataBaseHelper;
 import blackflame.com.zymepro.ui.document.ImageUtil;
 import blackflame.com.zymepro.ui.document.model.ImageTableHelper;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.PermissionUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import blackflame.com.zymepro.view.custom.WheelView;
@@ -43,7 +44,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.Permission;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -279,5 +279,10 @@ public class DocumentStoreActivity extends BaseActivity implements OnClickListen
     }catch (Exception e){
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(DocumentStoreActivity.this,"DocumentStoreActivity");
   }
 }

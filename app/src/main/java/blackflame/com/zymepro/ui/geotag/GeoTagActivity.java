@@ -1,19 +1,19 @@
 package blackflame.com.zymepro.ui.geotag;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants.RequestParam;
@@ -26,6 +26,7 @@ import blackflame.com.zymepro.ui.geotag.adapter.GeoTagAdapter;
 import blackflame.com.zymepro.ui.geotag.adapter.GeoTagAdapter.CardClickListener;
 import blackflame.com.zymepro.ui.geotag.model.GeotagResponse;
 import blackflame.com.zymepro.ui.geotag.savegeotag.SaveGeotagActivity;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
@@ -137,7 +138,7 @@ public class GeoTagActivity extends BaseActivity implements CardClickListener,Ap
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -152,12 +153,17 @@ public class GeoTagActivity extends BaseActivity implements CardClickListener,Ap
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(GeoTagActivity.this,"GeoTagActivity");
   }
 
   @Override

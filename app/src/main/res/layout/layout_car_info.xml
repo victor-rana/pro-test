@@ -23,7 +23,7 @@
       android:textSize="16sp"
       android:textStyle="bold"/>
 
-    <android.support.design.widget.TextInputEditText
+    <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/tv_name"
       android:layout_width="match_parent"
       android:layout_height="0dp"
@@ -50,7 +50,7 @@
       android:layout_marginRight="30dp"
       android:background="@color/white"/>
 
-    <android.support.design.widget.TextInputEditText
+    <com.google.android.material.textfield.TextInputEditText
       android:id="@+id/tv_regnumber"
       android:layout_width="match_parent"
       android:layout_height="0dp"

@@ -10,7 +10,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +25,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.alerts.model.Alert;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.GMapUtil;
 import blackflame.com.zymepro.util.UtilityMethod;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -415,7 +416,7 @@ public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClic
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -430,12 +431,17 @@ public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClic
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(AlertDetails.this,"AlertDetails");
   }
 
   @Override

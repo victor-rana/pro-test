@@ -1,17 +1,13 @@
 package blackflame.com.zymepro.ui.home;
 
 
-import static com.android.volley.VolleyLog.TAG;
-
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +19,6 @@ import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
-import blackflame.com.zymepro.constant.ActivityConstants;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.db.SettingPreferences;
 import blackflame.com.zymepro.io.http.ApiRequests;
@@ -42,12 +37,11 @@ import blackflame.com.zymepro.ui.home.navigation.NavigationFragment;
 import blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment;
 import blackflame.com.zymepro.ui.liveshare.LiveShareActivity;
 import blackflame.com.zymepro.ui.login.LoginActivity;
-import blackflame.com.zymepro.ui.login.fragment.loginfragment.LoginFragment;
 import blackflame.com.zymepro.ui.message.MessageFromTeam;
 import blackflame.com.zymepro.ui.pastnotification.PastNotification;
 import blackflame.com.zymepro.ui.refer.ReferActivity;
 import blackflame.com.zymepro.ui.setting.SettingActivity;
-import blackflame.com.zymepro.util.ActivityUtils;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
@@ -75,6 +69,8 @@ NavigationFragment navigationFragment;
     initViews();
     presenter=new MainPresenter(this,new MainInteractor());
     Bundle bundle=getIntent().getBundleExtra("bundle");
+
+    Log.d("Activity ==>",""+bundle);
 
     if (bundle != null) {
       presenter.routeFromNotification(bundle);
@@ -208,6 +204,7 @@ NavigationFragment navigationFragment;
 
   @Override
   public void openSingleCar(Bundle bundle) {
+    Log.d("open single car",bundle.toString());
   SingleCarFragment singleCarFragment=new SingleCarFragment();
   singleCarFragment.setArguments(bundle);
   addFragmentWithBackStack(singleCarFragment,false,bundle);
@@ -257,25 +254,26 @@ NavigationFragment navigationFragment;
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
     if (listener.getTag().equals("logout")){
       try{
-      JSONObject jObject = listener.getJsonResponse();
-      String hit_status = jObject.getString("status");
+        JSONObject jObject = listener.getJsonResponse();
+        String hit_status = jObject.getString("status");
 
 
-      if (hit_status.equals("SUCCEESS") || hit_status.equals("SUCCESS")) {
-        SettingPreferences.initializeInstance(this);
-        SettingPreferences.getInstance().clear();
-        CommonPreference.getInstance().clear();
+        if (hit_status.equals("SUCCEESS") || hit_status.equals("SUCCESS")) {
+          SettingPreferences.initializeInstance(this);
+          SettingPreferences.getInstance().clear();
+          CommonPreference.getInstance().clear();
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("logout", 1);
+          Intent intent = new Intent(this, LoginActivity.class);
+          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+          intent.putExtra("logout", 1);
 //        OneSignalUtility.removeTags();
 //        OneSignal.setSubscription(false);
-        startActivity(intent);
-        finish();
-      }
+          startActivity(intent);
+          finish();
+        }
 
       }catch (JSONException ex){
+        Log.d("Exception ex",""+ex.getCause());
 
       }
     }
@@ -283,6 +281,8 @@ NavigationFragment navigationFragment;
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
+
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
 
   }
 
@@ -293,16 +293,47 @@ NavigationFragment navigationFragment;
 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+    if (listener.getTag().equals("logout")){
+      try{
+        JSONObject jObject = listener.getJsonResponse();
+        String hit_status = jObject.getString("status");
 
+
+        if (hit_status.equals("SUCCEESS") || hit_status.equals("SUCCESS")) {
+          SettingPreferences.initializeInstance(this);
+          SettingPreferences.getInstance().clear();
+          CommonPreference.getInstance().clear();
+
+          Intent intent = new Intent(this, LoginActivity.class);
+          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+          intent.putExtra("logout", 1);
+//        OneSignalUtility.removeTags();
+//        OneSignal.setSubscription(false);
+          startActivity(intent);
+          finish();
+        }
+
+      }catch (JSONException ex){
+        Log.d("Exception ex",""+ex.getCause());
+
+      }
+    }
   }
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void indexScreen() {
+
+    Analytics.index(MainActivity.this,"MainActivity");
 
   }
 

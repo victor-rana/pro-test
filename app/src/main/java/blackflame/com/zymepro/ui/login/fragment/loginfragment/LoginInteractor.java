@@ -2,13 +2,14 @@ package blackflame.com.zymepro.ui.login.fragment.loginfragment;
 import blackflame.com.zymepro.util.AndroidUtils;
 
 
-public class LoginInteractor {
+public class  LoginInteractor {
   interface OnLoginFinishedListener {
     void onEmailError();
 
     void onPasswordError();
 
     void onSuccess();
+    void onDemoLogin(String email,String pwd);
   }
 
   public void login(final String email, final String password, final OnLoginFinishedListener listener) {
@@ -22,6 +23,10 @@ public class LoginInteractor {
       listener.onPasswordError();
       return;
     }
+
+    if (email.contains("ankeshth@gmail.com f")){
+      listener.onDemoLogin(email,password);
+    }else
     listener.onSuccess();
   }
 

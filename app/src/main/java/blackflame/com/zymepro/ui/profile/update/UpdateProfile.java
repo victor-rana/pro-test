@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import android.provider.Settings.Global;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +27,8 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
-import blackflame.com.zymepro.ui.carregistration.carInfo.CarInfoFragment;
 import blackflame.com.zymepro.ui.profile.ActivityProfile;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
@@ -403,7 +402,7 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -445,11 +444,16 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(UpdateProfile.this,"UpdateProfile");
   }
 }

@@ -2,12 +2,12 @@ package blackflame.com.zymepro.ui.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -28,6 +28,7 @@ import blackflame.com.zymepro.ui.profile.model.ProfileModel;
 import blackflame.com.zymepro.ui.profile.payment.PaymentActivity;
 import blackflame.com.zymepro.ui.profile.update.UpdateProfile;
 import blackflame.com.zymepro.ui.profile.updateuser.UpdateUser;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
 
@@ -223,6 +224,7 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -236,13 +238,19 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
   }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(ActivityProfile.this,"ActivityPorfile");
+  }
+
   @Override
   public void setEmail(String email) {
     this.email=email;

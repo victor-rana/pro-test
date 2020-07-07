@@ -2,7 +2,7 @@ package blackflame.com.zymepro.ui.login.fragment.signupfragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
+import com.google.android.material.textfield.TextInputEditText;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;

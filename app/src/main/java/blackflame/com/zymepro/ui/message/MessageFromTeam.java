@@ -1,11 +1,10 @@
 package blackflame.com.zymepro.ui.message;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.widget.TextView;
 
@@ -17,6 +16,8 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.util.Analytics;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -76,7 +77,7 @@ public class MessageFromTeam extends BaseActivity implements AppRequest {
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -91,11 +92,16 @@ public class MessageFromTeam extends BaseActivity implements AppRequest {
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(MessageFromTeam.this,"MessageFromTeam");
   }
 }

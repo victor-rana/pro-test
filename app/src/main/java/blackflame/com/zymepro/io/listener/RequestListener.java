@@ -17,6 +17,7 @@ public class RequestListener implements AppRequest {
 
     @Override
     public <T> void onRequestFailed(BaseTask<T> listener, Constants.RequestParam requestParam) {
+
     }
 
     @Override

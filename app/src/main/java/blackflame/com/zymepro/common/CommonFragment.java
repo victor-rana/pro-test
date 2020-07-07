@@ -1,16 +1,17 @@
 package blackflame.com.zymepro.common;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import blackflame.com.zymepro.R;
+import blackflame.com.zymepro.base.BaseActivity;
 
 
-public class CommonFragment extends Fragment {
+public class CommonFragment extends Fragment  {
     public String screenTitle;
 
     @Override
@@ -67,5 +68,11 @@ public class CommonFragment extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
     }
+
+
+
+
 }

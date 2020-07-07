@@ -1,8 +1,12 @@
 package blackflame.com.zymepro.ui.tripdetails;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import blackflame.com.zymepro.R;
@@ -14,8 +18,11 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.ui.history.replay.TripReplay;
 import blackflame.com.zymepro.ui.tripdetails.graphview.GraphFragment;
 import blackflame.com.zymepro.ui.tripdetails.mapview.TripPathFragment;
+import blackflame.com.zymepro.util.Analytics;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +43,8 @@ public class TripDetailsActivity extends BaseActivity implements DetailsPresente
   GraphFragment graphFragment;
   ImageView iv_play;
   DetailsPresenter presenter;
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -56,6 +65,18 @@ public class TripDetailsActivity extends BaseActivity implements DetailsPresente
     tv_idle_time= findViewById(R.id.idletime);
     tv_alerts= findViewById(R.id.alerts);
     iv_play=findViewById(R.id.iv_replay);
+
+    iv_play.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent=  new Intent(TripDetailsActivity.this, TripReplay.class);
+        intent.putExtra("trip_id",tripId);
+        intent.putExtra("date",ist_time);
+        intent.putExtra("start_address",startAddress);
+        intent.putExtra("end_address",endAddress);
+        startActivity(intent);
+      }
+    });
     Toolbar toolbar= findViewById(R.id.toolbar_common);
     TextView title= findViewById(R.id.toolbar_title_common);
     GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"Trip Details");
@@ -185,7 +206,7 @@ public class TripDetailsActivity extends BaseActivity implements DetailsPresente
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -200,11 +221,16 @@ public class TripDetailsActivity extends BaseActivity implements DetailsPresente
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(TripDetailsActivity.this,"TripDetailsActivity");
   }
 }

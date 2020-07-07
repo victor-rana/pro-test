@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_whats_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's New!"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/whats_new_alexa"
+            android:layout_below="@+id/tv_whats_new"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/ll_shop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="8dp"
+
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"
+                    android:text="Now you can share your trip with your friends and family for a selected duration by generating a sharable link directly from the application"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+              android:id="@+id/feature_2"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:padding="8dp"
+
+              android:orientation="vertical">
+                <ImageView
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:padding="8dp"
+                  app:srcCompat="@drawable/ic_geotag"/>
+                <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight=".5"
+                  android:text="Add geotags for frequently visited places"
+                  android:textColor="@color/white"
+                  android:layout_gravity="center"
+                  android:gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+          android:id="@+id/view_below_alexa"
+          android:layout_below="@+id/whats_new_alexa"
+          android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="@drawable/gradient_horizontal_transparent_white_transparent"
+          />
+
+
+
+        <TextView
+            android:id="@+id/web_dashboard_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feature3_image"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Track your car using our web interface on any laptop/deskptop browser:"
+          />
+        <TextView
+          android:id="@+id/web_dashboard_link"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/web_dashboard_text"
+          android:layout_marginTop="10dp"
+          android:textColor="@color/colorAccent"
+
+          android:gravity="center"
+          android:padding="8dp"
+          android:text="https://dashboard.getzyme.com"
+
+          />
+        <ImageView
+            android:id="@+id/feature3_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/whats_new_alexa"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_dismiss"
+            android:layout_below="@+id/web_dashboard_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Let's Explore"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_btn_rounded_blue"
+            android:padding="12dp"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

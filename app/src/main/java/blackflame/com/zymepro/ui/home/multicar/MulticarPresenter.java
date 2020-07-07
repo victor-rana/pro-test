@@ -1,5 +1,6 @@
 package blackflame.com.zymepro.ui.home.multicar;
 
+import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.ui.home.singlecar.CarcountModel;
 
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public void parseListData(JSONObject object){
     String hit_status = object.getString("status");
     if (hit_status.equals("SUCCESS")) {
       JSONObject carData = object.getJSONObject("msg");
+      if (carData.has("onesignal_status")) {
+        CommonPreference.getInstance().setOneSignalNotification(carData.getBoolean("onesignal_status"));
+
+      }
       final JSONArray array_car_list=carData.getJSONArray("car_list");
       final int length=array_car_list.length();
       list.clear();

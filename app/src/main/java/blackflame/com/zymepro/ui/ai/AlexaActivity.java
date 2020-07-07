@@ -5,7 +5,7 @@ import static blackflame.com.zymepro.util.UtilityMethod.openLink;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
+import blackflame.com.zymepro.util.Analytics;
 
 public class AlexaActivity extends BaseActivity implements OnClickListener {
   Button btn_start_alexa;
@@ -31,7 +32,7 @@ public class AlexaActivity extends BaseActivity implements OnClickListener {
     Toolbar toolbar=findViewById(R.id.toolbar_common);
     TextView title=findViewById(R.id.toolbar_title);
     GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"Alexa");
-     btn_start_alexa=findViewById(R.id.btn_alexa_start);
+    btn_start_alexa=findViewById(R.id.btn_alexa_start);
     buy=findViewById(R.id.tv_alexa_by_now);
 
     btn_start_alexa.setOnClickListener(this);
@@ -62,5 +63,10 @@ public class AlexaActivity extends BaseActivity implements OnClickListener {
 
         break;
     }
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(AlexaActivity.this,"AlexaActivity");
   }
 }

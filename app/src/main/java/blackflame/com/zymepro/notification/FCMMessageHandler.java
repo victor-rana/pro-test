@@ -2,7 +2,9 @@ package blackflame.com.zymepro.notification;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.RemoteInput;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.RemoteInput;
 import android.text.TextUtils;
 import android.util.Log;
 import blackflame.com.zymepro.BuildConfig;
@@ -23,6 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.android.volley.VolleyLog.TAG;
 
 public class FCMMessageHandler extends FirebaseMessagingService {
   public static final int MESSAGE_NOTIFICATION_ID = 435345;
@@ -46,21 +50,22 @@ public class FCMMessageHandler extends FirebaseMessagingService {
     // Log.e(TAG, "onMessageReceived:id "+remoteMessage.getMessageId() );
     //Log.e(TAG, "onMessageReceived:from "+remoteMessage.getFrom() );
     Log.e(TAG, "Data Payload: pre" + remoteMessage.getData().toString());
+    if (!CommonPreference.getInstance().getOneSignalNotification() && CommonPreference.getInstance().getIsLoggedIn()) {
+      // Check if message contains a data payload.
+      if (remoteMessage.getData().size() > 0) {
+        Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
 
-//        // Check if message contains a data payload.
-//        if (remoteMessage.getData().size() > 0) {
-//            Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
-//
-//            try {
-//                //setInputNotification();
-//                JSONObject json = new JSONObject(remoteMessage.getData().toString());
-//                handleDataMessage(json);
-//            } catch (Exception e) {
-//                Log.e(TAG, "onMessageReceived: "+e.getCause() );
-//                Log.e(TAG, "onMessageReceived: "+e.getMessage() );
-//              //  Log.e(TAG, "Exception: " + e.getMessage());
-//            }
-//        }
+        try {
+          //setInputNotification();
+          JSONObject json = new JSONObject(remoteMessage.getData().toString());
+          handleDataMessage(json);
+        } catch (Exception e) {
+          Log.e(TAG, "onMessageReceived: " + e.getCause());
+          Log.e(TAG, "onMessageReceived: " + e.getMessage());
+          //  Log.e(TAG, "Exception: " + e.getMessage());
+        }
+      }
+    }
 
   }
 
@@ -254,5 +259,76 @@ public class FCMMessageHandler extends FirebaseMessagingService {
   }
 
 
+  @Override
+  public void onNewToken(@NonNull String s) {
+    super.onNewToken(s);
 
+    sendRegistrationToServer(s);
+  }
+
+
+
+  private void sendRegistrationToServer(String token) {
+    // Add custom implementation, as needed.
+   final String token_send=token;
+    final String email=CommonPreference.getInstance().getEmail();
+    // getSharedPreferences(ActivityConstants.SHAREDPREFNAMELOGIN,0).getString(ActivityConstants.EMAIL,"00");
+
+    final StringRequest jsonObjReq = new StringRequest(Request.Method.POST,
+            "http://api.getzyme.xyz/notification/API/v1/token",
+            new Response.Listener<String>() {
+
+              @Override
+              public void onResponse(String response) {
+                try {
+                  JSONObject jObject = new JSONObject(response);
+//                            Log.e("ProFireBaseMessaging", "onResponse: "+response );
+
+                } catch (JSONException e) {
+                  e.printStackTrace();
+                }
+              }
+            }, new Response.ErrorListener() {
+
+
+      @Override
+      public void onErrorResponse(VolleyError error) {
+
+      }
+    }) {
+
+      @Override
+      protected Map<String, String> getParams() {
+        Map<String, String> params = new HashMap<>();
+        params.put("email_id",email);
+        params.put("token",token_send);
+        params.put("app_name","ZYME_PRO");
+        // params.put("source","android");
+        return params;
+      }
+      @Override
+      public Map<String, String> getHeaders() {
+        HashMap<String,String> param=new HashMap<>();
+        Log.e(TAG, "getHeaders: "+CommonPreference.getInstance().getToken() );
+        param.put("x-access-token",CommonPreference.getInstance().getToken());
+        param.put("x-app-version",String.valueOf(BuildConfig.VERSION_CODE));
+        param.put("x-client-token", KeyGenerator.getKey(CommonPreference.getInstance().getClientToken()));
+        return param;
+      }
+
+
+
+    };
+    jsonObjReq.setShouldCache(false);
+    jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+            10000,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    //  ZymeSingleton.getInstance().addToRequestQueue(jsonObjReq,  tag_json_obj);
+    RequestQueue requestQueue = Volley.newRequestQueue(Prosingleton.getAppContext());
+    requestQueue.add(jsonObjReq);
+
+
+
+  }
 }

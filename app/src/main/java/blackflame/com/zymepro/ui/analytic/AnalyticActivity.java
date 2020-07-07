@@ -5,11 +5,13 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings.Global;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
@@ -29,6 +31,7 @@ import blackflame.com.zymepro.ui.analytic.chart.MAxisValueFormatter;
 import blackflame.com.zymepro.ui.analytic.chart.MyMarkerView;
 import blackflame.com.zymepro.ui.analytic.chart.RadarMarkerView;
 import blackflame.com.zymepro.ui.analytic.listener.AnalyticResponseListener;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.UtilityMethod;
 import blackflame.com.zymepro.view.custom.SwitchMultiButton;
 import com.android.volley.VolleyError;
@@ -120,6 +123,10 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
   String totalDistance,totalTime;
 
   AnalyticPresenter presenter;
+
+
+  Calendar lastSelectedDay;
+  Calendar [] highlightDays=new Calendar[1];
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -820,12 +827,23 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
             now.get(Calendar.MONTH),
             now.get(Calendar.DAY_OF_MONTH)
         );
+
+
+
         now.add(Calendar.DATE,-6);
+        if (lastSelectedDay ==null){
+          lastSelectedDay=now;
+        }
+        highlightDays[0]=lastSelectedDay;
+
+
         dpd.setAccentColor(Color.parseColor("#2da9e1"));
         dpd.setThemeDark(true);
         dpd.setTitle("Select start date");
         dpd.setMaxDate(now);
-        dpd.setYearRange(2017,2019);
+        dpd.setHighlightedDays(highlightDays);
+
+        dpd.setYearRange(2017,2020);
         dpd.show((AnalyticActivity.this).getFragmentManager(), "DatePickerDialog");
       }
     });
@@ -833,10 +851,15 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
   @Override
   public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
     Calendar calendar = Calendar.getInstance();
+
+    Log.d("Last selected date",""+dayOfMonth);
     calendar.set(year, monthOfYear, dayOfMonth);
+
 
     Date date_start=calendar.getTime();
     calendar.add(Calendar.DATE,+6);
+    lastSelectedDay=calendar;
+
     Date date_end=calendar.getTime();
     setFormattedDate(date_start,date_end);
   }
@@ -848,6 +871,9 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
     end_date.setText(UtilityMethod.getDateOnly(dateFormat_server.format(end)));
     end_month.setText(UtilityMethod.getDateMonth(dateFormat_server.format(end)));
     end_day.setText(UtilityMethod.getDay(dateFormat_server.format(end)));
+    Calendar calendar=Calendar.getInstance();
+    calendar.setTime(start);
+    lastSelectedDay=calendar;
     loadData(ist_time,dateFormat_server.format(end));
   }
   private void loadData(String start_date,String end_date ){
@@ -875,7 +901,7 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -890,12 +916,17 @@ public class AnalyticActivity extends BaseActivity implements com.wdullaer.mater
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(AnalyticActivity.this,"AnalyticActivity");
   }
 
   @Override

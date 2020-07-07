@@ -344,7 +344,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            app:srcCompat="@drawable/ic_up_arrow"/>
+              android:padding="4dp"
+            app:srcCompat="@drawable/ic_arrow_up"/>
         </RelativeLayout>
 
 

@@ -10,9 +10,11 @@ import static com.google.android.gms.maps.model.JointType.ROUND;
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +32,8 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.history.replay.model.ReplayData;
+import blackflame.com.zymepro.util.Analytics;
+import blackflame.com.zymepro.util.TimeUtils;
 import blackflame.com.zymepro.util.UtilityMethod;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,6 +41,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Gap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -88,6 +93,13 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
   SimpleDateFormat sdf;
   Date date_start;
   Date date_current;
+
+  View viewInfoWindow;
+  CustomInfoWindowGoogleMap customInfoWindowGoogleMap;
+
+  TextView tvRpm,tvSpeed,tvVoltage,tvCoolant,tvTime;
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -116,6 +128,13 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
     tv_replay_end_time=findViewById(R.id.tv_detail_trip_end_time);
     tv_replay_start_time=findViewById(R.id.tv_detail_start_time);
 
+
+    tvRpm=findViewById(R.id.tvRpm);
+    tvCoolant=findViewById(R.id.tvCoolant);
+    tvSpeed=findViewById(R.id.tvSpeed);
+    tvVoltage=findViewById(R.id.tvVoltage);
+    tvTime=findViewById(R.id.tvTime);
+
     TextView time_increase=findViewById(R.id.iv_increase_time);
     TextView time_decrease=findViewById(R.id.iv_reduce_time);
     TextView tv_start_address=findViewById(R.id.tv_detail_start_address);
@@ -126,15 +145,21 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
     pause=findViewById(R.id.iv_pause);
     pause.setOnClickListener(this);
 
+    play=findViewById(R.id.iv_play);
+
     play.setOnClickListener(this);
     time_decrease.setOnClickListener(this);
     time_increase.setOnClickListener(this);
-    play=findViewById(R.id.iv_play);
     list_path=new ArrayList<>();
     date=getIntent().getStringExtra("date");
     trip_id=getIntent().getIntExtra("trip_id",-1);
     start_address=getIntent().getStringExtra("start_address");
     end_address=getIntent().getStringExtra("end_address");
+
+    tv_start_address.setText(start_address);
+    tv_end_address.setText(end_address);
+
+
 
     polyLineList= new ArrayList<>();
     seekbar = findViewById(R.id.seekBar);
@@ -245,6 +270,12 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
         Gmap.getUiSettings().setZoomGesturesEnabled(true);
         Gmap.getUiSettings().setRotateGesturesEnabled(true);
         Gmap.getUiSettings().setZoomControlsEnabled(true);
+
+//       customInfoWindowGoogleMap=new CustomInfoWindowGoogleMap(TripReplay.this);
+//
+//
+//        Gmap.setInfoWindowAdapter(customInfoWindowGoogleMap);
+
 
         try {
           boolean success = Gmap.setMapStyle(
@@ -397,6 +428,13 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
                   marker.setAnchor(0.5f, 0.5f);
                   marker.setRotation(getBearing(startPosition, endPosition));
                   marker.setPosition(newPos);
+//                  marker.setTag(list_path.get(index));
+//                  marker.showInfoWindow();
+
+//                  viewInfoWindow=customInfoWindowGoogleMap.getInfoWindow(marker);
+                  updateInfoWindow(list_path.get(index));
+
+
 
 
                   // Log.e(TAG, "onAnimationUpdate: marker position set previous" );
@@ -404,7 +442,14 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
                   if (index < list_path.size() - 1)
                     marker = Gmap.addMarker(new MarkerOptions().position(list_path.get(index).getPosition())
                         .flat(true)
-                        .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("car_replay", 112, 112))));
+                        .icon(BitmapDescriptorFactory.fromBitmap(resizeMapIcons("car_replay", 112, 112)))
+                    );
+
+//                  marker.setTag(list_path.get(index));
+//                  marker.showInfoWindow();
+//                  viewInfoWindow=customInfoWindowGoogleMap.getInfoWindow(marker);
+                  updateInfoWindow(list_path.get(index));
+
                   date_start = getCurrentDate(list_path.get(index).getTime());
 
 
@@ -518,6 +563,14 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
       for (int i=0;i<length;i++){
         JSONObject object_trip_path=array_tripPath.getJSONObject(i);
         ReplayData replayData=new ReplayData();
+        replayData.setSpeed(object_trip_path.getString("speed"));
+        replayData.setCoolant(object_trip_path.getString("coolant"));
+        replayData.setDistance(object_trip_path.getString("distance"));
+        replayData.setRpm(object_trip_path.getString("rpm"));
+        replayData.setVoltage(object_trip_path.getString("voltage"));
+
+
+
         double lat=object_trip_path.getJSONArray("coordinates").getDouble(0);
         replayData.setLatitude(lat);
         double lng=object_trip_path.getJSONArray("coordinates").getDouble(1);
@@ -572,7 +625,7 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -587,11 +640,28 @@ public class TripReplay extends BaseActivity implements OnClickListener,AppReque
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(TripReplay.this,"TripReplay");
+  }
+
+
+  private void updateInfoWindow(ReplayData replayData){
+    if (replayData != null) {
+
+      tvSpeed.setText(replayData.getSpeed());
+      tvRpm.setText(replayData.getRpm());
+      tvVoltage.setText(replayData.getVoltage());
+      tvCoolant.setText(replayData.getCoolant());
+      tvTime.setText(TimeUtils.getFormattedDate(replayData.getTime()));
+    }
   }
 }

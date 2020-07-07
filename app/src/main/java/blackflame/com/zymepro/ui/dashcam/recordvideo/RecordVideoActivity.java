@@ -1,12 +1,9 @@
 package blackflame.com.zymepro.ui.dashcam.recordvideo;
 
 import android.annotation.TargetApi;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
@@ -17,13 +14,12 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -41,26 +37,15 @@ import android.widget.Toast;
 
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
-import blackflame.com.zymepro.common.Constants;
-import blackflame.com.zymepro.constant.ActivityConstants;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.mqtt.MqttHandler;
 import blackflame.com.zymepro.ui.home.MqttDataListener;
-import blackflame.com.zymepro.util.NetworkUtils;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.ToastUtils;
-import blackflame.com.zymepro.util.jwt.KeyGenerator;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
+
 import com.github.anastr.speedviewlib.ProgressiveGauge;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
@@ -435,7 +420,7 @@ public class RecordVideoActivity extends BaseActivity implements MqttDataListene
         int height = metrics.heightPixels;
         int width = metrics.widthPixels;
 
-        mMediaRecorder.setVideoSize(width, height);
+        mMediaRecorder.setVideoSize(2048, 1024);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         mMediaRecorder.setVideoEncodingBitRate(6000000);
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
@@ -519,6 +504,11 @@ public class RecordVideoActivity extends BaseActivity implements MqttDataListene
   public void onDestroy() {
     super.onDestroy();
     destroyMediaProjection();
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(RecordVideoActivity.this,"RecordVideoActivity");
   }
 
   private void destroyMediaProjection() {

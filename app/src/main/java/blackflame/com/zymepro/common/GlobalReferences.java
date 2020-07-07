@@ -1,7 +1,7 @@
 package blackflame.com.zymepro.common;
 
 import android.location.Location;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.LinearLayout;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.db.Pref;

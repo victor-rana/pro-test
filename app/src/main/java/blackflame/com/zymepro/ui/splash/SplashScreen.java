@@ -2,9 +2,10 @@ package blackflame.com.zymepro.ui.splash;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.db.CommonPreference;
@@ -13,8 +14,10 @@ import blackflame.com.zymepro.onesignal.helper.NotificationHelperMethod;
 import blackflame.com.zymepro.onesignal.helper.OneSignalUtility;
 import blackflame.com.zymepro.ui.home.MainActivity;
 import blackflame.com.zymepro.ui.login.LoginActivity;
+import blackflame.com.zymepro.util.Analytics;
 
 public class SplashScreen extends BaseActivity {
+  private static final String TAG =SplashScreen.class.getCanonicalName() ;
   Intent intent;
   Bundle bundle;
   boolean hasLoggedin;
@@ -32,6 +35,7 @@ public class SplashScreen extends BaseActivity {
 
         bundle = getIntent().getExtras();
         String screen = bundle.getString("screen");
+        Log.d(TAG, "onCreate: "+screen);
         Intent intent_directed = NotificationHelperMethod
             .getActivityToLaunch(screen, SplashScreen.this);
         intent_directed.putExtra("bundle", bundle);
@@ -74,5 +78,10 @@ public class SplashScreen extends BaseActivity {
       }
     }, 3000);
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(SplashScreen.this,"SplashScreen");
   }
 }

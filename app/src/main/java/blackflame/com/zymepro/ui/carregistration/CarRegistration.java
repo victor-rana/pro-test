@@ -4,6 +4,7 @@ import android.os.Bundle;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.view.custom.StepIndicator;
 import blackflame.com.zymepro.view.custom.ZymeProViewPager;
 
@@ -48,4 +49,9 @@ public class CarRegistration extends BaseActivity {
   }
 
 
+  @Override
+  public void indexScreen() {
+    Analytics.index(CarRegistration.this,"CarRegistration");
+
+  }
 }

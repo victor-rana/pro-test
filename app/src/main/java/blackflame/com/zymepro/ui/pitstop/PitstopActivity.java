@@ -4,14 +4,13 @@ import static blackflame.com.zymepro.util.UtilityMethod.resizeMapIcons;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
-import android.provider.Settings.Global;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -21,7 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import blackflame.com.zymepro.BuildConfig;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants.RequestParam;
@@ -34,9 +33,10 @@ import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.pitstop.model.NearByData;
 import blackflame.com.zymepro.ui.pitstop.sheet.NearbyDialogHelper;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.GMapUtil;
 import blackflame.com.zymepro.util.LogUtils;
-import blackflame.com.zymepro.util.UtilityMethod;
+
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -49,7 +49,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
@@ -506,6 +505,7 @@ PitstopPresenter presenter;
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
 
   }
 
@@ -521,12 +521,17 @@ PitstopPresenter presenter;
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(PitstopActivity.this,"PitstopActivity");
   }
 
   @Override

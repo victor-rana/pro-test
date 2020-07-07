@@ -17,24 +17,24 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.constant.PermissionConstants;
-import blackflame.com.zymepro.constant.PermissionConstants.Permission;
 import blackflame.com.zymepro.ui.dashcam.dashcamvideo.adapter.DashcamVideoAdapter;
 import blackflame.com.zymepro.ui.dashcam.dashcamvideo.model.DashcamVideoModel;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.PermissionUtils;
 import blackflame.com.zymepro.util.UtilityMethod;
 import java.io.File;
@@ -54,6 +54,7 @@ public class DashcamVideo extends BaseActivity implements DashcamVideoAdapter.It
   TextView textView_sort;
   File[] files;
   Point point;
+  LinearLayout llNoVideo;
 
 
   ArrayList<DashcamVideoModel> dashcamVideoModels=new ArrayList<>();
@@ -72,6 +73,8 @@ public class DashcamVideo extends BaseActivity implements DashcamVideoAdapter.It
     GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"Dashcam Videos");
     textView_sort= findViewById(R.id.tv_sort_video);
     progressBar= findViewById(R.id.progressBarHolder);
+    llNoVideo=findViewById(R.id.ll_no_video);
+    recyclerView_video=findViewById(R.id.recycler_video);
     recyclerView_video.setLayoutManager(new GridLayoutManager(this, 2));
     adapter = new DashcamVideoAdapter(DashcamVideo.this, dashcamVideoModels);
     recyclerView_video.setAdapter(adapter);
@@ -170,6 +173,11 @@ public class DashcamVideo extends BaseActivity implements DashcamVideoAdapter.It
 
   }
 
+  @Override
+  public void indexScreen() {
+    Analytics.index(DashcamVideo.this,"DashcamVideo");
+
+  }
 
 
   public class LoadVideo extends AsyncTask<Void,Void,Void> {
@@ -245,6 +253,10 @@ public class DashcamVideo extends BaseActivity implements DashcamVideoAdapter.It
 
 
 
+
+
+
+
       return null;
     }
 
@@ -253,6 +265,16 @@ public class DashcamVideo extends BaseActivity implements DashcamVideoAdapter.It
       super.onPostExecute(aVoid);
       adapter.notifyDataSetChanged();
       progressBar.setVisibility(View.GONE);
+
+      if (length==0){
+        llNoVideo.setVisibility(View.VISIBLE);
+        recyclerView_video.setVisibility(View.GONE);
+      }else{
+        llNoVideo.setVisibility(View.GONE);
+        recyclerView_video.setVisibility(View.VISIBLE );
+      }
+
+
     }
 
   }

@@ -1,6 +1,6 @@
 package blackflame.com.zymepro.util;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import blackflame.com.zymepro.constant.TimeConstants;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public final class TimeUtils {
   private static final ThreadLocal<SimpleDateFormat> SDF_THREAD_LOCAL = new ThreadLocal<>();
@@ -996,4 +997,29 @@ public final class TimeUtils {
     }
     return sb.toString();
   }
+
+
+
+
+  public static String getFormattedDate(String ourDate)
+  {
+    try
+    {
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'");
+      formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+      Date value = formatter.parse(ourDate);
+
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm"); //this format changeable
+      dateFormatter.setTimeZone(TimeZone.getDefault());
+      ourDate = dateFormatter.format(value);
+
+      //Log.d("ourDate", ourDate);
+    }
+    catch (Exception e)
+    {
+      ourDate = "00-00-0000 00:00";
+    }
+    return ourDate;
+  }
+
 }

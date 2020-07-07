@@ -177,6 +177,11 @@ ArrayList<CarcountModel> list;
       String hit_status = data.getString("status");
       if (hit_status.equals("SUCCESS")) {
         JSONObject carData = data.getJSONObject("msg");
+
+        if (carData.has("onesignal_status")) {
+          CommonPreference.getInstance().setOneSignalNotification(carData.getBoolean("onesignal_status"));
+
+        }
         JSONArray array_car_list = carData.getJSONArray("car_list");
         int length = array_car_list.length();
         CommonPreference.getInstance().setDeviceCount(length);

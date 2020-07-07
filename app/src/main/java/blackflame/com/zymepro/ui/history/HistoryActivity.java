@@ -3,9 +3,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +24,7 @@ import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.history.adapter.HistoryAdapter;
 import blackflame.com.zymepro.ui.history.dialog.ReportDialog;
 import blackflame.com.zymepro.ui.history.model.TripHistory;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -41,6 +44,8 @@ public class HistoryActivity extends BaseActivity implements HistoryPresenter.Vi
   TextView tv_totaldistance,tv_totaltime,tv_totalcost,tv_fuelconsumed;
   String[] months={"Jan","Feb","Mar","APR","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
   HistoryPresenter presenter;
+
+  Calendar lastSelectedDate;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +111,7 @@ public class HistoryActivity extends BaseActivity implements HistoryPresenter.Vi
     pickdate.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        Calendar [] highlightDays=new Calendar[1];
         Calendar now = Calendar.getInstance();
         com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
             HistoryActivity.this,
@@ -113,11 +119,19 @@ public class HistoryActivity extends BaseActivity implements HistoryPresenter.Vi
             now.get(Calendar.MONTH),
             now.get(Calendar.DAY_OF_MONTH)
         );
+
+        if (lastSelectedDate ==null){
+          lastSelectedDate=now;
+        }
+        highlightDays[0]=lastSelectedDate;
         dpd.setAccentColor(Color.parseColor("#2da9e1"));
         dpd.setThemeDark(true);
         dpd.setTitle("Select Date");
         dpd.setMaxDate(now);
-        dpd.setYearRange(2018,2019);
+
+        dpd.setYearRange(2018,2020);
+
+        dpd.setHighlightedDays(highlightDays);
         dpd.show((HistoryActivity.this).getFragmentManager(), "DatePickerDialog");
       }
     });
@@ -159,7 +173,7 @@ try{
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
   @Override
   public <T> void onRequestStarted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
@@ -173,11 +187,17 @@ try{
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(HistoryActivity.this,"HistoryActivity");
 
   }
 
@@ -237,6 +257,11 @@ try{
     yearTextview.setText(""+year);
     Calendar calendar = Calendar.getInstance();
     calendar.set(year, monthOfYear, dayOfMonth);
+
+    lastSelectedDate=calendar;
+
+
+    Log.d("Last selected date ", date);
     String ist_time=new SimpleDateFormat("yyyy-MM-dd'T'00:00:00.SSSZZZ").format(calendar.getTime());
     if(NetworkUtils.isConnected()) {
       loadTrip(ist_time);

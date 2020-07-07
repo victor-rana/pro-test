@@ -1,21 +1,18 @@
 package blackflame.com.zymepro.ui.alerts;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +27,7 @@ import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.alertdetails.AlertDetails;
 import blackflame.com.zymepro.ui.alerts.model.Alert;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
@@ -67,6 +65,9 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
   FrameLayout progressBarHolder;
   LinearLayout buttonView;
   AlertPresenter presenter;
+  Calendar [] highlightDays=new Calendar[1];
+
+  Calendar lastSelectedDate;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -257,6 +258,8 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
           forward.setClickable(true);
         }
 
+        lastSelectedDate=now;
+
         formattedDate = simpleDateFormat.format(now.getTime());
         textView_SelectDate.setText(formattedDate);
 
@@ -278,6 +281,7 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
           forward.setClickable(false);
 
           now.add(Calendar.DATE, -1);
+          lastSelectedDate=now;
           formattedDate = simpleDateFormat.format(now.getTime());
 
           Toast.makeText(AlertActivity.this, "Can't select future date", Toast.LENGTH_SHORT).show();                }else {
@@ -293,6 +297,7 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
 
       case R.id.selectDate:
         forward.setAlpha(1f);
+
         Calendar now = Calendar.getInstance();
         com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
             AlertActivity.this,
@@ -301,11 +306,15 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
             now.get(Calendar.DAY_OF_MONTH));
         dpd.setAccentColor(Color.parseColor("#2da9e1"));
         dpd.setThemeDark(true);
+        if (lastSelectedDate ==null){
+          lastSelectedDate=now;
+        }
         dpd.setTitle("Select Date");
         dpd.setMaxDate(now);
-        dpd.setYearRange(2017,2018);
+        highlightDays[0]=lastSelectedDate;
+        dpd.setHighlightedDays(highlightDays);
+        dpd.setYearRange(2017,2020);
         dpd.show((AlertActivity.this).getFragmentManager(), "DatePickerDialog");
-
         break;
 
 
@@ -381,6 +390,7 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
     previous.setClickable(true);
     forward.setClickable(true);
     textView_SelectDate.setClickable(true);
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -395,12 +405,17 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(AlertActivity.this,"AlertActivity");
   }
 
   @Override
@@ -509,6 +524,9 @@ public class AlertActivity extends BaseActivity implements OnClickListener,AppRe
     now.set(year, monthOfYear, dayOfMonth);
     String date_selecct=simpleDateFormat.format(now.getTime());
     textView_SelectDate.setText(date_selecct);
+
+    lastSelectedDate=now;
+
     boolean isConnected=NetworkUtils.isConnected();
     if(isConnected) {
       loadAlert(df_ist.format(now.getTime()));

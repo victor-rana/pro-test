@@ -1,32 +1,28 @@
 package blackflame.com.zymepro.ui.document.image;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import blackflame.com.zymepro.Prosingleton;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.constant.PermissionConstants;
-import blackflame.com.zymepro.constant.PermissionConstants.Permission;
 import blackflame.com.zymepro.db.DataBaseHelper;
 import blackflame.com.zymepro.ui.document.documentsave.DocumentStoreActivity;
 import blackflame.com.zymepro.ui.document.fullimage.FullImageActivity;
 import blackflame.com.zymepro.ui.document.image.adapter.DocumetListener;
 import blackflame.com.zymepro.ui.document.image.adapter.GridAdapterDocument;
 import blackflame.com.zymepro.ui.document.model.ImageTableHelper;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.PermissionUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
@@ -83,7 +79,9 @@ public class DocumentImage extends BaseActivity implements DocumetListener,Permi
       PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA));
     PermissionUtils.sInstance.callback(this);
     PermissionUtils.sInstance.request();
-  }
+  }else{
+      new LoadImage().execute();
+    }
 
   }
 
@@ -157,6 +155,10 @@ public class DocumentImage extends BaseActivity implements DocumetListener,Permi
 
   }
 
+  @Override
+  public void indexScreen() {
+    Analytics.index(DocumentImage.this,"DocumentImage");
+  }
 
 
   public class LoadImage extends AsyncTask<Void,Void,Void> {
@@ -172,6 +174,8 @@ public class DocumentImage extends BaseActivity implements DocumetListener,Permi
         if (type.equals(title)) {
 
           String path=helper1.getPath();
+
+          Log.d("Image path",path);
 
 
           // Uri uri=Uri.parse(path);
@@ -215,6 +219,19 @@ public class DocumentImage extends BaseActivity implements DocumetListener,Permi
       });
 
       return null;
+    }
+  }
+
+
+  @Override
+  protected void onRestart() {
+    super.onRestart();
+    if (!PermissionUtils.isGranted(PermissionConstants.getPermissions(PermissionConstants.CAMERA))) {
+      PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA));
+      PermissionUtils.sInstance.callback(this);
+      PermissionUtils.sInstance.request();
+    } else {
+      new LoadImage().execute();
     }
   }
 }

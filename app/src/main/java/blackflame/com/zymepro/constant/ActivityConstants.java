@@ -11,7 +11,9 @@ public final class ActivityConstants {
 
 
 
-
+  public static final String CONNECT_TO_WIFI = "WIFI";
+  public static final String CONNECT_TO_MOBILE = "MOBILE";
+  public static final String NOT_CONNECT = "NOT_CONNECT";
 
 
   public static final String [] STATELIST={

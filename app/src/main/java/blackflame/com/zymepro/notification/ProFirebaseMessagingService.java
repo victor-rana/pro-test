@@ -4,7 +4,7 @@ import static com.android.volley.VolleyLog.TAG;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import blackflame.com.zymepro.BuildConfig;
 import blackflame.com.zymepro.Prosingleton;

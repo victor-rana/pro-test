@@ -2,8 +2,8 @@ package blackflame.com.zymepro.ui.setting.mapstyle.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.CheckedTextView;

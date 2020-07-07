@@ -2,9 +2,9 @@ package blackflame.com.zymepro.ui.breakdown;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -14,6 +14,7 @@ import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.constant.PermissionConstants;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.PermissionUtils;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
@@ -50,6 +51,7 @@ public class BreakdownActivity extends BaseActivity implements OnClickListener,P
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_breakdown);
+    GlobalReferences.getInstance().baseActivity=this;
     initViews();
   }
 
@@ -198,19 +200,19 @@ public class BreakdownActivity extends BaseActivity implements OnClickListener,P
         .setPositiveButtonClick(new Closure() {
           @Override
           public void exec() {
-            if(PermissionUtils.isGranted(PermissionConstants.PHONE)){
+//            if(PermissionUtils.isGranted(PermissionConstants.PHONE)){
 
-              Intent callIntent = new Intent(Intent.ACTION_CALL);
+              Intent callIntent = new Intent(Intent.ACTION_DIAL);
               callIntent.setData(Uri.parse("tel:" + callPhone));
               startActivity(callIntent);
 
-            }else{
-
-                PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.PHONE));
-                PermissionUtils.sInstance.callback(BreakdownActivity.this);
-                PermissionUtils.sInstance.request();
-
-            }
+//            }else{
+//
+//                PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.PHONE));
+//                PermissionUtils.sInstance.callback(BreakdownActivity.this);
+//                PermissionUtils.sInstance.request();
+//
+//            }
           }
         })
 
@@ -230,6 +232,12 @@ public class BreakdownActivity extends BaseActivity implements OnClickListener,P
 
   @Override
   public void onDenied() {
+
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(BreakdownActivity.this,"BreakDownActivity");
 
   }
 }

@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +29,8 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import com.instamojo.android.Instamojo;
+
+import blackflame.com.zymepro.util.Analytics;
 import instamojo.library.InstamojoPay;
 import instamojo.library.InstapayListener;
 import java.util.UUID;
@@ -292,7 +294,7 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -334,6 +336,12 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
 
   @Override
   public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(PaymentActivity.this,"PaymentActivity");
 
   }
 }

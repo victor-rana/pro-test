@@ -1,7 +1,11 @@
 package blackflame.com.zymepro.io.http;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import blackflame.com.zymepro.BuildConfig;
+import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.Constants;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -13,7 +17,12 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
+
 import java.util.HashMap;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 public class ApiRequests {
     private static ApiRequests apiRequests = null;
@@ -428,6 +437,26 @@ public class ApiRequests {
         }
     }
 
+
+  public void get_live_trip_path(Context context, AppRequest appRequest,String carId) {
+    if (context != null) {
+      requestParam = RequestParam.GET_LIVE_TRIP_PATH;
+      String url = RequestParam.GET_LIVE_TRIP_PATH.getBaseComleteUrl()+"/"+carId;
+
+      Log.d("Live url",url);
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
   public void getBrands(Context context, AppRequest appRequest) {
     if (context != null) {
       requestParam = RequestParam.LOAD_BRANDS;
@@ -579,7 +608,7 @@ public class ApiRequests {
       requestParam = RequestParam.GET_TRIP_DETAILS;
       String url = RequestParam.GET_TRIP_DETAILS.getBaseComleteUrl();
       LogUtils.error("gps_status",url+carId);
-      HttpRequests requests = new HttpRequests(Request.Method.GET, url+"timeddetail"+carId+"/"+date+"/"+tripId, requestParam.getRequestTag(), error, appRequest, mParams);
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url+"timeddetail"+"/"+carId+"/"+date+"/"+tripId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
         mRequestQueue.cancelAll(requestParam.getRequestTag());
@@ -747,6 +776,8 @@ public class ApiRequests {
         public void onErrorResponse(VolleyError error) {
 
             String json = null;
+
+
             NetworkResponse response = error.networkResponse;
             if (error.getMessage()!= null) {
                 json = new String(error.getMessage());
@@ -760,7 +791,33 @@ public class ApiRequests {
             if (listener != null) {
                 if (task != null) {
                     try {
+
+                      
+                      if(response != null && response.data != null) {
+                        switch (response.statusCode) {
+                          case 401:
+                            // Log.e("Error", "onErrorResponse: "+new String(response.data));
+                            try {
+                              JSONObject obj = new JSONObject(new String(response.data));
+                              String msg = obj.getString("msg");
+
+                          
+
+
+                            } catch (JSONException e) {
+                              e.printStackTrace();
+                            }
+
+                            break;
+
+
+                        }
+                      }
+
+
+
                         task.setError(error);
+                      Log.d("Error log =>",json);
                         task.setJsonResponse(new JSONObject(json));
                         listener.onRequestFailed(task, requestParam);
                     }catch (Exception e){
@@ -770,6 +827,10 @@ public class ApiRequests {
                 else if (task1 != null) {
                     try {
                         try {
+
+
+                          Log.d("Error log =>",json);
+
                             task1.setError(error);
                             task1.setJsonResponse(new JSONObject(json));
                         }catch (Exception e){

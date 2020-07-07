@@ -30,7 +30,8 @@ public class NotificationReceivedHandler implements OneSignal.NotificationReceiv
 //
     CommonPreference.initializeInstance(context);
     boolean hasLoggedIn = CommonPreference.getInstance().getIsLoggedIn();
-    if (hasLoggedIn) {
+    boolean isOneSignalEnable=CommonPreference.getInstance().getOneSignalNotification();
+    if (hasLoggedIn && isOneSignalEnable) {
 
       notificationHandler = new NotificationHandler(context);
       try {

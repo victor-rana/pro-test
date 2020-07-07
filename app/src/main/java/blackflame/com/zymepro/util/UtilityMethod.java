@@ -21,10 +21,13 @@ import blackflame.com.zymepro.Prosingleton;
 import blackflame.com.zymepro.R;
 
 import blackflame.com.zymepro.ui.login.LoginActivity;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class UtilityMethod {
@@ -490,6 +493,35 @@ public class UtilityMethod {
     }
     return OurDate;
   }
+
+
+
+  public static Date getTimerDate(String futureDate){
+      Date date=null;
+        try {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+            format.setTimeZone(TimeZone.getTimeZone("UTC"));
+             date = format.parse(futureDate);
+
+            System.out.println(date);
+        }catch (Exception ex){
+
+            Log.e(TAG, "getTimerDate: "+ex.getCause() );
+
+        }
+
+        return  date;
+  }
+
+
+    public static String convertSecondsToHMmSs(long seconds) {
+        long s = seconds % 60;
+        long m = (seconds / 60) % 60;
+        long h = (seconds / (60 * 60)) % 24;
+        return String.format("%d:%02d:%02d", h,m,s);
+    }
+
+
 
 
 }

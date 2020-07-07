@@ -5,13 +5,12 @@ import static blackflame.com.zymepro.util.UtilityMethod.getDate;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.provider.Settings.Global;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,13 +22,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import blackflame.com.zymepro.Prosingleton;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
-import blackflame.com.zymepro.constant.ActivityConstants;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
@@ -39,6 +36,7 @@ import blackflame.com.zymepro.ui.enginescan.adapter.ErrorListAdapter;
 import blackflame.com.zymepro.ui.enginescan.model.ErrorCode;
 import blackflame.com.zymepro.ui.enginescan.model.ErrorCodeData;
 import blackflame.com.zymepro.ui.pitstop.PitstopActivity;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.android.volley.NetworkError;
@@ -930,14 +928,16 @@ public class EngineScanActivity extends BaseActivity implements OnClickListener,
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
     LogUtils.error("Engine scan",listener.getTag());
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
     VolleyError error=listener.getVolleyError();
 
     new Handler(getMainLooper()).post(new Runnable() {
       @Override
       public void run() {
-        imageview_animation.clearAnimation();
-        imageview_animation.setVisibility(View.INVISIBLE);
+        if (imageview_animation != null) {
+          imageview_animation.clearAnimation();
+          imageview_animation.setVisibility(View.INVISIBLE);
+        }
       }
     });
 
@@ -1057,10 +1057,18 @@ public class EngineScanActivity extends BaseActivity implements OnClickListener,
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
       LogUtils.error("Engine",listener.getTag());
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void indexScreen() {
+
+    Analytics.index(EngineScanActivity.this,"EngineScanActivity");
 
   }
 

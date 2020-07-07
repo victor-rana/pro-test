@@ -1,14 +1,13 @@
 package blackflame.com.zymepro.ui.carregistration.index;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
-import android.widget.Toast;
-import blackflame.com.zymepro.Prosingleton;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.GlobalReferences;

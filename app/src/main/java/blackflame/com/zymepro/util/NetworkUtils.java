@@ -14,10 +14,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
-import android.util.Log;
+
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
@@ -27,6 +27,8 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
+
+import blackflame.com.zymepro.constant.ActivityConstants;
 
 public final class NetworkUtils {
   private NetworkUtils() {
@@ -42,6 +44,10 @@ public final class NetworkUtils {
     NETWORK_UNKNOWN,
     NETWORK_NO
   }
+
+  public static int TYPE_WIFI = 1;
+  public static int TYPE_MOBILE = 2;
+  public static int TYPE_NOT_CONNECTED = 0;
 
   /**
    * Open the settings of wireless.
@@ -447,6 +453,64 @@ public final class NetworkUtils {
     return Formatter.formatIpAddress(wm.getDhcpInfo().serverAddress);
   }
 
+  public static String getNetworkClass(Context context) {
+    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    if (cm!=null) {
+      NetworkInfo info = cm.getActiveNetworkInfo();
 
+      if (info == null || !info.isConnected())
+        return "-"; //not connected
+      if (info.getType() == ConnectivityManager.TYPE_WIFI)
+        return "WIFI";
+      if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+        int networkType = info.getSubtype();
+        switch (networkType) {
+          case TelephonyManager.NETWORK_TYPE_HSPAP:  //api<13 : replace by 15
+            return "3G";
+          case TelephonyManager.NETWORK_TYPE_LTE:    //api<11 : replace by 13
+            return "4G";
+          default:
+            return "UNKNOWN";
+        }
+      }
+    }
+    return "UNKNOWN";
+  }
+  public static String getConnectivityStatusString(Context context) {
+
+    int conn = getConnectivityStatus(context);
+
+    String status = null;
+    if (conn == TYPE_WIFI) {
+      //status = "Wifi enabled";
+      status = ActivityConstants.CONNECT_TO_WIFI;
+    } else if (conn == TYPE_MOBILE) {
+      //status = "Mobile data enabled";
+      System.out.println(ActivityConstants.CONNECT_TO_MOBILE);
+      status = getNetworkClass(context);
+    } else if (conn == TYPE_NOT_CONNECTED) {
+      status = ActivityConstants.NOT_CONNECT;
+    }
+
+    return status ;//+ " / " + DateTime.getCurrentDataTime();
+  }
+
+  public static int getConnectivityStatus(Context context) {
+
+    ConnectivityManager cm = (ConnectivityManager) context
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+    if (null != activeNetwork) {
+
+      if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+        return TYPE_WIFI;
+
+      if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+        return TYPE_MOBILE;
+    }
+    return TYPE_NOT_CONNECTED;
+  }
 
 }

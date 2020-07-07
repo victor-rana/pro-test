@@ -15,6 +15,8 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.util.Analytics;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -149,7 +151,7 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -162,11 +164,18 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
   }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(ActivityActivation.this,"ActivityActivation");
+  }
+
   @Override
   public void onBackPressed() {
     stopRepeatingTask();

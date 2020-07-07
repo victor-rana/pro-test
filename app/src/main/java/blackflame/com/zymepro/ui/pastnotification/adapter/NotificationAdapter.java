@@ -4,8 +4,8 @@ import static blackflame.com.zymepro.util.UtilityMethod.getDate;
 import static blackflame.com.zymepro.util.UtilityMethod.getDatewithMonth;
 import static blackflame.com.zymepro.util.UtilityMethod.getTime;
 
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -12,15 +12,14 @@ import android.location.LocationManager;
 
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +42,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.geotag.GeoTagActivity;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.AnimationUtils;
 import blackflame.com.zymepro.util.GMapUtil;
 
@@ -446,7 +446,7 @@ public class SaveGeotagActivity extends BaseActivity implements GoogleApiClient.
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -487,11 +487,16 @@ public class SaveGeotagActivity extends BaseActivity implements GoogleApiClient.
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(SaveGeotagActivity.this,"SaveGeoTagActivity");
   }
 }

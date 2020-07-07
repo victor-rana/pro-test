@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/grey"
-  >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey">
   <include layout="@layout/toolbar_common" />
 
-  <android.support.v7.widget.RecyclerView
-    android:id="@+id/recycler_video"
-    android:layout_above="@+id/video_filter_sort_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/toolbar_common"
-    />
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbar_common"
+
+      android:layout_above="@+id/video_filter_sort_container"
+      >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+          android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_no_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        >
+      <androidx.legacy.widget.Space
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="0.5"/>
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1.5"
+          android:padding="12dp"
+          app:srcCompat="@drawable/ic_video"
+          />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:text="@string/no_video"
+          android:textColor="@color/white"
+          android:gravity="center"
+          android:textSize="16sp"/>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:textColor="@color/white"
+          android:gravity="center_horizontal"
+          android:text="@string/record_video"/>
+    </LinearLayout>
+  </RelativeLayout>
+
+
+
+
+
+
   <View
     android:layout_width="match_parent"
     android:layout_height="0.5dp"

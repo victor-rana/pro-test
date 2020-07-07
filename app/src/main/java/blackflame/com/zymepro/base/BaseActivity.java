@@ -1,25 +1,62 @@
 package blackflame.com.zymepro.base;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.VolleyError;
+
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
+import blackflame.com.zymepro.common.Constants;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.db.Pref;
+import blackflame.com.zymepro.io.http.ApiRequests;
+import blackflame.com.zymepro.io.http.BaseTask;
+import blackflame.com.zymepro.io.http.BaseTaskJson;
+import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.receiver.ConnectivityReceiver;
+import blackflame.com.zymepro.ui.home.MainActivity;
+import blackflame.com.zymepro.util.NetworkUtils;
+import blackflame.com.zymepro.util.ToastUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public class BaseActivity extends BaseActivityParent {
+import static android.net.ConnectivityManager.CONNECTIVITY_ACTION;
+
+public abstract class BaseActivity extends BaseActivityParent implements AppRequest, ConnectivityReceiver.ConnectivityReceiverListener {
 
   private static final String TAG = BaseActivity.class.getCanonicalName();
   protected FragmentManager fragmentManager;
   protected FragmentTransaction fragmentTransaction;
+  IntentFilter intentFilter;
+  ConnectivityReceiver receiver;
+  AlertDialog dialog_show;
+
   @Override
   public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
 
@@ -28,6 +65,32 @@ public class BaseActivity extends BaseActivityParent {
     GlobalReferences.getInstance().pref  = new Pref(this);
     CommonPreference.initializeInstance(this);
     //fragmentManager =getSupportFragmentManager();
+
+    intentFilter = new IntentFilter();
+    intentFilter.addAction(CONNECTIVITY_ACTION);
+    receiver = new ConnectivityReceiver();
+    IntentFilter intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+    this.registerReceiver(receiver, intentFilter);
+
+//    Tovuti.from(this).monitor(new Monitor.ConnectivityListener(){
+//      @Override
+//      public void onConnectivityChanged(int connectionType, boolean isConnected, boolean isFast){
+//        Log.e(TAG, "onConnectivityChanged: "+isConnected );
+//        showSnack(isConnected);
+//      }
+//    });
+
+    ReactiveNetwork.observeInternetConnectivity()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(isConnectedToInternet -> {
+              // do something with isConnectedToInternet value
+              showSnack(isConnectedToInternet);
+
+
+
+            })
+    ;
 
   }
   public void setToolbar(Toolbar toolbar,TextView tv,String title){
@@ -40,6 +103,43 @@ public class BaseActivity extends BaseActivityParent {
         getSupportActionBar().setTitle(null);
       }catch (NullPointerException e){}
     }
+  }
+
+
+  public void doGlobalLogout(VolleyError error,JSONObject data){
+
+    try{
+
+      NetworkResponse response = error.networkResponse;
+
+
+      if (data.has("auth") && !data.getBoolean("auth")){
+        Toast.makeText(BaseActivity.this,"Error base" +data ,Toast.LENGTH_SHORT).show();
+        if (NetworkUtils.isConnected()) {
+          JSONObject jsonObject = new JSONObject();
+          try {
+            jsonObject.put(Constants.EMAIL, CommonPreference.getInstance().getEmail());
+            jsonObject.put("token",CommonPreference.getInstance().getFcmToken() );
+
+            Toast.makeText(this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+          }catch (Exception e){
+            e.printStackTrace();
+          }
+
+          ApiRequests.getInstance().logout(GlobalReferences.getInstance().baseActivity, BaseActivity.this,jsonObject);
+        } else {
+          ToastUtils.showShort(R.string.no_internet);
+        }
+
+      }
+    }catch (Exception e){
+
+      Log.e(TAG, "onRequestFailed: "+e );
+
+    }
+
+
+
   }
 
 
@@ -87,7 +187,7 @@ public class BaseActivity extends BaseActivityParent {
       String backStateName = fragment.getClass().getName();
       String fragmentTag = backStateName;
       Log.e(TAG, "addFragmentWithBackStack: name"+fragmentTag );
-      final android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+      final FragmentManager manager = getSupportFragmentManager();
       if(manager!=null) {
 
         Log.e("manager.findFra)", manager.findFragmentByTag(fragmentTag) + "");
@@ -98,7 +198,7 @@ public class BaseActivity extends BaseActivityParent {
 
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
 
-          android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
+          FragmentTransaction ft = manager.beginTransaction();
           if (bundle!=null) {
             fragment.setArguments(bundle);
           }
@@ -111,7 +211,7 @@ public class BaseActivity extends BaseActivityParent {
           ft.commitAllowingStateLoss();
         } else {
           if (fragmentTag.equals("blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment")){
-            android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
+            FragmentTransaction ft = manager.beginTransaction();
             if (bundle!=null) {
               fragment.setArguments(bundle);
             }
@@ -138,8 +238,23 @@ public class BaseActivity extends BaseActivityParent {
   protected void onResume() {
     super.onResume();
     onPostResume();
-    fragmentManager =getSupportFragmentManager();
+
+
+      fragmentManager =getSupportFragmentManager();
     Log.e("manager",getSupportFragmentManager()+"");
+  }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+//    Tovuti.from(this).stop();
+
   }
 
   public void replaceFragmentWithAnimation(Fragment fragment, String tag){
@@ -163,4 +278,107 @@ public class BaseActivity extends BaseActivityParent {
 
     return super.onOptionsItemSelected(item);
   }
+
+  @Override
+  public <T> void onRequestStarted(BaseTask<T> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public <T> void onRequestCompleted(BaseTask<T> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public <T> void onRequestFailed(BaseTask<T> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public <T> void onRequestStarted(BaseTaskJson<JSONObject> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, Constants.RequestParam requestParam) {
+
+  }
+
+  @Override
+  public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void onNetworkConnectionChanged(boolean isConnected) {
+    showSnack(isConnected);
+
+  }
+
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    try {
+
+      unregisterReceiver(receiver);
+    }catch (Exception ex){
+      ex.printStackTrace();
+    }
+  }
+
+
+  private  void showSnack(boolean isConnected) {
+    String message;
+    int color;
+    if (isConnected) {
+      message = "Connected to Internet";
+      color = Color.WHITE;
+      if (dialog_show!=null){
+        dialog_show.hide();
+      }
+    } else {
+      message = "Sorry! Not connected to internet";
+      color = Color.RED;
+      //  final AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+      final AlertDialog.Builder dialog = new AlertDialog.Builder(BaseActivity.this);
+      dialog.setMessage(message);
+      dialog.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+          System.exit(0);
+        }
+      });
+      dialog.setNegativeButton("Setting", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+          try {
+            //Intent intent = new Intent(Intent.ACTION_MAIN);
+            startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+//                        intent.setClassName("com.android.phone", "com.android.phone.NetworkSetting");
+//                        startActivity(intent);
+          }catch (ActivityNotFoundException ex){
+            dialogInterface.dismiss();
+          }
+        }
+      });
+      dialog.setCancelable(false);
+      dialog_show=dialog.create();
+      if(!(BaseActivity.this).isFinishing()) {
+        dialog_show.show();
+      }
+    }
+
+
+    // Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
+
+
+  public abstract void indexScreen();
+
 }

@@ -1,11 +1,11 @@
 package blackflame.com.zymepro.ui.setting.mapstyle;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -19,6 +19,7 @@ import blackflame.com.zymepro.ui.setting.mapstyle.adapter.StyleAdapter;
 import blackflame.com.zymepro.ui.setting.mapstyle.adapter.ViewHolder;
 import blackflame.com.zymepro.ui.setting.mapstyle.model.MapStyle;
 import blackflame.com.zymepro.ui.setting.mapstyle.model.SelectableItem;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.ToastUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class MapStyleSetting extends BaseActivity implements ViewHolder.OnItemSe
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_map_style_setting);
+    GlobalReferences.getInstance().baseActivity=this;
     initViews();
 
   }
@@ -99,5 +101,10 @@ public class MapStyleSetting extends BaseActivity implements ViewHolder.OnItemSe
   public void onItemSelected(SelectableItem item) {
     List<MapStyle> selectedItems = adapter.getSelectedItems();
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(MapStyleSetting.this,"MapStyleSetting");
   }
 }

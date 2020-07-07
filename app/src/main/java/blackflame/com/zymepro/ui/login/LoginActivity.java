@@ -6,6 +6,7 @@ import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.ui.login.fragment.loginfragment.LoginFragment;
 import blackflame.com.zymepro.ui.login.fragment.signupfragment.SignUpFragment;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.view.custom.SwitchMultiButton;
 
 public class LoginActivity extends BaseActivity {
@@ -49,4 +50,9 @@ public class LoginActivity extends BaseActivity {
 
     }
   };
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(LoginActivity.this,"LoginActivity");
+  }
 }

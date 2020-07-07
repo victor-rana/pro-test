@@ -5,18 +5,19 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
 import blackflame.com.zymepro.ui.wbview.WebActivity;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import java.util.List;
@@ -158,5 +159,10 @@ public class AboutUs extends BaseActivity implements OnClickListener {
     } catch (PackageManager.NameNotFoundException e) {
       return FACEBOOK_URL; //normal web url
     }
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(AboutUs.this,"Aboutus");
   }
 }

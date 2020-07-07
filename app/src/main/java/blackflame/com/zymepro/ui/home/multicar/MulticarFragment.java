@@ -3,15 +3,13 @@ package blackflame.com.zymepro.ui.home.multicar;
 import static blackflame.com.zymepro.util.UtilityMethod.resizeMapIcons;
 import static com.android.volley.VolleyLog.TAG;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings.Global;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,7 +26,6 @@ import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.CommonFragment;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
-import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
@@ -47,17 +44,15 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
-import org.eclipse.paho.client.mqttv3.MqttException;
+
 import org.json.JSONObject;
 
 public class MulticarFragment extends CommonFragment implements OnMarkerClickListener,OnInfoWindowClickListener,GoogleApiClient.ConnectionCallbacks,AppRequest,OnMapClickListener,MulticarPresenter.View {
@@ -335,7 +330,7 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    Log.e(TAG, "onRequestFailed:= "+listener.getVolleyError());
   }
 
   @Override
@@ -359,6 +354,8 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+
+    Log.e(TAG, "onRequestFailed: "+listener.getJsonResponse() );
 
   }
 

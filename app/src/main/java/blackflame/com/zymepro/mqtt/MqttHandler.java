@@ -34,7 +34,7 @@ static MqttDataListener listener;
       String email = CommonPreference.getInstance().getEmail();
 
       String id = email+String.valueOf(System.currentTimeMillis() + Math.random());
-        mqttAndroidClient = new MqttAndroidClient(Prosingleton.getAppContext(), Constants.MQTT_URL_TEST, id);
+        mqttAndroidClient = new MqttAndroidClient(Prosingleton.getAppContext(), Constants.MQTT_URL_PRODUCTION, id);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
           @Override
           public void connectComplete(boolean reconnect, String serverURI) {
@@ -159,6 +159,7 @@ static MqttDataListener listener;
           try{
             JSONObject data= new JSONObject(new String(message.getPayload()));
             listener.setData(data,topic);
+            Log.d("Mqtt data ",data.toString());
           }catch (Exception ex){
             //Log.e(TAG, "messageArrived: "+ex.getCause() );
           }

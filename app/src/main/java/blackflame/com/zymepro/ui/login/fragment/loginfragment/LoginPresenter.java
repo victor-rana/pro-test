@@ -17,10 +17,18 @@ public class LoginPresenter implements  LoginInteractor.OnLoginFinishedListener 
   }
   public void validateCredentials(String username, String password) {
     if (view != null) {
-      view.showProgressBar();
+        if (username != null && username.contains("ankeshth@gmail.com")){
+            view.showDemoProgressBar();
+        }else {
+            view.showProgressBar();
+        }
+
+
     }
     interactor.login(username, password, this);
   }
+
+
   public void storeData(JSONObject data,String email){
 
            try {
@@ -46,6 +54,11 @@ public class LoginPresenter implements  LoginInteractor.OnLoginFinishedListener 
             CommonPreference.getInstance().setDeviceActivated(isActivate);
             CommonPreference.getInstance().setMobile(mobileNumber);
             CommonPreference.getInstance().setReferCode(coupon_code);
+
+            if (data.has("is_demo_user") && data.getBoolean("is_demo_user")){
+              CommonPreference.getInstance().setIsDemoUser(data.getBoolean("is_demo_user"));
+              CommonPreference.getInstance().setExpiryTime(data.getString("login_expiry"));
+            }
             CommonPreference.getInstance().setToken(data.getString("token"));
             if (jsonData.has("name")) {
               CommonPreference.getInstance().setUserName(jsonData.getString("name"));
@@ -57,6 +70,16 @@ public class LoginPresenter implements  LoginInteractor.OnLoginFinishedListener 
                 CommonPreference.getInstance().setImei(jsonData.getString("IMEI"));
               }
             }
+
+            if (jsonData.has("is_demo_user") && jsonData.getBoolean("is_demo_user")){
+              CommonPreference.getInstance().setIsDemoUser(jsonData.getBoolean("is_demo_user"));
+              CommonPreference.getInstance().setTokenExpTime("login_expiry");
+
+            }
+
+
+
+
             CommonPreference.getInstance().setIsLoggedIn(true);
             CommonPreference.getInstance().setSubscriptionTopic(topicName);
             view.navigateToHome();
@@ -95,12 +118,21 @@ public class LoginPresenter implements  LoginInteractor.OnLoginFinishedListener 
     }
   }
 
+  @Override
+  public void onDemoLogin(String email, String pwd) {
+     view.doDemoLogin(email,pwd);
+  }
+
+
+
   public interface View{
     void setPasswordError();
     void setEmailError();
     void showProgressBar();
+    void showDemoProgressBar();
     void hideProgressBar();
     void navigateToHome();
     void doApiCall();
+    void doDemoLogin(String email,String pwd);
   }
 }

@@ -7,10 +7,13 @@ import com.android.volley.Request.Method;
 
 public interface Constants {
 
-  public static final boolean DEBUG = true; // true for test env, false for prod env.
+  public static final boolean DEBUG = false; // true for test env, false for prod env.
+
 
   String BASE_URL_PRODUCTION = "http://api.getzyme.xyz/pro";
   String SEED_URL_PRODUCTION = "http://api.getzyme.xyz/seed";
+  //TODO CHANGE MQTT URL BEFORE RELEASE
+
   String MQTT_URL_PRODUCTION = "tcp://broker.getzyme.xyz:3000";
   String NOTIFICATION_URL_PRODUCTION = "http://api.getzyme.xyz/notification";
   String INSTA_URL_PRODUCTION_ = "https://api.instamojo.com/";
@@ -19,10 +22,15 @@ public interface Constants {
   //test url
   String BASE_URL_TEST = "http://api-test.getzyme.xyz/pro";
   String SEED_URL_TEST = "http://api-test.getzyme.xyz/seed";
+  //TODO CHANGE MQTT URL BEFORE RELEASE
   String MQTT_URL_TEST = "tcp://broker-test.getzyme.xyz:3000";
   String NOTIFICATION_URL_TEST = "http://api-test.getzyme.xyz/notification";
   String INSTA_URL_TEST = "https://test.instamojo.com/";
   String INSTA_TYPE_TEST = "test";
+
+
+
+
 
 
   public enum RequestParam {
@@ -66,7 +74,8 @@ public interface Constants {
     UPDATE_FAILED(38,Method.POST,"/API/v1/user/recharge","payment_failed"),
     UPDATE_MOBILE_SETTING(39,Method.POST,"/API/v1/user/mobile/","mobile_Setting"),
     GET_GEO_FENCE(40,Method.GET,"/API/v1/user/geofence/","get_geofence"),
-    SAVE_GEOFENCE(41,Method.POST,"/API/v1/user/geofence/","save_geofence");
+    SAVE_GEOFENCE(41,Method.POST,"/API/v1/user/geofence/","save_geofence"),
+    GET_LIVE_TRIP_PATH(42, Method.GET, "/API/v1/trip/latest/", "live_trip"),;
     private int id;
     private int method;
     private String postFix;

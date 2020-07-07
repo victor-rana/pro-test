@@ -3,15 +3,14 @@ package blackflame.com.zymepro.ui.setting;
 import static blackflame.com.zymepro.util.UtilityMethod.get12HourTime;
 
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.Settings.Global;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +22,8 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants.RequestParam;
@@ -35,12 +36,15 @@ import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.geofence.GeofenceActivity;
 import blackflame.com.zymepro.ui.setting.mapstyle.MapStyleSetting;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.view.custom.RippleLayout;
 import blackflame.com.zymepro.view.custom.SwitchMultiButton;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import java.util.Calendar;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SettingActivity extends BaseActivity implements OnCheckedChangeListener,OnClickListener,AppRequest,SettingInteractor.View {
@@ -670,6 +674,7 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -679,16 +684,37 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
     LogUtils.error("setting",""+listener.getJsonResponse());
+
+    try {
+      JSONObject jsonObject = listener.getJsonResponse();
+      String code = jsonObject.getString("status");
+      JSONObject object_data = jsonObject.getJSONObject("msg");
+      if (code.equals("SUCCESS")) {
+        Toast.makeText(this, "Setting Saved Successfully", Toast.LENGTH_SHORT).show();
+
+
+      }
+
+    } catch (JSONException ex) {
+
+    }
   }
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
 
   }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(SettingActivity.this,"SettingActivity");
+  }
+
   public void upLoadSetting(){
     try{
       JSONObject params=new JSONObject();

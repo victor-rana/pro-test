@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.Nullable;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.carregistration.CarRegistration;
+import blackflame.com.zymepro.ui.qrscanner.QrscanActivity;
 import blackflame.com.zymepro.util.PermissionUtils;
 import com.android.volley.NetworkResponse;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
@@ -39,6 +41,7 @@ import org.json.JSONObject;
 
 public class QrscanFragment extends CommonFragment implements AppRequest ,PermissionUtils.SimpleCallback{
 
+  private static final String TAG = QrscanFragment.class.getCanonicalName();
   Button btnScan;
   String scanResult,body,status_message,msg;
   TextInputEditText et_qrcode;
@@ -61,7 +64,7 @@ public class QrscanFragment extends CommonFragment implements AppRequest ,Permis
     View v = inflater.inflate(R.layout.layout_qr_fragment, container, false);
     ImageView imageView = v.findViewById(R.id.image_gif);
     GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageView);
-    Glide.with(this).load(R.mipmap.barcode_black).into(imageViewTarget);
+    Glide.with(getContext()).load(R.mipmap.barcode_black).into(imageViewTarget);
     btnScan= v.findViewById(R.id.btn_scan);
     // mScannerView = new ZBarScannerView(getActivity());
     textView_barcode_locator= v.findViewById(R.id.bar_code_locater);
@@ -122,6 +125,8 @@ public class QrscanFragment extends CommonFragment implements AppRequest ,Permis
         v.startAnimation(buttonClick);
         if (!PermissionUtils.isGranted(PermissionConstants.CAMERA)){
           PermissionUtils.permission(PermissionConstants.getPermissions(PermissionConstants.CAMERA));
+          PermissionUtils.sInstance.callback(QrscanFragment.this);
+          PermissionUtils.sInstance.request();
         }else{
           sendScanActivity();
         }
@@ -129,10 +134,10 @@ public class QrscanFragment extends CommonFragment implements AppRequest ,Permis
     });
   }
   public void sendScanActivity(){
-//    Intent intent=new Intent(getActivity(),ScanQrcodeActivity.class);
-//    intent.putExtra("coming",1);
-//    startActivity(intent);
-//    getActivity().finish();
+    Intent intent=new Intent(getActivity(), QrscanActivity.class);
+    intent.putExtra("coming",1);
+    startActivity(intent);
+    getActivity().finish();
   }
 
 
@@ -209,6 +214,8 @@ public class QrscanFragment extends CommonFragment implements AppRequest ,Permis
 
         }catch (JSONException ex){
 
+          Log.e(TAG, "onRequestCompleted: "+ex.getCause() );
+
         }
 
   }
@@ -251,6 +258,8 @@ public class QrscanFragment extends CommonFragment implements AppRequest ,Permis
         }
       }
     }catch (Exception e){
+
+      Log.e(TAG, "onRequestFailed: "+e.getCause() );
 
     }
 

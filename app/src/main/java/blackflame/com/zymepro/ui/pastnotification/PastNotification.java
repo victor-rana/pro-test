@@ -4,12 +4,12 @@ import static blackflame.com.zymepro.util.UtilityMethod.getDate;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +25,7 @@ import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.pastnotification.adapter.NotificationAdapter;
 import blackflame.com.zymepro.ui.pastnotification.listener.NotificationClickListener;
 import blackflame.com.zymepro.ui.pastnotification.model.HistoricResponse;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.view.custom.swiperefresh.SwipyRefreshLayout;
 import blackflame.com.zymepro.view.custom.swiperefresh.SwipyRefreshLayout.OnRefreshListener;
 import blackflame.com.zymepro.view.custom.swiperefresh.SwipyRefreshLayoutDirection;
@@ -149,7 +150,7 @@ public class PastNotification extends BaseActivity implements NotificationClickL
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -164,11 +165,18 @@ public class PastNotification extends BaseActivity implements NotificationClickL
 
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
   public void onResponse(JSONObject response) {
+
+  }
+
+  @Override
+  public void indexScreen() {
+
+    Analytics.index(PastNotification.this,"PastNotification");
 
   }
 }

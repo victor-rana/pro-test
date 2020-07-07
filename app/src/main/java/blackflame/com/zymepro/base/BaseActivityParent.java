@@ -3,10 +3,10 @@ package blackflame.com.zymepro.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import blackflame.com.zymepro.R;
@@ -69,7 +69,7 @@ public class BaseActivityParent extends AppCompatActivity {
       String fragmentTag = backStateName;
       Log.e(TAG, "addFragmentWithBackStack: name"+fragmentTag );
 
-      final android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+      final FragmentManager manager = getSupportFragmentManager();
       if(manager!=null) {
 
         Log.e("manager.findFra)", manager.findFragmentByTag(fragmentTag) + "");
@@ -81,7 +81,7 @@ public class BaseActivityParent extends AppCompatActivity {
 
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
 
-          android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
+          FragmentTransaction ft = manager.beginTransaction();
           if (bundle!=null) {
             fragment.setArguments(bundle);
           }
@@ -96,7 +96,7 @@ public class BaseActivityParent extends AppCompatActivity {
           // Fragment fragment1 = manager.findFragmentByTag(fragmentTag);
 
           if (fragmentTag.equals("blackflame.com.zymepro.FragmentSingleCar")){
-            android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
+            FragmentTransaction ft = manager.beginTransaction();
             if (bundle!=null) {
               fragment.setArguments(bundle);
             }

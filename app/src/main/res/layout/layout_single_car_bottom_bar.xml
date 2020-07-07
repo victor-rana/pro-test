@@ -9,6 +9,16 @@
   android:orientation="horizontal"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <TextView
+      android:id="@+id/tv_timer"
+      android:layout_width="match_parent"
+      android:layout_height="20dp"
+      android:background="@color/blue_gradient"
+      android:layout_gravity="center_horizontal"
+      android:gravity="center"
+      android:visibility="gone"
+      android:textColor="@color/white"/>
   <LinearLayout
     android:id="@+id/ll_triphistory"
     android:layout_width="0dp"

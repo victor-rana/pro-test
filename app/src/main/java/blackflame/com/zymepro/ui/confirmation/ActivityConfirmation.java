@@ -1,7 +1,7 @@
 package blackflame.com.zymepro.ui.confirmation;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,17 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import blackflame.com.zymepro.Prosingleton;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.ui.activation.ActivityActivation;
 import blackflame.com.zymepro.ui.home.MainActivity;
 import blackflame.com.zymepro.ui.wbview.WebActivity;
-import blackflame.com.zymepro.util.ActivityUtils;
-import blackflame.com.zymepro.util.AndroidUtils;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
-import com.fasterxml.jackson.databind.ser.Serializers.Base;
 
 public class ActivityConfirmation extends BaseActivity {
   private Button btn_troubleshoot,btn_retry,btn_Ready;
@@ -120,5 +118,10 @@ public class ActivityConfirmation extends BaseActivity {
         }
       }
     });
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(ActivityConfirmation.this,"ActivityCOnfirmation");
   }
 }

@@ -43,4 +43,9 @@
   <color name="def_reached_color">#FFD844</color>
   <color name="def_pointer_color">#FFFFFF</color>
 
+  <color name="black_overlay">#66000000</color>
+
+
+
+
 </resources>

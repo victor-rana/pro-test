@@ -10,14 +10,17 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings.Global;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.CardView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.cardview.widget.CardView;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.util.Log;
@@ -27,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,7 +39,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import blackflame.com.zymepro.BuildConfig;
 import blackflame.com.zymepro.R;
+import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.db.SettingPreferences;
 import blackflame.com.zymepro.ui.activation.ActivityActivation;
 import blackflame.com.zymepro.Prosingleton;
@@ -60,6 +66,7 @@ import blackflame.com.zymepro.ui.history.HistoryActivity;
 import blackflame.com.zymepro.ui.home.MainActivity;
 import blackflame.com.zymepro.ui.home.MqttDataListener;
 import blackflame.com.zymepro.ui.home.multicar.MulticarFragment;
+import blackflame.com.zymepro.ui.livetrip.LiveTripActivity;
 import blackflame.com.zymepro.ui.pitstop.PitstopActivity;
 import blackflame.com.zymepro.util.GMapUtil;
 import blackflame.com.zymepro.util.NetworkUtils;
@@ -81,6 +88,10 @@ import com.google.android.gms.maps.model.LatLng;
 
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.what3words.androidwrapper.What3WordsV3;
+import com.what3words.javawrapper.request.Coordinates;
+import com.what3words.javawrapper.response.ConvertTo3WA;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,7 +101,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMarkerClickListener,OnMapReadyCallback,SimpleCallback,SinglePresenter.View ,AppRequest ,MqttDataListener,OnClickListener {
-
 
   private static final int REQ_PERMISSION = 100;
   MapView mMapView;
@@ -125,15 +135,73 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   String TAG=SingleCarFragment.class.getCanonicalName();
   NerdModeDialog dialog_nerd_mode;
   boolean isSosClicked=false;
+  ImageView trip_route;
+
+  String selectedImei;
 
 
   PendingIntent sentPending, deliveredPending;
 
+  TextView tvTimer,tvThreeWords,tvWhats3words;
+    What3WordsV3 what3WordsV3;
+    ImageView ivTakeOnMap;
+    String mapAddress;
+    SwitchCompat switchWhats3Words;
+    LinearLayout llWhatswords;
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
+    Log.d("Single car fragment ","");
     View view = inflater.inflate(R.layout.fragment_singlecar, container, false);
     mMapView = view.findViewById(R.id.map);
+    switchWhats3Words=view.findViewById(R.id.switch_w3w);
+    llWhatswords=view.findViewById(R.id.ll_whats3words);
+
+
+
+
+    tvWhats3words=view.findViewById(R.id.tvWhatsW3);
+
+
+
+
+    switchWhats3Words.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+        CommonPreference.getInstance().setWhats3Words(b);
+        if (b){
+
+
+          if (lastLatitude != 0){
+            llWhatswords.setVisibility(View.VISIBLE);
+            new FetchWhatsThreeWords().execute(lastLatitude,lastLongitude);
+          }
+
+        }else{
+          llWhatswords.setVisibility(View.GONE);
+        }
+
+      }
+    });
+
+
+    switchWhats3Words.setChecked(CommonPreference.getInstance().getsetWhats3Words());
+
+
+
+    tvWhats3words.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://what3words.com/about-us/"));
+
+        startActivity(browserIntent);
+
+      }
+    });
+
     mMapView.onCreate(savedInstanceState);
     initViews(view);
     presenter=new SinglePresenter(this,new SingleInteractor());
@@ -149,12 +217,43 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     history = view.findViewById(R.id.ll_triphistory);
     alert = view.findViewById(R.id.ll_alert);
     analytics=view.findViewById(R.id.ll_analytics);
+    ivTakeOnMap=view.findViewById(R.id.ivTakeonMap);
+    ivTakeOnMap.setOnClickListener(view1 -> {
+
+      if (mapAddress != null) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mapAddress));
+
+        startActivity(browserIntent);
+
+      }
+    });
+
+
+
+    tvTimer=view.findViewById(R.id.tv_timer);
+    if (CommonPreference.getInstance().getIsDemoUser()){
+      tvTimer.setVisibility(View.VISIBLE);
+    }
+
+    tvThreeWords=view.findViewById(R.id.address_realtime_three_words);
+
 
     pitstop.setOnClickListener(this);
     enginescan.setOnClickListener(this);
     alert.setOnClickListener(this);
     history.setOnClickListener(this);
     analytics.setOnClickListener(this);
+
+     trip_route=view.findViewById(R.id.iv_trip_details);
+     trip_route.setOnClickListener(new OnClickListener() {
+       @Override
+       public void onClick(View view) {
+         Intent intent=new Intent(getActivity(), LiveTripActivity.class);
+         intent.putExtra("imei",selectedImei);
+         startActivity(intent);
+       }
+     });
 
     setRipple(enginescan);
     setRipple(history);
@@ -203,6 +302,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     rippleBackground = view.findViewById(R.id.ripple);
     relativeLayout_realtime_data = view.findViewById(R.id.pokemon);
     imageView_car = view.findViewById(R.id.centerImage);
+    what3WordsV3 = new What3WordsV3(BuildConfig.THREE_WORDS,getActivity().getApplicationContext());
     mMapView.onResume();
     fetchStatusData();
     try {
@@ -290,6 +390,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     listClick();
     nerdMode();
 
+
   }
 
 
@@ -355,6 +456,32 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       // Log.e(TAG, "onResume: "+e.getMessage() );
       // Oops, looks like the map style resource couldn't be found!
     }
+
+
+    Log.e(TAG, "onResume: "+ CommonPreference.getInstance().getExpiryTime());
+
+    if (CommonPreference.getInstance().getExpiryTime() != null && CommonPreference.getInstance().getIsDemoUser()) {
+      long time = UtilityMethod.getTimerDate(CommonPreference.getInstance().getExpiryTime()).getTime() - System.currentTimeMillis();
+
+
+      new CountDownTimer(time, 1000) {
+
+        public void onTick(long millisUntilFinished) {
+          tvTimer.setText("Time remaining: " + UtilityMethod.convertSecondsToHMmSs(millisUntilFinished / 1000));
+
+          //here you can have your logic to set text to edittext
+        }
+
+        public void onFinish() {
+          tvTimer.setText("done");
+        }
+
+      }.start();
+    }
+
+
+
+
 
   }
 
@@ -702,6 +829,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void registerMqtt(String imei) {
+    selectedImei=imei;
     MqttHandler.registerMqtt(imei,this);
 
   }
@@ -726,6 +854,12 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     lastLatitude=latitude;
     lastLongitude=longitude;
     imageView_car.setVisibility(View.VISIBLE);
+
+    if (CommonPreference.getInstance().getsetWhats3Words()){
+      llWhatswords.setVisibility(View.VISIBLE);
+    }
+
+
     if (lastLatitude != 0.0) {
       isMarkerCreated = true;
       CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -737,6 +871,11 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
         gmap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
       }
       }
+
+    if (CommonPreference.getInstance().getsetWhats3Words()) {
+      new FetchWhatsThreeWords().execute(latitude, longitude);
+    }
+
   }
 
   @Override
@@ -843,6 +982,13 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   public void loadAddress(double latitude, double longitude) {
     ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity,SingleCarFragment.this,latitude,longitude);
 
+   if (CommonPreference.getInstance().getsetWhats3Words()){
+     new FetchWhatsThreeWords().execute(latitude,longitude);
+   }
+
+
+
+
   }
 
   public void fetchStatusData(){
@@ -936,6 +1082,13 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
 
+//    Toast.makeText(getActivity(),"Error get"+listener.getVolleyError(),Toast.LENGTH_SHORT).show();
+
+
+//    if (getActivity() instanceof BaseActivity){
+//      ((BaseActivity) getActivity()).doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
+//    }
+
   }
 
   @Override
@@ -951,6 +1104,11 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
 
+//    if (getActivity() instanceof BaseActivity){
+//      Toast.makeText(getActivity(),"Error post"+listener.getVolleyError()  ,Toast.LENGTH_SHORT).show();
+//      ((BaseActivity) getActivity()).doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
+//
+//    }
   }
 
   @Override
@@ -965,6 +1123,11 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       @Override
       public void run() {
         presenter.parseRealtimeData(topic,data);
+
+        Log.d("Mqtt data ",data.toString());
+
+
+
       }
     });
 
@@ -983,6 +1146,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void setRealtimeData(int coolant, int rpm, int speed, String voltage,String status) {
+
     tv_coolant_realtime.setText(coolant + " °C");
     tv_battery_realtime.setText(voltage + " V");
     tv_speed.setText("" + speed + " km/h");
@@ -1192,6 +1356,40 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     intent.putExtra("latitude", lastLatitude);
     intent.putExtra("longitude", lastLongitude);
     startActivity(intent);
+  }
+
+
+
+  private final class FetchWhatsThreeWords extends AsyncTask<Double, Void, String> {
+
+
+    @Override
+    protected String doInBackground(Double... doubles) {
+      ConvertTo3WA words=null;
+      String wordsAddress="";
+      if (what3WordsV3 != null) {
+
+         words = what3WordsV3.convertTo3wa(new Coordinates(doubles[0], doubles[1]))
+                .language("en")
+                .execute();
+
+
+        Log.e(TAG, "loadAddress:words " + words);
+
+        mapAddress = words.getMap();
+        wordsAddress=words.getWords();
+      }
+
+      return wordsAddress;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+      tvThreeWords.setText(result);
+
+      // You might want to change "executed" for the returned string
+      // passed into onPostExecute(), but that is up to you
+    }
   }
 
 

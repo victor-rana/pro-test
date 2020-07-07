@@ -35,6 +35,7 @@ public class CommonPreference {
   private static final String DEVICECOUNT="devicecount";
   private static final String MONTHCOUNT="monthcount";
 
+  private static final  String ISDEMOUSER="isdemouser";
   private static final String MAP_TYPE="map_type";
   private static final String SHOULD_LIVE_TRAFFIC="live_traffic";
   private static final String IMEI_SUBSCRIPTION="imei_subscription";
@@ -46,10 +47,17 @@ public class CommonPreference {
   public static final String DEVICELINKED="devicelinked";
   public static final String GEOFENCE_RADIUS="radius";
   public static final String GEOFENCE_LATITUDE="latitude";
-  public static final String GEOFENCE_LONGITUDE="longitude";
+  public static final String GEOFENCE_LONGITUDE = "longitude";
+  private static final String NOTIFICATION_ROUTE = "notification_route";
+  private static final String IS_DEMO_LOGIN = "is_demo_login";
+  private static final String LOGIN_TIME = "login_time";
+  private static final String LOGIN_EXPIRY = "login_expiry";
+
+  private static final String TOKEN_EXP_TIME="token_exp_time";
 
 
   static final String GEOFENCESEND="Geofencesend";
+  static final String WHATS3WORDS="whats3words";
 
 
 
@@ -294,6 +302,33 @@ public class CommonPreference {
   }
 
 
+
+
+
+  public void setIsDemoUser(boolean value){
+    mPref.edit()
+            .putBoolean(ISDEMOUSER, value)
+            .apply();
+
+  }
+  public boolean getIsDemoUser(){
+    return mPref.getBoolean(ISDEMOUSER, false);
+  }
+
+
+
+
+  public void setTokenExpTime(String time){
+    mPref.edit().putString(TOKEN_EXP_TIME, time)
+            .apply();
+  }
+  public String getTokenExpTime(){
+
+    return mPref.getString(TOKEN_EXP_TIME, null
+    );
+  }
+
+
   public void setDeviceCount(int count){
     mPref.edit()
         .putInt(DEVICECOUNT, count)
@@ -383,6 +418,17 @@ public class CommonPreference {
     return mPref.getString(PLAYER_ID, null);}
 
 
+
+
+
+  public void setExpiryTime(String carId){
+    mPref.edit().putString(LOGIN_EXPIRY, carId)
+            .apply();
+  }
+  public String getExpiryTime(){
+    return mPref.getString(LOGIN_EXPIRY, null);}
+
+
   public void setGeofence(boolean value){
     mPref.edit()
         .putBoolean(GEOFENCESEND, value)
@@ -391,6 +437,17 @@ public class CommonPreference {
   public boolean isGeofenceSet(){
     return mPref.getBoolean(GEOFENCESEND, false);
   }
+
+
+  public void setWhats3Words(boolean value){
+    mPref.edit()
+            .putBoolean(WHATS3WORDS, value)
+            .apply();
+  }
+  public boolean getsetWhats3Words(){
+    return mPref.getBoolean(WHATS3WORDS, false);
+  }
+
 
 public void setGeofenceRadius(int radius){
   mPref.edit()
@@ -420,4 +477,13 @@ public int getGeonceRadius(){
   public String getGeofenceLongitude(){
     return mPref.getString(GEOFENCE_LONGITUDE, null);
   }
+
+
+  public void setOneSignalNotification(boolean status){
+    mPref.edit().putBoolean(NOTIFICATION_ROUTE, status)
+            .apply();
+  }
+  public boolean getOneSignalNotification(){
+
+    return mPref.getBoolean(NOTIFICATION_ROUTE, true);}
 }

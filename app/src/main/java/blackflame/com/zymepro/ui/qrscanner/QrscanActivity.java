@@ -1,10 +1,10 @@
 package blackflame.com.zymepro.ui.qrscanner;
 
 import android.content.Intent;
-import android.provider.Settings.Global;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.Constants.RequestParam;
@@ -15,6 +15,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.carregistration.CarRegistration;
+import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.android.volley.NetworkResponse;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
@@ -115,7 +116,7 @@ public class QrscanActivity extends BaseActivity implements ZBarScannerView.Resu
 
   @Override
   public <T> void onRequestFailed(BaseTask<T> listener, RequestParam requestParam) {
-
+    doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
   }
 
   @Override
@@ -146,6 +147,7 @@ public class QrscanActivity extends BaseActivity implements ZBarScannerView.Resu
   @Override
   public <T> void onRequestFailed(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
     try{
+      doGlobalLogout(listener.getVolleyError(),listener.getJsonResponse());
       NetworkResponse response = listener.getVolleyError().networkResponse;
       if(response != null && response.data != null) {
         switch (response.statusCode) {
@@ -188,5 +190,10 @@ public class QrscanActivity extends BaseActivity implements ZBarScannerView.Resu
   @Override
   public void onResponse(JSONObject response) {
 
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(QrscanActivity.this,"QrscanActivity");
   }
 }

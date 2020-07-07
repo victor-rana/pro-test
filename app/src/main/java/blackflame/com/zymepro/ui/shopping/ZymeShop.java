@@ -3,13 +3,14 @@ package blackflame.com.zymepro.ui.shopping;
 import static blackflame.com.zymepro.util.UtilityMethod.openLink;
 
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.base.BaseActivity;
 import blackflame.com.zymepro.common.GlobalReferences;
+import blackflame.com.zymepro.util.Analytics;
 
 
 public class ZymeShop extends BaseActivity implements View.OnClickListener {
@@ -26,6 +27,7 @@ public class ZymeShop extends BaseActivity implements View.OnClickListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    GlobalReferences.getInstance().baseActivity=this;
     setContentView(R.layout.activity_zyme_shop);
     initViews();
 
@@ -87,5 +89,11 @@ public class ZymeShop extends BaseActivity implements View.OnClickListener {
         openLink(urls[5]);
         break;
     }
+  }
+
+  @Override
+  public void indexScreen() {
+    Analytics.index(ZymeShop.this,"ZymeShop");
+
   }
 }

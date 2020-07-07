@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+
 import blackflame.com.zymepro.ui.ai.AlexaActivity;
 import blackflame.com.zymepro.ui.ai.GoogleActivity;
 import blackflame.com.zymepro.ui.alertdetails.AlertDetails;
@@ -34,7 +36,10 @@ public class NotificationHelperMethod {
 
   public static Intent getActivityToLaunch(String name,Context context) {
     Intent activityTOlaunch=null;
+    Log.d("Activity to launch",name);
     switch (name){
+
+
       case "HOME":
         activityTOlaunch=new Intent(context,MainActivity.class);
         break;

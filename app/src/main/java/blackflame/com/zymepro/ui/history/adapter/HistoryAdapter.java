@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +91,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
       Show = itemView.findViewById(R.id.show);
 
       expandButton.setOnClickListener(this);
+      arrow.setOnClickListener(this);
     }
 
     public void bind() {
@@ -150,17 +151,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
       if (position == selectedItem) {
         selectedItem = UNSELECTED;
         if (holder !=null)
-          arrow.setImageDrawable(Prosingleton.getAppContext().getResources().getDrawable(R.drawable.ic_up_arrow));
+          arrow.setImageDrawable(Prosingleton.getAppContext().getResources().getDrawable(R.drawable.ic_arrow_up));
       } else {
         expandButton.setSelected(true);
         expandableLayout.expand();
         if (arrow!=null)
-          arrow.setImageDrawable(Prosingleton.getAppContext().getResources().getDrawable(R.drawable.ic_down_arrow_white));
+          arrow.setImageDrawable(Prosingleton.getAppContext().getResources().getDrawable(R.drawable.ic_down_arrow));
         selectedItem = position;
       }
     }
-
-
 
     @Override
     public void onExpansionUpdate(float expansionFraction, int state) {

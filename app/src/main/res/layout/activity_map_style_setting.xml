@@ -7,7 +7,7 @@
   android:background="#000"
   >
   <include layout="@layout/toolbar_map_style"/>
-  <android.support.v7.widget.RecyclerView
+  <androidx.recyclerview.widget.RecyclerView
     android:layout_below="@+id/toolbar_map_style"
     android:id="@+id/recycler_style"
     android:layout_width="match_parent"
