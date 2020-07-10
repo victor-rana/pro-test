@@ -2,6 +2,7 @@ package blackflame.com.zymepro.ui.home.multicar;
 
 import blackflame.com.zymepro.db.CommonPreference;
 import blackflame.com.zymepro.ui.home.singlecar.CarcountModel;
+import blackflame.com.zymepro.util.LogUtils;
 
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -73,25 +74,16 @@ public void parseListData(JSONObject object){
 }
 public void parseAddressData(JSONObject object){
   try {
-    if (object.getJSONArray("results").length() > 0) {
+    if (object.has("msg") ) {
       String addre = null;
-      String result=null;
 
-      addre = ((JSONArray) object.get("results")).getJSONObject(0).getString("formatted_address");
+      addre=object.getString("msg");
 
-      String[] address_array = addre.split(",");
-      StringBuffer buffer = new StringBuffer();
 
-      for (int i = 0; i < address_array.length - 2; i++) {
-        result = result + address_array[i];
-        if (i == address_array.length - 3) {
-          buffer.append(address_array[i]);
-        } else {
-          buffer.append(address_array[i] + ",");
-        }
-      }
 
-      view.setAddress(buffer.toString());
+      view.setAddress(addre);
+
+      LogUtils.error("Alerts",addre);
 
 
     }

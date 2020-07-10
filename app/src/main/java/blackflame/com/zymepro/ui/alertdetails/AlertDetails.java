@@ -38,6 +38,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClickListener,OnMapReadyCallback,AppRequest,DetailsPresenter.View {
@@ -202,7 +204,16 @@ public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClic
   }
 
   private void loadAddress(double latitude,double longitude){
-    ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity,AlertDetails.this,latitude,longitude);
+
+    try {
+      JSONObject address=new JSONObject();
+      address.put("lat",latitude);
+      address.put("lon",longitude);
+
+      ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity, AlertDetails.this, address);
+    }catch (JSONException ex){
+
+    }
   }
 
   private void setCurrentLocation(LatLng latlng){
@@ -411,7 +422,7 @@ public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClic
 
   @Override
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
-      presenter.parseAddress(listener.getJsonResponse());
+
   }
 
   @Override
@@ -426,7 +437,7 @@ public class AlertDetails extends BaseActivity implements GoogleMap.OnMarkerClic
 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    presenter.parseAddress(listener.getJsonResponse());
   }
 
   @Override

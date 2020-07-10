@@ -384,21 +384,14 @@
         android:layout_marginRight="48dp"
         android:weightSum="3">
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:gravity="center"
-          android:layout_alignParentLeft="true"
-          android:text="Enable W3W"
-          android:layout_marginLeft="32dp"
-          android:textColor="@color/white" />
+
       <androidx.appcompat.widget.SwitchCompat
           android:id="@+id/switch_w3w"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_alignParentRight="true"
           android:layout_marginRight="32dp"
+          android:text="Enable W3W"
+          android:layout_centerHorizontal="true"
           android:textColor="@color/white"
           android:gravity="center" />
 
@@ -408,8 +401,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center"
-          android:layout_marginLeft="32dp"
-
+          android:layout_centerHorizontal="true"
           android:text="What's this?"
           android:textColor="@color/blue_gradient" />
 

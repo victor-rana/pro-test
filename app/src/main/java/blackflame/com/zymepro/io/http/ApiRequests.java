@@ -19,11 +19,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
+import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static blackflame.com.zymepro.Prosingleton.TAG;
+
 public class ApiRequests {
     private static ApiRequests apiRequests = null;
     private final VolleyErrorListener error;
@@ -667,19 +671,25 @@ public class ApiRequests {
     }
   }
 
-  public void get_address(Context context, AppRequest appRequest,double lat,double lon) {
-        if (context != null) {
-            requestParam = RequestParam.STATUS;
-            String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&sensor=true+&key=AIzaSyApjqH7n5NtCjitmRG7ZiFgAsnPICWlrOM";;
-            HttpRequests requests = new HttpRequests(Request.Method.GET, url, "address", error, appRequest, mParams);
-            error.setRequestLister(appRequest, requests, "address");
-            if (mRequestQueue != null) {
-                mRequestQueue.cancelAll(requestParam.getRequestTag());
-            }
-            requests.setTag("address");
-            mRequestQueue.add(requests);
-            appRequest.onRequestStarted(requests, requestParam);
-        }
+  public void get_address(Context context, AppRequest appRequest, JSONObject data) {
+
+
+    if (context != null) {
+
+      requestParam = RequestParam.GET_ADDRESS;
+      String url = RequestParam.GET_ADDRESS.getBaseComleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, data, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+
+
+
     }
 
 

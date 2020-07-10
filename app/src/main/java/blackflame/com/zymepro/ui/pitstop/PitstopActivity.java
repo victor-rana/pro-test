@@ -54,19 +54,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import org.json.JSONObject;
 
-public class PitstopActivity extends BaseActivity implements OnClickListener,OnMapReadyCallback,OnMarkerClickListener,AppRequest,PitstopPresenter.View {
+public class PitstopActivity extends BaseActivity implements OnClickListener,AppRequest,PitstopPresenter.View {
   Toolbar toolbar_pitstop;
   TextView Toolbar_Title,textview_model;
-  GoogleMap Gmap;
-  GoogleApiClient mGoogleApiClient;
-  LocationManager manager;
-  String Name;
-  String MobileNo1, MobileNo2;
-  final int REQ_PERMISSION = 2;
-  final int REQ_CALL = 3;
-  Location mlastlocation;
+
+
   double latitude_mechanic, longitude_mechanic;
-  LatLng latlng_locateOnmap;
+
   String tag_json_arry = "json_array_req";
   double latitude;
   double longitude;
@@ -133,7 +127,7 @@ PitstopPresenter presenter;
 
     animation_in = AnimationUtils.loadAnimation(getApplicationContext(),
         R.anim.slide_up);
-    setUpMapIfNeeded();
+
     type="car_repair";
     Intent intent = getIntent();
     latitude = intent.getDoubleExtra("latitude", 0.0);
@@ -404,49 +398,9 @@ PitstopPresenter presenter;
   }
 
 
-  private void setUpMapIfNeeded() {
-    // Do a null check to confirm that we have not already instantiated the map.
-    if (Gmap == null) {
-      // Try to obtain the map from the SupportMapFragment.
-      SupportMapFragment fm = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview));
-      // Check if we were successful in obtaining the map.
-      fm.getMapAsync(PitstopActivity.this);
 
-    }
-  }
 
-  @Override
-  public void onMapReady(GoogleMap googleMap) {
-    Gmap = googleMap;
-    Gmap.setOnMarkerClickListener(this);
-    Gmap.getUiSettings().setZoomControlsEnabled(true);
-    Gmap.getUiSettings().setCompassEnabled(false);
-      if (Gmap != null) {
-        GMapUtil.setMapStyle(Gmap);
-      }
-    CameraPosition cameraPosition = new CameraPosition.Builder()
-        .target(new LatLng(26.5937, 78.9629))
-        .zoom(6)
-        .bearing(0)
-        .build();
-    Gmap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-  }
 
-  @Override
-  public boolean onMarkerClick(Marker marker) {
-    int position = Integer.valueOf((String)marker.getTag());
-    NearByData data=data_list.get(position);
-    Bundle bundle=new Bundle();
-    bundle.putString("address",data.getAddress());
-    bundle.putString("image",data.getImage_reference());
-    bundle.putString("name",data.getName());
-    bundle.putBoolean("isopen",data.isIsopen());
-    bundle.putString("rating",String.valueOf(data.getRating()));
-    bundle.putDouble("lat",marker.getPosition().latitude);
-    bundle.putDouble("lng",marker.getPosition().longitude);
-    NearbyDialogHelper.openDialog(PitstopActivity.this,bundle);
-    return true;
-  }
 
   @Override
   public <T> void onRequestStarted(BaseTask<T> listener, RequestParam requestParam) {
@@ -469,9 +423,7 @@ PitstopPresenter presenter;
 
 
         if (listener.getTag().equals("near_by")){
-          if (Gmap !=null){
-            Gmap.clear();
-          }
+
 
           presenter.parseData(listener.getJsonResponse());
         }else if (listener.getTag().equals("price")){
@@ -536,15 +488,7 @@ PitstopPresenter presenter;
 
   @Override
   public void setMarker(NearByData data,int i) {
-    if (Gmap != null) {
-        builder.include(data.getLocation());
-        Gmap.addMarker(new MarkerOptions()
-            .position(data.getLocation())
-            .title(data.getName())
-            .icon(BitmapDescriptorFactory
-                .fromBitmap(resizeMapIcons("pitstop_marker_fuel_station", 64, 64))))
-            .setTag(String.valueOf(i));
-      }
+
     }
 
 
@@ -554,10 +498,7 @@ PitstopPresenter presenter;
       data_list.clear();
       data_list.addAll(list);
       LogUtils.error("length",""+list.size());
-      if (data_list.size() > 0) {
-        LatLngBounds bounds = builder.build();
-        Gmap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 20));
-      }
+
     }
 
   }

@@ -35,6 +35,7 @@ import blackflame.com.zymepro.ui.home.singlecar.CarcountAdapter;
 import blackflame.com.zymepro.ui.home.singlecar.CarcountModel;
 import blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment;
 import blackflame.com.zymepro.util.GMapUtil;
+import blackflame.com.zymepro.util.MarkerUtil;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -53,6 +54,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MulticarFragment extends CommonFragment implements OnMarkerClickListener,OnInfoWindowClickListener,GoogleApiClient.ConnectionCallbacks,AppRequest,OnMapClickListener,MulticarPresenter.View {
@@ -307,8 +309,15 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
 
   @Override
   public boolean onMarkerClick(Marker marker) {
-    ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity,this,marker.getPosition().latitude,marker.getPosition().longitude);
-    return false;
+    try {
+      JSONObject address=new JSONObject();
+      address.put("lat",marker.getPosition().latitude);
+      address.put("lon",marker.getPosition().longitude);
+
+      ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity, MulticarFragment.this, address);
+    }catch (JSONException ex){
+
+    }    return false;
   }
 
   @Override
@@ -322,7 +331,7 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
     if (listener.getTag().equals("status")) {
       presenter.parseListData(listener.getJsonResponse());
     }
-    if (listener.getTag().equals("address")){
+    else if (listener.getTag().equals("address")){
       presenter.parseAddressData(listener.getJsonResponse());
     }
 
@@ -349,7 +358,9 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
-
+    if (listener.getTag().equals("address")){
+      presenter.parseAddressData(listener.getJsonResponse());
+    }
   }
 
   @Override

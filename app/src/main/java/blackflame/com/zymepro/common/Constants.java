@@ -8,8 +8,6 @@ import com.android.volley.Request.Method;
 public interface Constants {
 
   public static final boolean DEBUG = false; // true for test env, false for prod env.
-
-
   String BASE_URL_PRODUCTION = "http://api.getzyme.xyz/pro";
   String SEED_URL_PRODUCTION = "http://api.getzyme.xyz/seed";
   //TODO CHANGE MQTT URL BEFORE RELEASE
@@ -27,12 +25,6 @@ public interface Constants {
   String NOTIFICATION_URL_TEST = "http://api-test.getzyme.xyz/notification";
   String INSTA_URL_TEST = "https://test.instamojo.com/";
   String INSTA_TYPE_TEST = "test";
-
-
-
-
-
-
   public enum RequestParam {
     SIGN_IN(1, Method.POST, "/API/v1/user/login", "sign_in"),
     SIGN_UP(2, Method.POST, "/API/v1/user", "sign_up"),
@@ -75,7 +67,8 @@ public interface Constants {
     UPDATE_MOBILE_SETTING(39,Method.POST,"/API/v1/user/mobile/","mobile_Setting"),
     GET_GEO_FENCE(40,Method.GET,"/API/v1/user/geofence/","get_geofence"),
     SAVE_GEOFENCE(41,Method.POST,"/API/v1/user/geofence/","save_geofence"),
-    GET_LIVE_TRIP_PATH(42, Method.GET, "/API/v1/trip/latest/", "live_trip"),;
+    GET_LIVE_TRIP_PATH(42, Method.GET, "/API/v1/trip/latest/", "live_trip"),
+    GET_ADDRESS(43,Method.POST,"/API/v1/location/address","address");
     private int id;
     private int method;
     private String postFix;

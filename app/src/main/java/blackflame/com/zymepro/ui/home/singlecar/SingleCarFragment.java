@@ -57,6 +57,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.mqtt.MqttHandler;
+import blackflame.com.zymepro.ui.alertdetails.AlertDetails;
 import blackflame.com.zymepro.ui.alerts.AlertActivity;
 import blackflame.com.zymepro.ui.analytic.AnalyticActivity;
 import blackflame.com.zymepro.ui.carregistration.CarRegistration;
@@ -980,8 +981,15 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void loadAddress(double latitude, double longitude) {
-    ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity,SingleCarFragment.this,latitude,longitude);
+    try {
+      JSONObject address=new JSONObject();
+      address.put("lat",latitude);
+      address.put("lon",longitude);
 
+      ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity, SingleCarFragment.this, address);
+    }catch (JSONException ex){
+
+    }
    if (CommonPreference.getInstance().getsetWhats3Words()){
      new FetchWhatsThreeWords().execute(latitude,longitude);
    }
@@ -1059,10 +1067,13 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
       progressBar_dataloading.setVisibility(View.GONE);
       JSONObject data=listener.getJsonResponse();
+    Log.e(TAG, "onRequestCompleted: "+data );
 
      if(listener.getTag().equals("status")){
        presenter.parseData(data,registration);
      }else if(listener.getTag().equals("address")){
+
+       Log.e(TAG, "onRequestCompleted: "+data );
        presenter.parseAddress(data);
      }else if (listener.getTag().equals("pitstop")){
        presenter.parseLocation(listener.getJsonResponse());
@@ -1098,7 +1109,11 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+    if(listener.getTag().equals("address")){
 
+      Log.e(TAG, "onRequestCompleted: "+listener.getJsonResponse() );
+      presenter.parseAddress(listener.getJsonResponse());
+    }
   }
 
   @Override

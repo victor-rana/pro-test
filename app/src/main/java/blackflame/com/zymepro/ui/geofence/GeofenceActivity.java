@@ -36,6 +36,7 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment;
 import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.PermissionUtils;
@@ -370,7 +371,15 @@ public class GeofenceActivity extends BaseActivity implements GoogleApiClient.Co
   }
 
   private void getAddress(double latitude, double longitude) {
-    ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity,GeofenceActivity.this,latitude,longitude);
+    try {
+      JSONObject address=new JSONObject();
+      address.put("lat",latitude);
+      address.put("lon",longitude);
+
+      ApiRequests.getInstance().get_address(GlobalReferences.getInstance().baseActivity, GeofenceActivity.this, address);
+    }catch (JSONException ex){
+
+    }
   }
 
   @Override
@@ -530,30 +539,11 @@ public class GeofenceActivity extends BaseActivity implements GoogleApiClient.Co
           }
         }else if (listener.getTag().equals("address")){
          JSONObject response=listener.getJsonResponse();
-          if (response.getJSONArray("results").length() > 0) {
-            String addre = null;
-            String result=null;
 
-            addre = ((JSONArray) response.get("results")).getJSONObject(0).getString("formatted_address");
-
-            String[] address_array = addre.split(",");
-            StringBuffer buffer = new StringBuffer();
-
-            for (int i = 0; i < address_array.length - 2; i++) {
-              result = result + address_array[i];
-              if (i == address_array.length - 3) {
-                buffer.append(address_array[i]);
-              } else {
-                buffer.append(address_array[i] + ",");
-              }
-            }
-            textView_address.setText(buffer.toString());
+            textView_address.setText(response.getString("msg"));
 
           }
 
-
-
-      }
 
     } catch (JSONException ex) {
 
@@ -576,7 +566,14 @@ public class GeofenceActivity extends BaseActivity implements GoogleApiClient.Co
       JSONObject jsonObject = listener.getJsonResponse();
       String code = jsonObject.getString("status");
       String message = jsonObject.getString("msg");
-      if (code.equals("SUCCEESS") || code.equals("SUCCESS")) {
+      if (listener.getTag().equals("address")){
+        JSONObject response=listener.getJsonResponse();
+
+        textView_address.setText(response.getString("msg"));
+
+      }
+      if (code.equals("SUCCEESS") && listener.getTag().equals("save_geofence") ) {
+        isEditClick=false;
         textView_radius.setText(textView_radius.getText().toString()+" km");
         textView_title_data.setText("Geofence set at");
         CommonPreference.getInstance().setGeofence(true);

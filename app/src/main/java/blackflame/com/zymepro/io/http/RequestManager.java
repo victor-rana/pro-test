@@ -34,7 +34,9 @@ public class RequestManager {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(context);
         }
+
         return mRequestQueue;
     }
+
 
 }
