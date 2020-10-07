@@ -285,6 +285,7 @@ ArrayList<CarcountModel> list;
         case "ACTIVE":
           view.setCardClickable(false);
           view.setActiveCard();
+          CommonPreference.getInstance().setThisDeviceLinked(true);
           CommonPreference.getInstance().setDeviceActivated(true);
 
           break;

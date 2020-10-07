@@ -56,10 +56,10 @@ public class SettingInteractor {
       }
       if(object_setting.has("overspeed_limit")) {
         int overspeed=object_setting.getInt("overspeed_limit");
-        if(overspeed!=40){
+//        if(overspeed!=40){
           view.setSpeed(overspeed);
 
-        }
+//        }
       }
 
 
@@ -79,10 +79,10 @@ public class SettingInteractor {
         JSONObject object_theft = object_setting.getJSONObject("theft");
         if(object_theft.has("startTime")){
           Log.e("Setting", "parseSetting: "+object_theft.getInt("startTime")+""+getTime(object_theft.getInt("startTime")) );
-          view.setStartTime(getTime(object_theft.getInt("startTime")));
+          view.setStartTime(object_theft.getInt("startTime"),getTime(object_theft.getInt("startTime")));
         }
         if (object_theft.has("endTime")){
-          view.setEndTime(getTime(object_theft.getInt("endTime")));
+          view.setEndTime(object_theft.getInt("endTime"),getTime(object_theft.getInt("endTime")));
         }
       }
       if(object_setting.has("sos_1")){
@@ -135,8 +135,8 @@ public class SettingInteractor {
     void setTripEnd(boolean val);
     void setOverSpeed(boolean val);
     void setTheft(boolean val);
-    void setStartTime(String time);
-    void setEndTime(String time);
+    void setStartTime(int second,String time);
+    void setEndTime(int second,String time);
     void setSpeed(int speed);
     void setCoolant(int coolant);
     void setVolatage(float voltage);

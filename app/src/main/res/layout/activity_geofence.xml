@@ -116,13 +116,13 @@
             android:gravity="center">
 
             <TextView
-              android:id="@+id/geofence_radius_text"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:textSize="16sp"
-              android:text="@string/radius"
-              android:textColor="@color/white"/>
+                android:id="@+id/geofence_radius_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/radius"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
             <TextView
               android:id="@+id/geofence_radius"
               android:layout_toRightOf="@+id/geofence_radius_text"
@@ -134,19 +134,23 @@
               android:textColor="@color/white"/>
 
           </RelativeLayout>
-          <SeekBar
-            android:id="@+id/seekbar_radius"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:max="100"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:thumbTint="#fff"
-            android:progressTint="#1e1f1f"
-            android:progressBackgroundTint="#b4b9b9"
 
-            />
+
+          <SeekBar
+              android:id="@+id/seekbar_radius"
+              style="@style/CustomProgressBarReplay"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:max="100"
+              android:layout_centerVertical="true"
+              android:layout_marginBottom="10dp"
+              android:layout_marginLeft="30dp"
+              android:layout_marginRight="30dp"
+              android:thumb="@drawable/view_circle_address_start" />
+
+
+
 
         </LinearLayout>
       </LinearLayout>

@@ -2,10 +2,8 @@ package blackflame.com.zymepro.io.http;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import blackflame.com.zymepro.BuildConfig;
-import blackflame.com.zymepro.R;
 import blackflame.com.zymepro.common.Constants;
 import blackflame.com.zymepro.common.Constants.RequestParam;
 import blackflame.com.zymepro.common.GlobalReferences;
@@ -17,16 +15,11 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeErrorDialog;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
-import com.google.gson.JsonObject;
 
 import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static blackflame.com.zymepro.Prosingleton.TAG;
 
 public class ApiRequests {
     private static ApiRequests apiRequests = null;
@@ -53,7 +46,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.LINK_DEVICE;
-      String url = RequestParam.LINK_DEVICE.getBaseComleteUrl();
+      String url = RequestParam.LINK_DEVICE.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -68,7 +61,7 @@ public class ApiRequests {
     public void sign_up(Context context, AppRequest appRequest, JSONObject jsonObject) {
         if (context != null) {
             requestParam = Constants.RequestParam.SIGN_UP;
-            String url = Constants.RequestParam.SIGN_UP.getBaseComleteUrl();
+            String url = Constants.RequestParam.SIGN_UP.getBaseCompleteUrl();
             HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
             error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
             if (mRequestQueue != null) {
@@ -84,7 +77,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.REGISTER_CAR;
-      String url = RequestParam.REGISTER_CAR.getBaseComleteUrl();
+      String url = RequestParam.REGISTER_CAR.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -101,7 +94,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_CAR;
-      String url = RequestParam.UPDATE_CAR.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_CAR.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.PUT, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -116,7 +109,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_PROFILE;
-      String url = RequestParam.UPDATE_PROFILE.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_PROFILE.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -131,7 +124,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_PASSWORD;
-      String url = RequestParam.UPDATE_PASSWORD.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_PASSWORD.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -147,7 +140,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPLOAD_SETTING;
-      String url = RequestParam.UPLOAD_SETTING.getBaseComleteUrl();
+      String url = RequestParam.UPLOAD_SETTING.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -164,7 +157,7 @@ public class ApiRequests {
   public void get_setting(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.GET_SETTING;
-      String url = RequestParam.GET_SETTING.getBaseComleteUrl();
+      String url = RequestParam.GET_SETTING.getBaseCompleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -179,7 +172,7 @@ public class ApiRequests {
   public void get_trip(Context context, AppRequest appRequest,String carId,String time) {
     if (context != null) {
       requestParam = RequestParam.LOAD_TRIP;
-      String url = RequestParam.LOAD_TRIP.getBaseComleteUrl();
+      String url = RequestParam.LOAD_TRIP.getBaseCompleteUrl();
       LogUtils.error("History",url+carId+"/"+time);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId+"/"+time, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -195,7 +188,7 @@ public class ApiRequests {
   public void get_alert_list(Context context, AppRequest appRequest,String carId,String time) {
     if (context != null) {
       requestParam = RequestParam.GET_ALERT_LIST;
-      String url = RequestParam.GET_ALERT_LIST.getBaseComleteUrl();
+      String url = RequestParam.GET_ALERT_LIST.getBaseCompleteUrl();
       LogUtils.error("History",url+carId+"/"+time);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId+"/"+time, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -211,7 +204,7 @@ public class ApiRequests {
   public void get_old_error(Context context, AppRequest appRequest,String imei) {
     if (context != null) {
       requestParam = RequestParam.GET_PREVIOUS_ERROR;
-      String url = RequestParam.GET_PREVIOUS_ERROR.getBaseComleteUrl();
+      String url = RequestParam.GET_PREVIOUS_ERROR.getBaseCompleteUrl();
       LogUtils.error("History",url+imei);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+imei, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -226,7 +219,7 @@ public class ApiRequests {
   public void get_current_error(Context context, AppRequest appRequest,String imei) {
     if (context != null) {
       requestParam = RequestParam.GET_CURRENT_ERROR;
-      String url = RequestParam.GET_CURRENT_ERROR.getBaseComleteUrl();
+      String url = RequestParam.GET_CURRENT_ERROR.getBaseCompleteUrl();
       LogUtils.error("History",url+imei);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+imei, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -260,7 +253,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.GET_FUEL_PRICE;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.GET_FUEL_PRICE.getBaseComleteUrl();
+      String url=RequestParam.GET_FUEL_PRICE.getBaseCompleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+type, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -276,7 +269,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.LOAD_ANALYTICS;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.LOAD_ANALYTICS.getBaseComleteUrl();
+      String url=RequestParam.LOAD_ANALYTICS.getBaseCompleteUrl();
       LogUtils.error("Analytic",url+carId+"/"+start_date+"/"+end_date);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId+"/"+start_date+"/"+end_date, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -294,7 +287,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.LOAD_GEOTAG;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.LOAD_GEOTAG.getBaseComleteUrl();
+      String url=RequestParam.LOAD_GEOTAG.getBaseCompleteUrl();
 
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -310,7 +303,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.DELETE_GEOTAG;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.DELETE_GEOTAG.getBaseComleteUrl();
+      String url=RequestParam.DELETE_GEOTAG.getBaseCompleteUrl();
 
       HttpRequests requests = new HttpRequests(Method.DELETE, url+id, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -327,7 +320,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.LOAD_MESSAGE_FROM_TEAM;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.LOAD_MESSAGE_FROM_TEAM.getBaseComleteUrl();
+      String url=RequestParam.LOAD_MESSAGE_FROM_TEAM.getBaseCompleteUrl();
 
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -344,7 +337,7 @@ public class ApiRequests {
     if (context != null) {
       requestParam = RequestParam.LOAD_REFER_MESSAGE;
       String tag=requestParam.getRequestTag();
-      String url=RequestParam.LOAD_REFER_MESSAGE.getBaseComleteUrl();
+      String url=RequestParam.LOAD_REFER_MESSAGE.getBaseCompleteUrl();
 
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, tag,error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -360,7 +353,7 @@ public class ApiRequests {
   public void get_trip_details(Context context, AppRequest appRequest,String carId,String time,int trip_id) {
     if (context != null) {
       requestParam = RequestParam.GET_TRIP_DETAILS;
-      String url = RequestParam.GET_TRIP_DETAILS.getBaseComleteUrl();
+      String url = RequestParam.GET_TRIP_DETAILS.getBaseCompleteUrl();
       LogUtils.error("History",url+carId+"/"+time);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+"detail/"+carId+"/"+time+"/"+trip_id, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -378,10 +371,10 @@ public class ApiRequests {
       String url =null;
       if (type.equals("pdf")){
         requestParam = RequestParam.GET_PDF_URL;
-        url=RequestParam.GET_PDF_URL.getBaseComleteUrl()+endDate+"/"+startdate;
+        url=RequestParam.GET_PDF_URL.getBaseCompleteUrl()+endDate+"/"+startdate;
       }else if(type.equals("csv")){
         requestParam = RequestParam.GET_CSV_URL;
-        url=RequestParam.GET_CSV_URL.getBaseComleteUrl()+endDate+"/"+startdate;
+        url=RequestParam.GET_CSV_URL.getBaseCompleteUrl()+endDate+"/"+startdate;
       }
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -397,7 +390,7 @@ public class ApiRequests {
         if (context != null) {
 
             requestParam = Constants.RequestParam.SIGN_IN;
-            String url = Constants.RequestParam.SIGN_IN.getBaseComleteUrl();
+            String url = Constants.RequestParam.SIGN_IN.getBaseCompleteUrl();
             String requestTag = "sign_up";
             HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
             error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -414,7 +407,7 @@ public class ApiRequests {
   public void get_profile(Context context, AppRequest appRequest) {
     if (context != null) {
       requestParam = RequestParam.LOAD_PROFILE;
-      String url = RequestParam.LOAD_PROFILE.getBaseComleteUrl();
+      String url = RequestParam.LOAD_PROFILE.getBaseCompleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -429,7 +422,7 @@ public class ApiRequests {
     public void get_status(Context context, AppRequest appRequest) {
         if (context != null) {
             requestParam = RequestParam.STATUS;
-            String url = RequestParam.STATUS.getBaseComleteUrl();
+            String url = RequestParam.STATUS.getBaseCompleteUrl();
             HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
             error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
             if (mRequestQueue != null) {
@@ -445,7 +438,7 @@ public class ApiRequests {
   public void get_live_trip_path(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.GET_LIVE_TRIP_PATH;
-      String url = RequestParam.GET_LIVE_TRIP_PATH.getBaseComleteUrl()+"/"+carId;
+      String url = RequestParam.GET_LIVE_TRIP_PATH.getBaseCompleteUrl()+"/"+carId;
 
       Log.d("Live url",url);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
@@ -464,7 +457,7 @@ public class ApiRequests {
   public void getBrands(Context context, AppRequest appRequest) {
     if (context != null) {
       requestParam = RequestParam.LOAD_BRANDS;
-      String url = RequestParam.LOAD_BRANDS.getBaseComleteUrl();
+      String url = RequestParam.LOAD_BRANDS.getSeedComleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -478,8 +471,24 @@ public class ApiRequests {
   public void getModels(Context context, AppRequest appRequest,String model) {
     if (context != null) {
       requestParam = RequestParam.LOAD_MODELS;
-      String url = RequestParam.LOAD_MODELS.getBaseComleteUrl();
+      String url = RequestParam.LOAD_MODELS.getSeedComleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+model, requestParam.getRequestTag(), error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+  public void getSubscriptionAmount(Context context, AppRequest appRequest) {
+    if (context != null) {
+      requestParam = RequestParam.GET_SUBSCRIPTION_AMOUNT;
+      String url = RequestParam.GET_SUBSCRIPTION_AMOUNT.getBaseCompleteUrl();
+      HttpRequests requests = new HttpRequests(Request.Method.GET, url, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
         mRequestQueue.cancelAll(requestParam.getRequestTag());
@@ -494,8 +503,8 @@ public class ApiRequests {
 
   public void get_last_connection(Context context, AppRequest appRequest,String imei) {
     if (context != null) {
-      requestParam = RequestParam.STATUS;
-      String url = RequestParam.LAST_CONNECTION.getBaseComleteUrl();
+      requestParam = RequestParam.LAST_CONNECTION;
+      String url = RequestParam.LAST_CONNECTION.getBaseCompleteUrl();
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+imei, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -509,8 +518,8 @@ public class ApiRequests {
 
   public void get_gps_status(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
-      requestParam = RequestParam.STATUS;
-      String url = RequestParam.GPS_STATUS.getBaseComleteUrl();
+      requestParam = RequestParam.GPS_STATUS;
+      String url = RequestParam.GPS_STATUS.getBaseCompleteUrl();
       LogUtils.error("gps_status",url);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -526,7 +535,7 @@ public class ApiRequests {
   public void get_past_notification(Context context, AppRequest appRequest,int page) {
     if (context != null) {
       requestParam = RequestParam.LOAD_PAST_NOTIFICATION;
-      String url = RequestParam.LOAD_PAST_NOTIFICATION.getBaseComleteUrl();
+      String url = RequestParam.LOAD_PAST_NOTIFICATION.getBaseCompleteUrl();
       LogUtils.error("past_notification",url);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+page, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -542,7 +551,7 @@ public class ApiRequests {
   public void get_location(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.PITSTOP;
-      String url = RequestParam.PITSTOP.getBaseComleteUrl();
+      String url = RequestParam.PITSTOP.getBaseCompleteUrl();
       LogUtils.error("gps_status",url);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -556,12 +565,11 @@ public class ApiRequests {
   }
 
 
-
-  public void save_geotag(Context context, AppRequest appRequest, JSONObject jsonObject) {
+  public void create_order(Context context, AppRequest appRequest, JSONObject jsonObject) {
     if (context != null) {
 
-      requestParam = RequestParam.SAVE_GEO_TAG;
-      String url = RequestParam.SAVE_GEO_TAG.getBaseComleteUrl();
+      requestParam = RequestParam.CREATE_ORDER;
+      String url = RequestParam.CREATE_ORDER.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -574,11 +582,55 @@ public class ApiRequests {
   }
 
 
+
+
+
+
+
+  public void save_geotag(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.SAVE_GEO_TAG;
+      String url = RequestParam.SAVE_GEO_TAG.getBaseCompleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+
+  public void update_order(Context context, AppRequest appRequest, JSONObject jsonObject) {
+    if (context != null) {
+
+      requestParam = RequestParam.UPDATE_ORDER;
+      String url = RequestParam.UPDATE_ORDER.getBaseCompleteUrl();
+      HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
+      error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
+      if (mRequestQueue != null) {
+        mRequestQueue.cancelAll(requestParam.getRequestTag());
+      }
+      requests.setTag(requestParam.getRequestTag());
+      mRequestQueue.add(requests);
+      appRequest.onRequestStarted(requests, requestParam);
+    }
+  }
+
+
+
+
+
   public void save_geofence(Context context, AppRequest appRequest, JSONObject jsonObject) {
     if (context != null) {
 
       requestParam = RequestParam.SAVE_GEOFENCE;
-      String url = RequestParam.SAVE_GEOFENCE.getBaseComleteUrl();
+      String url = RequestParam.SAVE_GEOFENCE.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -593,7 +645,7 @@ public class ApiRequests {
   public void get_geofence(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.GET_GEO_FENCE;
-      String url = RequestParam.GET_GEO_FENCE.getBaseComleteUrl();
+      String url = RequestParam.GET_GEO_FENCE.getBaseCompleteUrl();
       LogUtils.error("gps_status",url+carId);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -610,7 +662,7 @@ public class ApiRequests {
   public void get_replay(Context context, AppRequest appRequest,String carId,String date,String tripId) {
     if (context != null) {
       requestParam = RequestParam.GET_TRIP_DETAILS;
-      String url = RequestParam.GET_TRIP_DETAILS.getBaseComleteUrl();
+      String url = RequestParam.GET_TRIP_DETAILS.getBaseCompleteUrl();
       LogUtils.error("gps_status",url+carId);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+"timeddetail"+"/"+carId+"/"+date+"/"+tripId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -628,7 +680,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_PAYMENT;
-      String url = RequestParam.UPDATE_PAYMENT.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_PAYMENT.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -643,7 +695,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_FAILED;
-      String url = RequestParam.UPDATE_FAILED.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_FAILED.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -659,7 +711,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.UPDATE_MOBILE_SETTING;
-      String url = RequestParam.UPDATE_MOBILE_SETTING.getBaseComleteUrl();
+      String url = RequestParam.UPDATE_MOBILE_SETTING.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, jsonObject, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -677,7 +729,7 @@ public class ApiRequests {
     if (context != null) {
 
       requestParam = RequestParam.GET_ADDRESS;
-      String url = RequestParam.GET_ADDRESS.getBaseComleteUrl();
+      String url = RequestParam.GET_ADDRESS.getBaseCompleteUrl();
       HttpRequestsJson requests = new HttpRequestsJson(Method.POST, url, data, error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
       if (mRequestQueue != null) {
@@ -696,7 +748,7 @@ public class ApiRequests {
   public void get_existing_url(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.GET_EXISTING_URL;
-      String url = RequestParam.GET_EXISTING_URL.getBaseComleteUrl();
+      String url = RequestParam.GET_EXISTING_URL.getBaseCompleteUrl();
       LogUtils.error("gps_status",url+carId);
       HttpRequests requests = new HttpRequests(Request.Method.GET, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -712,7 +764,7 @@ public class ApiRequests {
   public void deactivate_url(Context context, AppRequest appRequest,String carId) {
     if (context != null) {
       requestParam = RequestParam.DEACTIVATE_URL;
-      String url = RequestParam.DEACTIVATE_URL.getBaseComleteUrl();
+      String url = RequestParam.DEACTIVATE_URL.getBaseCompleteUrl();
       LogUtils.error("gps_status",url);
       HttpRequests requests = new HttpRequests(Method.DELETE, url+carId, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -728,7 +780,7 @@ public class ApiRequests {
   public void generate_url(Context context, AppRequest appRequest,String carId,String seconds) {
     if (context != null) {
       requestParam = RequestParam.GENERATE_URL;
-      String url = RequestParam.GENERATE_URL.getBaseComleteUrl();
+      String url = RequestParam.GENERATE_URL.getBaseCompleteUrl();
       LogUtils.error("gps_status",url);
       HttpRequests requests = new HttpRequests(Method.POST, url+carId+"/"+seconds, requestParam.getRequestTag(), error, appRequest, mParams);
       error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
@@ -746,7 +798,7 @@ public class ApiRequests {
         if (context != null) {
 
             requestParam = RequestParam.SIGN_OUT;
-            String url = RequestParam.SIGN_OUT.getBaseComleteUrl();
+            String url = RequestParam.SIGN_OUT.getBaseCompleteUrl();
             HttpRequestsJson requests = new HttpRequestsJson(Request.Method.POST, url, jsonObject, error, appRequest, mParams);
             error.setRequestLister(appRequest, requests, requestParam.getRequestTag());
             if (mRequestQueue != null) {

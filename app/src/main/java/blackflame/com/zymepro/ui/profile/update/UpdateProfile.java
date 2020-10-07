@@ -10,6 +10,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -28,6 +29,7 @@ import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
 import blackflame.com.zymepro.ui.profile.ActivityProfile;
+import blackflame.com.zymepro.ui.profile.ProfilePresenter;
 import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.LogUtils;
 import blackflame.com.zymepro.util.NetworkUtils;
@@ -61,6 +63,8 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_update_profile);
     GlobalReferences.getInstance().baseActivity=this;
+    presenter=new UpdatePresenter(this);
+    context=this;
 
 
     initViews();
@@ -121,11 +125,12 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
       radioButton_diesel_update.setChecked(true);
     }
 
-    loadModel(model_previous);
+    loadModel(brand_previous);
   onBrand();
   onCC();
   selectState();
   uploadData();
+  onModel();
 
   loadBand();
 
@@ -304,6 +309,52 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
     });
   }
 
+  public void onModel(){
+    final AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+    textView_model_update.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        v.startAnimation(buttonClick);
+        View outerView = LayoutInflater
+                .from(GlobalReferences.getInstance().baseActivity).inflate(R.layout.layout_wheel_selection, null);
+        outerView.setBackgroundColor(context.getResources().getColor(R.color.grey));
+        Button btn_confirm= outerView.findViewById(R.id.btn_confirm);
+        wv_cc_update = outerView.findViewById(R.id.wheel_view_wv);
+        wv_cc_update.setOffset(2);
+        if(carModel!=null) {
+          wv_cc_update.setItems(Arrays.asList(carModel));
+        }
+        wv_cc_update.setSeletion(0);
+        wv_cc_update.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+          @Override
+          public void onSelected(int selectedIndex, String item) {
+            // Log.d("CarInfor", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+            textView_model_update.setText(item);
+            boolean isConnected=NetworkUtils.isConnected();
+
+          }
+        });
+        LayoutInflater inflater = getLayoutInflater();
+        View titleView = inflater.inflate(R.layout.custom_title_dialog, null);
+        TextView textView= titleView.findViewById(R.id.dialog_title);
+        textView.setText("Select a model");
+        final AlertDialog dialog=  new AlertDialog.Builder(GlobalReferences.getInstance().baseActivity)
+                .setTitle("Select a model")
+                .setView(outerView)
+                .setCustomTitle(titleView)
+//                        .setPositiveButton("OK", null)
+                .show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            dialog.dismiss();
+          }
+        });
+      }
+    });
+  }
+
 
   @Override
   public void nameError() {
@@ -343,12 +394,15 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
 
   @Override
   public void setBrand(String[] data) {
+
     this.carBrand=data;
+    Log.e("TAG", "setBrand: "+carBrand.length );
   }
 
   @Override
   public void setModel(String[] model) {
     this.carModel=model;
+    Log.e("TAG", "setModel: "+model.length );
   }
 
   @Override
@@ -391,6 +445,7 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
 
   @Override
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
+    Log.e("TAG", "onRequestCompleted: 1"+ listener.getTag());
 
     if (listener.getTag().equals("brand")){
       presenter.parseBrand(listener.getJsonResponse());
@@ -413,29 +468,39 @@ public class UpdateProfile extends BaseActivity implements UpdatePresenter.View 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
     try {
-      JSONObject object=listener.getJsonResponse();
-      String status=object.getString("status");
-      String msg=object.getString("msg");
-      new AwesomeSuccessDialog(GlobalReferences.getInstance().baseActivity)
-          .setTitle("Success")
-          .setMessage(msg)
-          .setColoredCircle(R.color.colorAccent)
-          .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
-          .setCancelable(true)
-          .setPositiveButtonText("Ok")
-          .setPositiveButtonbackgroundColor(R.color.colorAccent)
-          .setPositiveButtonTextColor(R.color.white)
-          .setPositiveButtonClick(new Closure() {
-            @Override
-            public void exec() {
-              //click
-              Intent intent=  new Intent(UpdateProfile.this,ActivityProfile.class);
-              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-              startActivity(intent);
-              finish();
-            }
-          })
-          .show();
+
+      Log.e("TAG", "onRequestCompleted: 2"+ listener.getTag());
+
+      if (listener.getTag().equals("brand")){
+        presenter.parseBrand(listener.getJsonResponse());
+      }else if(listener.getTag().equals("model")){
+        presenter.parseModel(listener.getJsonResponse());
+      }else {
+
+        JSONObject object = listener.getJsonResponse();
+        String status = object.getString("status");
+        String msg = object.getString("msg");
+        new AwesomeSuccessDialog(GlobalReferences.getInstance().baseActivity)
+                .setTitle("Success")
+                .setMessage(msg)
+                .setColoredCircle(R.color.colorAccent)
+                .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
+                .setCancelable(true)
+                .setPositiveButtonText("Ok")
+                .setPositiveButtonbackgroundColor(R.color.colorAccent)
+                .setPositiveButtonTextColor(R.color.white)
+                .setPositiveButtonClick(new Closure() {
+                  @Override
+                  public void exec() {
+                    //click
+                    Intent intent = new Intent(UpdateProfile.this, ActivityProfile.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                  }
+                })
+                .show();
+      }
 
     } catch (JSONException ex) {
 

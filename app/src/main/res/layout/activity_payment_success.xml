@@ -6,6 +6,12 @@
   android:background="#000"
   android:orientation="vertical">
 
+  <RelativeLayout
+      android:id="@+id/rlStatus"
+      android:visibility="invisible"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
   <TextView
     android:id="@+id/tv_payment_success"
     android:layout_width="match_parent"
@@ -56,4 +62,5 @@
     android:textColor="@color/white"
     android:background="@drawable/bg_rectangle_button"
     />
+  </RelativeLayout>
 </RelativeLayout>

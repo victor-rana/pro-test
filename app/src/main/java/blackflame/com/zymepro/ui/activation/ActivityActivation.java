@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 import blackflame.com.zymepro.R;
@@ -117,34 +118,41 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
   @Override
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
     try {
+      Log.e("TAG", "onRequestCompleted: 2"+listener.getTag() );
 
       if (listener.getTag().equals("last_connection")) {
         JSONObject jObject = listener.getJsonResponse();
          connection_status = jObject.getString("connection_status");
-         if (connection_status.equals("ESTABLISHED")){
+         if (connection_status.equalsIgnoreCase("ESTABLISHED")){
            isConnectionEstablished=true;
+           Log.e("TAG", "onRequestCompleted: "+isConnectionEstablished );
            String carId=CommonPreference.getInstance().getCarId();
            getGpsStatus(carId);
-         } else if (listener.getTag().equals("gps_status")){
-           JSONObject carData = jObject.getJSONObject("msg");
-           //distance_last = carData.getInt("distance");
-           // trip_status = carData.getBoolean("custom_trip");
-           JSONArray array = carData.getJSONArray("last_location");
-           if(array.length()>0){
-             isGpsActive=true;
-             tv_counter.setText("Zyme Pro activated!");
+         }
+      }else if (listener.getTag().equals("gps_status")){
+        Log.e("TAG", "onRequestCompleted gps status: " );
+        JSONObject jObject = listener.getJsonResponse();
+        JSONObject carData = jObject.getJSONObject("msg");
+        //distance_last = carData.getInt("distance");
+        // trip_status = carData.getBoolean("custom_trip");
+        JSONArray array = carData.getJSONArray("last_location");
+        Log.e("TAG", "onRequestCompleted gps status: " +array.length());
+        if(array.length()>0){
+          isGpsActive=true;
+          tv_counter.setText("Zyme Pro activated!");
 //             Intent intent=new Intent(ActivityActivation.this,ActivityConfirmation.class);
 //             intent.putExtra("status",1);
 //             CommonPreference.getInstance().setDeviceActivated(true);
 //             // edit.apply();
 //             startActivity(intent);
-             finish();
-           }else{
-             isGpsActive=false;
-           }
-         }
+          finish();
+        }else{
+          Log.e("TAG", "onRequestCompleted gps status: " +isGpsActive);
+          isGpsActive=false;
+        }
       }
     }catch (JSONException ex){
+      Log.e("TAG", "onRequestCompleted: "+ex.getMessage() );
 
     }
   }
@@ -156,6 +164,40 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
 
   @Override
   public <T> void onRequestStarted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+    try {
+
+      Log.e("TAG", "onRequestStarted: 2"+listener.getTag() );
+
+      if (listener.getTag().equals("last_connection")) {
+        JSONObject jObject = listener.getJsonResponse();
+        connection_status = jObject.getString("connection_status");
+        if (connection_status.equals("ESTABLISHED")){
+          isConnectionEstablished=true;
+          String carId=CommonPreference.getInstance().getCarId();
+          getGpsStatus(carId);
+        } else if (listener.getTag().equals("gps_status")){
+          JSONObject carData = jObject.getJSONObject("msg");
+          //distance_last = carData.getInt("distance");
+          // trip_status = carData.getBoolean("custom_trip");
+          JSONArray array = carData.getJSONArray("last_location");
+          if(array.length()>0){
+            isGpsActive=true;
+            tv_counter.setText("Zyme Pro activated!");
+//             Intent intent=new Intent(ActivityActivation.this,ActivityConfirmation.class);
+//             intent.putExtra("status",1);
+//             CommonPreference.getInstance().setDeviceActivated(true);
+//             // edit.apply();
+//             startActivity(intent);
+            finish();
+          }else{
+            isGpsActive=false;
+          }
+        }
+      }
+    }catch (JSONException ex){
+      Log.e("TAG", "onRequestStarted: "+ex.getMessage() );
+
+    }
   }
 
   @Override

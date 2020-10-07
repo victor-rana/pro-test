@@ -876,19 +876,28 @@ public class SettingActivity extends BaseActivity implements OnCheckedChangeList
   }
 
   @Override
-  public void setStartTime(String time) {
+  public void setStartTime(int second,String time) {
+
+    start_selected_hour = second / 3600;
+
+    start_selected_minute = (second % 3600) / 60;
+
     editext_start_time.setText(time);
 
   }
 
   @Override
-  public void setEndTime(String time) {
+  public void setEndTime(int second,String time) {
+    end_selected_hour = second / 3600;
+
+    end_selected_minute = (second % 3600) / 60;
 
     editText_end_time.setText(time);
   }
 
   @Override
   public void setSpeed(int speed) {
+
     if(speed!=40){
       final int progress=120/(speed-40);
       seekBar_overspeeding.setProgress(0);

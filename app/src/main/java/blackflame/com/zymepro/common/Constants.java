@@ -8,12 +8,12 @@ import com.android.volley.Request.Method;
 public interface Constants {
 
   public static final boolean DEBUG = false; // true for test env, false for prod env.
-  String BASE_URL_PRODUCTION = "http://api.getzyme.xyz/pro";
-  String SEED_URL_PRODUCTION = "http://api.getzyme.xyz/seed";
+  String BASE_URL_PRODUCTION = "https://api.getzyme.xyz/pro";
+  String SEED_URL_PRODUCTION = "https://api.getzyme.xyz/seed";
   //TODO CHANGE MQTT URL BEFORE RELEASE
 
   String MQTT_URL_PRODUCTION = "tcp://broker.getzyme.xyz:3000";
-  String NOTIFICATION_URL_PRODUCTION = "http://api.getzyme.xyz/notification";
+  String NOTIFICATION_URL_PRODUCTION = "https://api.getzyme.xyz/notification";
   String INSTA_URL_PRODUCTION_ = "https://api.instamojo.com/";
   String INSTA_TYPE_PROD = "prod";
   int VERSION_CODE = 39;
@@ -68,7 +68,12 @@ public interface Constants {
     GET_GEO_FENCE(40,Method.GET,"/API/v1/user/geofence/","get_geofence"),
     SAVE_GEOFENCE(41,Method.POST,"/API/v1/user/geofence/","save_geofence"),
     GET_LIVE_TRIP_PATH(42, Method.GET, "/API/v1/trip/latest/", "live_trip"),
-    GET_ADDRESS(43,Method.POST,"/API/v1/location/address","address");
+    GET_ADDRESS(43,Method.POST,"/API/v1/location/address","address"),
+    GET_SUBSCRIPTION_AMOUNT(44, Method.GET,"/API/v1/user/subscription-amount","amount"),
+    CREATE_ORDER(45, Method.POST,"/API/v1/user/generate-recharge-order","create_order"),
+    UPDATE_ORDER(45, Method.POST,"/API/v1/user/recharge-order-complete","update_order");
+
+
     private int id;
     private int method;
     private String postFix;
@@ -85,7 +90,7 @@ public interface Constants {
       return id;
     }
 
-    public String getBaseComleteUrl() {
+    public String getBaseCompleteUrl() {
       if (DEBUG) {
         return BASE_URL_TEST.concat(postFix);
 
@@ -94,6 +99,16 @@ public interface Constants {
       }
     }
 
+
+
+    public String getSeedComleteUrl() {
+      if (DEBUG) {
+        return SEED_URL_TEST.concat(postFix);
+
+      } else {
+        return SEED_URL_PRODUCTION.concat(postFix);
+      }
+    }
     public String getMqttUrl() {
       if (DEBUG) {
         return MQTT_URL_TEST;

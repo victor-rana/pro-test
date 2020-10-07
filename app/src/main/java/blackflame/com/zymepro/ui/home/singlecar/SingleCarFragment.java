@@ -150,6 +150,8 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     SwitchCompat switchWhats3Words;
     LinearLayout llWhatswords;
 
+    String fragmentTag="SingleCar";
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -403,7 +405,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
         CarcountModel model = list.get(position);
         if (model.getBrand().equals("All")) {
           MulticarFragment multicar = new MulticarFragment();
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(multicar,false,null);
+          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(multicar,false,null,"MultiCar");
         } else {
           onDetach();
           onDestroyView();
@@ -413,7 +415,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
           bundle.putString("IMEI", list.get(position).getImei());
           bundle.putString("registration_number", list.get(position).getRegistration());
           bundle.putInt("coming", 2);
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle);
+          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
         }
       }
     });
@@ -1067,8 +1069,9 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
       progressBar_dataloading.setVisibility(View.GONE);
       JSONObject data=listener.getJsonResponse();
-    Log.e(TAG, "onRequestCompleted: "+data );
 
+
+    Log.e(TAG, "onRequestCompleted: "+data );
      if(listener.getTag().equals("status")){
        presenter.parseData(data,registration);
      }else if(listener.getTag().equals("address")){
@@ -1082,8 +1085,6 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
        sendSos(listener.getJsonResponse());
 
      }
-
-
 
   }
 
@@ -1173,9 +1174,16 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     imageView_car.setVisibility(View.VISIBLE);
     if (gmap!=null) {
       gmap.clear();
+
+      float zoom=gmap.getCameraPosition().zoom;
+
+      if (zoom <12){
+        zoom=16.0f;
+      }
+
       CameraPosition cameraPosition = new CameraPosition.Builder()
           .target(new LatLng(latitude, longitude))
-          .zoom(gmap.getCameraPosition().zoom)
+          .zoom(zoom)
           .bearing(0)
           .build();
       gmap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

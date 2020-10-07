@@ -1,6 +1,7 @@
 package blackflame.com.zymepro.ui.profile.payment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -31,17 +32,19 @@ import blackflame.com.zymepro.io.listener.AppRequest;
 import com.instamojo.android.Instamojo;
 
 import blackflame.com.zymepro.util.Analytics;
-import instamojo.library.InstamojoPay;
-import instamojo.library.InstapayListener;
+import blackflame.com.zymepro.util.UtilityMethod;
+
 import java.util.UUID;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PaymentActivity extends BaseActivity implements OnClickListener,AppRequest {
+public class PaymentActivity extends BaseActivity implements OnClickListener,AppRequest,Instamojo.InstamojoPaymentCallback {
   private TextView nameBox,  phoneBox;
   private TextView emailBox,amount,gst_value,amount_payable,tv_month;
   String orderId,paymentId;
-  InstapayListener listener;
+
   String imei;
   AlphaAnimation inAnimation;
   AlphaAnimation outAnimation;
@@ -56,6 +59,13 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   LinearLayout btn_three_month,btn_six_month,btn_twelve_month;
   boolean isChecked=false;
   private ProgressDialog dialog;
+  int amountOne,amountTwo,amountThree;
+  TextView tvAmount_1,tvAmount_2,tvAmount_3,tvDuration_1,tvDuration_2,tvDuration_3;
+  int selectedAmount;
+  String carId;
+
+  Dialog progressDialog;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -66,20 +76,32 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   private void initViews(){
     Toolbar toolbar=findViewById(R.id.toolbar_common);
     TextView title=findViewById(R.id.toolbar_title);
-    GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"");
+    Instamojo.getInstance().initialize(this, Instamojo.Environment.TEST);
+    GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"Subscription Renewal");
     Intent intent=getIntent();
     String email=intent.getStringExtra("email");
     String name=intent.getStringExtra("name");
     String mobile=intent.getStringExtra("mobile");
     imei=intent.getStringExtra("imei");
-    Instamojo.initialize(getApplicationContext());
+    carId=intent.getStringExtra("carId");
+
     progressBarHolder =  findViewById(R.id.progressBarHolder);
     btn_six_month=findViewById(R.id.btn_six_month);
     btn_three_month=findViewById(R.id.btn_three_month);
     btn_twelve_month=findViewById(R.id.btn_twelve_month);
 
 
+    tvAmount_1=findViewById(R.id.tvAmount_1);
+    tvAmount_2=findViewById(R.id.tvAmount_2);
+    tvAmount_3=findViewById(R.id.tvAmount_3);
+    tvDuration_1=findViewById(R.id.tvDuration_1);
+    tvDuration_2=findViewById(R.id.tvDuration_2);
+    tvDuration_3=findViewById(R.id.tvDuration_3);
+
+
     button = findViewById(R.id.pay);
+    button.setOnClickListener(this::onClick);
+
     nameBox =  findViewById(R.id.name);
     nameBox.setText(name);
 
@@ -94,11 +116,57 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
     rb_six=findViewById(R.id.radio_six_month);
     rb_three=findViewById(R.id.radio_three_month);
     rb_twelve=findViewById(R.id.radio_twelve_month);
-    Instamojo.setBaseUrl(Constants.INSTA_URL_TEST);
+
     dialog = new ProgressDialog(this);
     dialog.setIndeterminate(true);
     dialog.setMessage("Please wait...");
     dialog.setCancelable(false);
+
+
+
+    progressDialog= UtilityMethod.showProgress(PaymentActivity.this);
+    ApiRequests.getInstance().getSubscriptionAmount(GlobalReferences.getInstance().baseActivity,PaymentActivity.this);
+
+
+
+    btn_three_month.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        rb_twelve.setChecked(false);
+        rb_three.setChecked(true);
+        rb_six.setChecked(false);
+        CommonPreference.getInstance().setSubscriptionMonth(3);
+        isChecked=true;
+
+        selectedAmount=amountOne;
+      }
+    });
+    btn_six_month.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        rb_twelve.setChecked(false);
+        rb_three.setChecked(false);
+        rb_six.setChecked(true);
+
+        CommonPreference.getInstance().setSubscriptionMonth(6);
+        isChecked=true;
+        selectedAmount=amountTwo;
+      }
+    });
+    btn_twelve_month.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        rb_twelve.setChecked(true);
+        rb_three.setChecked(false);
+        rb_six.setChecked(false);
+
+        CommonPreference.getInstance().setSubscriptionMonth(12);
+        isChecked=true;
+        selectedAmount=amountThree;
+      }
+    });
+
+
 
   }
 
@@ -106,14 +174,32 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   public void onClick(View v) {
     switch (v.getId()){
      case  R.id.pay:
-       if (isChecked) {
+       if (isChecked && selectedAmount != 0) {
          //fetchTokenAndTransactionID();
          String name = nameBox.getText().toString();
          final String email = emailBox.getText().toString();
          String phone = phoneBox.getText().toString();
          String amount = amount_payable.getText().toString().replace("₹ ", "").replace("/-","").trim();
          // Log.e("Tag", "onClick: "+name+email+phone+amount );
-         callInstamojoPay(email, phone, amount, textView_Title.getText().toString(), name);
+
+        JSONObject data=new JSONObject();
+         try {
+           data.put("amount",selectedAmount+"");
+           data.put("car_id",carId);
+         } catch (JSONException e) {
+           e.printStackTrace();
+         }
+
+
+
+
+         progressDialog=UtilityMethod.showProgress(PaymentActivity.this);
+
+         ApiRequests.getInstance().create_order(GlobalReferences.getInstance().baseActivity,PaymentActivity.this,data);
+
+
+
+
        }else{
          Toast
              .makeText(PaymentActivity.this, "Please select subscription duration", Toast.LENGTH_SHORT).show();
@@ -169,32 +255,6 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   private  int calculateGst(int amount){
     return (18*amount)/100;
   }
-  private void callInstamojoPay(String email, String phone, String amount, String purpose, String buyername) {
-    final Activity activity = this;
-    InstamojoPay instamojoPay = new InstamojoPay();
-    IntentFilter filter = new IntentFilter("ai.devsupport.instamojo");
-    Instamojo.initialize(PaymentActivity.this);
-    registerReceiver(instamojoPay, filter);
-    JSONObject pay = new JSONObject();
-    try {
-      pay.put("email", email);
-      pay.put("phone", phone);
-      pay.put("purpose", purpose);
-      pay.put("amount", amount);
-      pay.put("name", buyername);
-      pay.put("webhook",BuildConfig.WEBHOOK_URL);
-      pay.put("send_sms", true);
-      pay.put("send_email", true);
-      pay.put("description",purpose);
-
-      Log.e(TAG, "callInstamojoPay: "+pay );
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
-    initListener();
-
-    instamojoPay.start(activity, pay, listener);
-  }
   private void showProgress(){
     progressBarHolder.setAnimation(inAnimation);
     progressBarHolder.bringToFront();
@@ -202,58 +262,7 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
 
   }
 
-  private void initListener() {
-    listener = new instamojo.library.InstapayListener() {
-      @Override
-      public void onSuccess(String response) {
 
-
-        if (response.contains("success")) {
-
-          String[] data = response.split(":");
-          Log.e("Payment", "afterReplace: " + data);
-
-
-          for (int i = 0; i < data.length; i++) {
-            String[] data_parse = data[i].split("=");
-            if (data_parse[0].equals("orderId")) {
-              orderId = data_parse[1];
-            }
-            if (data_parse[0].equals("paymentId")) {
-              paymentId = data_parse[1];
-            }
-          }
-
-          if (paymentId!=null) {
-            showProgress();
-            //  Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-
-
-            updateStatus("CREDIT",orderId,paymentId);
-
-         //   new PaymentUpdater(PaymentActivity.this, CommonPreference.getInstance().getSubscriptionImei(), paymentId, orderId,CommonPreference.getInstance().getSubscriptionMonth(),amount_payable.getText().toString().replace("₹ ", "").replace("/-","").trim(),gst_value.getText().toString().replace("₹ ", "").replace("/-","").trim());
-          }
-
-
-
-        }
-
-
-
-
-      }
-
-      @Override
-      public void onFailure(int code, String reason) {
-
-        updateStatus("FAILED",UUID.randomUUID().toString(),"--");
-
-//        new PaymentFailedUpdater(PaymentActivity.this, CommonPreference.getInstance().getSubscriptionImei(), "--", UUID
-//            .randomUUID().toString(),CommonPreference.getInstance().getSubscriptionMonth(),amount_payable.getText().toString().replace("₹ ", "").replace("/-","").trim(),gst_value.getText().toString().replace("₹ ", "").replace("/-","").trim());
-
-      }
-    };
-  }
 
 
 
@@ -290,6 +299,39 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   @Override
   public <T> void onRequestCompleted(BaseTask<T> listener, RequestParam requestParam) {
 
+    if (progressDialog != null){
+      progressDialog.dismiss();
+    }
+
+    if (listener.getTag().equals("amount")){
+      JSONObject data= null;
+      try {
+        data = listener.getJsonResponse().getJSONObject("msg");
+        JSONArray array_amount=data.getJSONArray("amount");
+        amountOne= array_amount.getJSONObject(0).getInt("current_amount");
+        amountTwo=array_amount.getJSONObject(1).getInt("current_amount");
+        amountThree=array_amount.getJSONObject(2).getInt("current_amount");
+        tvAmount_1.setText("₹ "+amountOne);
+        tvAmount_2.setText("₹ "+amountTwo);
+        tvAmount_3.setText("₹ "+amountThree);
+
+        tvDuration_2.setText(array_amount.getJSONObject(1).getString("label"));
+
+        tvDuration_1.setText(array_amount.getJSONObject(0).getString("label"));
+        tvDuration_3.setText(array_amount.getJSONObject(2).getString("label"));
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+
+    }
+    else if (listener.getTag().equals("create_order")){
+      try {
+        Instamojo.getInstance().initiatePayment(PaymentActivity.this, listener.getJsonResponse().getJSONObject("msg").getString("order_id"), this);
+      }catch (JSONException ex){
+        Log.e(TAG, "onOrderCreated: "+ex.getCause() );
+      }
+    }
+
   }
 
   @Override
@@ -304,6 +346,10 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
 
   @Override
   public <T> void onRequestCompleted(BaseTaskJson<JSONObject> listener, RequestParam requestParam) {
+
+    if (progressDialog != null){
+      progressDialog.dismiss();
+    }
     if (listener.getTag().equals("payment_success")){
       progressBarHolder.setVisibility(View.GONE);
 
@@ -318,6 +364,14 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
       Intent intent=new Intent(PaymentActivity.this,PaymentFailed.class);
       startActivity(intent);
       finish();
+    }else if (listener.getTag().equals("create_order")){
+      try {
+        Log.e(TAG, "onRequestCompleted: "+listener.getJsonResponse() );
+        orderId=listener.getJsonResponse().getJSONObject("msg").getString("order_id");
+        Instamojo.getInstance().initiatePayment(PaymentActivity.this, listener.getJsonResponse().getJSONObject("msg").getString("order_id"), this);
+      }catch (JSONException ex){
+        Log.e(TAG, "onOrderCreated: "+ex.getCause() );
+      }
     }
   }
 
@@ -328,6 +382,10 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
     if (progressBarHolder!=null) {
       progressBarHolder.setAnimation(outAnimation);
       progressBarHolder.setVisibility(View.GONE);
+    }
+
+    if (progressDialog != null){
+      progressDialog.dismiss();
     }
 
     Intent intent =new Intent(PaymentActivity.this,PaymentFailed.class);
@@ -342,6 +400,48 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   @Override
   public void indexScreen() {
     Analytics.index(PaymentActivity.this,"PaymentActivity");
+
+  }
+
+  @Override
+  public void onInstamojoPaymentComplete(String orderID, String transactionID, String paymentID, String paymentStatus) {
+
+    Log.e(TAG, "onInstamojoPaymentComplete: "+transactionID );
+
+    if (progressDialog != null){
+      progressDialog.dismiss();
+    }
+
+    Intent intent=new Intent(PaymentActivity.this,PaymentSuccess.class);
+    intent.putExtra("payment_id",paymentID);
+    intent.putExtra("transactionID",transactionID);
+    startActivity(intent);
+    finish();
+
+  }
+
+  @Override
+  public void onPaymentCancelled() {
+
+  }
+
+  @Override
+  public void onInitiatePaymentFailure(String s) {
+
+    try{
+      JSONObject params=new JSONObject();
+      params.put("IMEI", CommonPreference.getInstance().getSubscriptionImei());
+      params.put("order_id", orderId);
+      params.put("payment_status",s);
+      params.put("month_count",CommonPreference.getInstance().getSubscriptionMonth());
+      params.put("amount",selectedAmount);
+
+
+      ApiRequests.getInstance().save_payment_failed(GlobalReferences.getInstance().baseActivity,PaymentActivity.this,params);
+
+
+
+    }catch (JSONException ex){}
 
   }
 }

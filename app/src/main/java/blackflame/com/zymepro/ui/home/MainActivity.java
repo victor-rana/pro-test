@@ -158,10 +158,10 @@ NavigationFragment navigationFragment;
    int devicecount=CommonPreference.getInstance().getDeviceCount();
     if(devicecount>1){
       MulticarFragment f1 = new MulticarFragment();
-      addFragmentWithBackStack(f1,false,null);
+      addFragmentWithBackStack(f1,false,null,"MultiCar");
     }else{
       SingleCarFragment f1 = new SingleCarFragment();
-      addFragmentWithBackStack(f1,false,null);
+      addFragmentWithBackStack(f1,false,null,"SingleCar");
     }
 
   }

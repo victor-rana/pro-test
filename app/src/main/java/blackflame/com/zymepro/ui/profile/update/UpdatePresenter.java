@@ -1,6 +1,8 @@
 package blackflame.com.zymepro.ui.profile.update;
 
 import android.text.TextUtils;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +56,9 @@ public class UpdatePresenter {
 
 
       view.setBrand(carBrand);
+      Log.e("TAG", "parseBrand: "+carBrand.length );
     }catch (JSONException ex){
+      Log.e("TAG", "parseBrand: "+ex.getLocalizedMessage() );
 
     }
 
@@ -74,9 +78,11 @@ public class UpdatePresenter {
 
 
       view.setModel(carModel);
+      Log.e("TAG", "parseModel: "+carModel.length );
 
 
     }catch (JSONException ex){
+      Log.e("TAG", "parseBrand: "+ex.getLocalizedMessage() );
 
     }
   }

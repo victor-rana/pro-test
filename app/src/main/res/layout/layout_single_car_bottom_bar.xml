@@ -134,6 +134,7 @@
     android:orientation="vertical"
     android:paddingBottom="4dp"
     android:paddingTop="8dp"
+      android:visibility="gone"
     >
 
     <ImageView

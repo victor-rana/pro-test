@@ -182,10 +182,10 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
       e.printStackTrace();
     }
   }
-  public void addFragmentWithBackStack(Fragment fragment, boolean addToBackStack,Bundle bundle){
+  public void addFragmentWithBackStack(Fragment fragment, boolean addToBackStack,Bundle bundle,String tag){
     try {
       String backStateName = fragment.getClass().getName();
-      String fragmentTag = backStateName;
+      String fragmentTag = tag;
       Log.e(TAG, "addFragmentWithBackStack: name"+fragmentTag );
       final FragmentManager manager = getSupportFragmentManager();
       if(manager!=null) {
@@ -210,7 +210,7 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
             ft.addToBackStack(backStateName);
           ft.commitAllowingStateLoss();
         } else {
-          if (fragmentTag.equals("blackflame.com.zymepro.ui.home.singlecar.SingleCarFragment")){
+          if (fragmentTag.equals("SingleCar")){
             FragmentTransaction ft = manager.beginTransaction();
             if (bundle!=null) {
               fragment.setArguments(bundle);

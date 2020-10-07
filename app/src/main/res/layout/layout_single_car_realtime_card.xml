@@ -148,7 +148,7 @@
             android:layout_above="@+id/status"
             android:layout_centerHorizontal="true"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_map"/>
+            android:src="@drawable/ic_map_blue"/>
 
         <TextView
             android:id="@+id/status"

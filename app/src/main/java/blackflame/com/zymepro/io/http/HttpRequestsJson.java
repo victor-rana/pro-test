@@ -42,7 +42,7 @@ public class HttpRequestsJson extends BaseTaskJson {
 
         this.appRequest = appRequest;
         Log.e("Content tye", "dfddf");
-        LogUtils.info("Login",jsonObject.toString());
+        LogUtils.info("Login",jsonObject.toString()+appRequest);
 
         this.requestParam = requestParam;
     }

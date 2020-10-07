@@ -53,21 +53,23 @@
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvDuration_1"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="3 months"
+          android:text="--"
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvAmount_1"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="₹ 400/-"
+          android:text="--"
           android:textColor="@color/white" />
 
       </LinearLayout>
@@ -98,21 +100,23 @@
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvDuration_2"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="6 months"
+          android:text="--"
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvAmount_2"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="₹ 600/-"
+          android:text="--"
           android:textColor="@color/white" />
         <TextView
           android:layout_width="match_parent"
@@ -123,6 +127,7 @@
           android:layout_marginTop="4dp"
           android:textColor="@color/colorAccent"
           android:gravity="center"
+            android:visibility="gone"
           />
 
       </LinearLayout>
@@ -153,21 +158,23 @@
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvDuration_3"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="12 months"
+          android:text="--"
           android:textColor="@color/white" />
 
         <TextView
+            android:id="@+id/tvAmount_3"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="4dp"
           android:gravity="center"
-          android:text="₹ 900/-"
+          android:text="--"
           android:textColor="@color/white" />
 
         <TextView
@@ -179,6 +186,7 @@
           android:layout_marginTop="4dp"
           android:textColor="@color/colorAccent"
           android:gravity="center"
+            android:visibility="gone"
           />
 
       </LinearLayout>
@@ -241,6 +249,7 @@
           android:gravity="end"
           android:textColor="@color/white"
           android:padding="4dp"
+            android:visibility="gone"
           />
         <TextView
           android:layout_width="match_parent"
@@ -249,7 +258,9 @@
           android:gravity="end"
           android:textColor="@color/white"
           android:padding="4dp"
-          />
+            android:visibility="gone"
+
+            />
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -257,7 +268,9 @@
           android:gravity="end"
           android:textColor="@color/white"
           android:padding="4dp"
-          />
+            android:visibility="gone"
+
+            />
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -265,7 +278,9 @@
           android:gravity="end"
           android:textColor="@color/white"
           android:padding="4dp"
-          />
+            android:visibility="gone"
+
+            />
       </LinearLayout>
       <LinearLayout
         android:layout_width="0dp"
@@ -308,7 +323,9 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="--"
-          android:textColor="@color/white"
+            android:visibility="gone"
+
+            android:textColor="@color/white"
           android:padding="4dp"
           android:maxLines="1"
           />
@@ -320,7 +337,9 @@
           android:textColor="@color/white"
           android:padding="4dp"
           android:maxLines="1"
-          />
+            android:visibility="gone"
+
+            />
         <TextView
           android:id="@+id/tv_gst"
           android:layout_width="match_parent"
@@ -329,7 +348,9 @@
           android:textColor="@color/white"
           android:padding="4dp"
           android:maxLines="1"
-          />
+            android:visibility="gone"
+
+            />
         <TextView
           android:id="@+id/tv_amount_payable"
           android:layout_width="match_parent"
@@ -337,7 +358,9 @@
           android:text="--"
           android:textColor="@color/white"
           android:padding="4dp"
-          android:maxLines="1"
+            android:visibility="gone"
+
+            android:maxLines="1"
           />
 
       </LinearLayout>

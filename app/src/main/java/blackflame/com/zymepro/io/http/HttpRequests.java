@@ -29,7 +29,7 @@ public class HttpRequests extends BaseTask<JSONObject> {
     public HttpRequests(int method, Constants.RequestParam requestParam, Response.ErrorListener listener,
                         AppRequest appRequest, Map<String, String> mParams) {
 
-        super(method, requestParam.getBaseComleteUrl(), listener, requestParam.getRequestTag(), mParams);
+        super(method, requestParam.getBaseCompleteUrl(), listener, requestParam.getRequestTag(), mParams);
         this.appRequest = appRequest;
         this.mParams = mParams;
         setHeaders("authorization", GlobalReferences.getInstance().pref.getAccessToken()+"");

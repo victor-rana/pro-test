@@ -4,6 +4,8 @@ package blackflame.com.zymepro.util;
 
 import static blackflame.com.zymepro.util.ActivityUtils.startActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,10 +13,14 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Window;
+import android.widget.ProgressBar;
 
 
 import blackflame.com.zymepro.Prosingleton;
@@ -522,6 +528,19 @@ public class UtilityMethod {
     }
 
 
+
+    public static Dialog showProgress(Activity activity) {
+        Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(
+                new ColorDrawable(0));
+        dialog.setContentView(R.layout.dialog_progress);
+        ProgressBar progressBar = dialog.findViewById(R.id.progressBar);
+        progressBar.getIndeterminateDrawable().setColorFilter(activity.getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+        dialog.setCancelable(false);
+        dialog.show();
+        return dialog;
+    }
 
 
 }

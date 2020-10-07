@@ -88,6 +88,7 @@ PitstopPresenter presenter;
     GlobalReferences.getInstance().baseActivity=this;
     presenter=new PitstopPresenter(this);
     initViews();
+
   }
   private void initViews(){
     toolbar_pitstop = findViewById(R.id.toolbar_common);

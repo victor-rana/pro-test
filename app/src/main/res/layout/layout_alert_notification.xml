@@ -85,7 +85,7 @@
       android:layout_weight="3"
       android:max="16"
       android:minHeight="16dp"
-      android:progress="12"
+      android:progress="0"
       android:progressBackgroundTint="@color/setting_view_background"
       android:progressTint="@color/colorAccent"
       android:thumbTint="#fff"

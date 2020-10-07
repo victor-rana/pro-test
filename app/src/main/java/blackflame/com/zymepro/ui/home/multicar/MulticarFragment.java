@@ -189,7 +189,7 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
           bundle.putString("IMEI",list.get(position).getImei());
           bundle.putString("registration_number",list.get(position).getRegistration());
           bundle.putInt("coming",2);
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle);
+          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
         }
         textView_selected_car.setText(model.getRegistration()+" "+model.getBrand()+" "+model.getBrand());
 

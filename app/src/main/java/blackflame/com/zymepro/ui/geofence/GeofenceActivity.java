@@ -289,7 +289,7 @@ public class GeofenceActivity extends BaseActivity implements GoogleApiClient.Co
           .fillColor(getResources().getColor(R.color.map_circle_fill_color)));
       Gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(
           circleOptions.getCenter(), getZoomLevel(circle)));
-    } else if (latLng != null) {
+    } else if (latLng != null && marker != null) {
       marker.setPosition(latLng);
       CircleOptions circleOptions = new CircleOptions().center(latLng);
       circle = Gmap.addCircle(circleOptions

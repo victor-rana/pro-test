@@ -13,6 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="0.5dp"
     android:background="@drawable/gradient_black_white_black" />
-  <include layout="@layout/layout_scan_card_bottom"/>
+  <include
+      layout="@layout/layout_scan_card_bottom"/>
 
 </LinearLayout>
