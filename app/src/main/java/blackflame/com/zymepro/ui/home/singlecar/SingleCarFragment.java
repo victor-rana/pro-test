@@ -1169,6 +1169,8 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   }
 
+
+
   @Override
   public void updateRealtimeLocation(double latitude, double longitude) {
     imageView_car.setVisibility(View.VISIBLE);
