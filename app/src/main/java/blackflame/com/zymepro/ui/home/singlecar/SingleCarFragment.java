@@ -2,7 +2,9 @@ package blackflame.com.zymepro.ui.home.singlecar;
 
 
 import static blackflame.com.zymepro.constant.PermissionConstants.getPermissions;
+import static com.android.volley.VolleyLog.TAG;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -404,9 +406,17 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
         listview_carCount.setVisibility(View.GONE);
         CarcountModel model = list.get(position);
         if (model.getBrand().equals("All")) {
+          Log.d(TAG, "onItemClick: sushant position All "+position+" id  "+id);
+
           MulticarFragment multicar = new MulticarFragment();
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(multicar,false,null,"MultiCar");
+          Activity activity=getActivity();
+          if (activity instanceof MainActivity){
+            ((MainActivity) activity).addFragmentWithBackStack(multicar,false,null,"MultiCar");
+          }
+
         } else {
+          Log.d(TAG, "onItemClick: sushant position Single "+position+" id  "+id);
+
           onDetach();
           onDestroyView();
           listview_carCount.setVisibility(View.GONE);
@@ -415,7 +425,12 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
           bundle.putString("IMEI", list.get(position).getImei());
           bundle.putString("registration_number", list.get(position).getRegistration());
           bundle.putInt("coming", 2);
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
+
+          Activity activity=getActivity();
+          if (activity instanceof MainActivity){
+            ((MainActivity) activity).addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
+          }
+
         }
       }
     });
@@ -1138,7 +1153,10 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     new Handler(Looper.getMainLooper()).post(new Runnable() {
       @Override
       public void run() {
-        presenter.parseRealtimeData(topic,data);
+
+        if (CommonPreference.getInstance().getDeviceActivated()) {
+          presenter.parseRealtimeData(topic, data);
+        }
 
         Log.d("Mqtt data ",data.toString());
 

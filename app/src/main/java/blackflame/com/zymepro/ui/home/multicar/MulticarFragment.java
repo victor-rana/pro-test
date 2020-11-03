@@ -3,6 +3,7 @@ package blackflame.com.zymepro.ui.home.multicar;
 import static blackflame.com.zymepro.util.UtilityMethod.resizeMapIcons;
 import static com.android.volley.VolleyLog.TAG;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -178,18 +179,29 @@ public class MulticarFragment extends CommonFragment implements OnMarkerClickLis
     listView_multicar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Log.d(TAG, "onItemClick: sushant position "+position+" id  "+id);
         listView_multicar.setVisibility(View.GONE);
         onDestroyView();
         CarcountModel model=list.get(position);
+        Log.d(TAG, "onItemClick: sushant position All "+position+" id  "+id+" model "+model.toString());
+
         if(model.getBrand().equals("All")){
+          Log.d(TAG, "onItemClick: sushant position All "+position+" id  "+id);
 
         }else{
+          Log.d(TAG, "onItemClick: sushant Single Car "+position+" id  "+id);
+
           SingleCarFragment singleCar=new SingleCarFragment();
           Bundle bundle=new Bundle();
           bundle.putString("IMEI",list.get(position).getImei());
           bundle.putString("registration_number",list.get(position).getRegistration());
           bundle.putInt("coming",2);
-          GlobalReferences.getInstance().baseActivity.addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
+          Activity activity=getActivity();
+          if (activity instanceof MainActivity){
+            ((MainActivity) activity).addFragmentWithBackStack(singleCar,false,bundle,"SingleCar");
+          }
+
         }
         textView_selected_car.setText(model.getRegistration()+" "+model.getBrand()+" "+model.getBrand());
 

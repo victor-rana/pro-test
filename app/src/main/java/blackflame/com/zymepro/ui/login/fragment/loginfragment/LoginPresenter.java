@@ -76,10 +76,6 @@ public class LoginPresenter implements  LoginInteractor.OnLoginFinishedListener 
               CommonPreference.getInstance().setTokenExpTime("login_expiry");
 
             }
-
-
-
-
             CommonPreference.getInstance().setIsLoggedIn(true);
             CommonPreference.getInstance().setSubscriptionTopic(topicName);
             view.navigateToHome();

@@ -168,7 +168,7 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
 
           FragmentTransaction ft = manager.beginTransaction();
           //  ft.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
-          ft.replace(id, fragment, fragmentTag);
+          ft.replace(id, fragment);
 
           // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
           if (addToBackStack)
@@ -182,41 +182,63 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
       e.printStackTrace();
     }
   }
-  public void addFragmentWithBackStack(Fragment fragment, boolean addToBackStack,Bundle bundle,String tag){
+
+
+
+
+
+  public void addFragmentWithBackStack(Fragment fragment, boolean addToBackStack,Bundle bundle){
     try {
       String backStateName = fragment.getClass().getName();
-      String fragmentTag = tag;
+      String fragmentTag = backStateName;
       Log.e(TAG, "addFragmentWithBackStack: name"+fragmentTag );
       final FragmentManager manager = getSupportFragmentManager();
       if(manager!=null) {
-
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        fragmentManager =getSupportFragmentManager();
+//                        Log.e("fragmentManager",fragmentManager+"");
+//                    }
+//                });
         Log.e("manager.findFra)", manager.findFragmentByTag(fragmentTag) + "");
 
         Fragment fragment1 = manager.findFragmentByTag(fragmentTag);
+//            if(fragment1 instanceof PagerFragment) {
+//                Suggestions suggestions = fragment.getArguments().getParcelable("near_by");
+//                fragment1.getArguments().putParcelable("near_by", suggestions);
+//            }
 
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
 
-          FragmentTransaction ft = manager.beginTransaction();
+        FragmentTransaction ft = manager.beginTransaction();
           if (bundle!=null) {
             fragment.setArguments(bundle);
           }
           //  ft.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
-          ft.replace(R.id.singlecarfragment, fragment, fragmentTag);
+          ft.replace(R.id.singlecarfragment, fragment);
 
           // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
           if (addToBackStack)
             ft.addToBackStack(backStateName);
           ft.commitAllowingStateLoss();
         } else {
-          if (fragmentTag.equals("SingleCar")){
-            FragmentTransaction ft = manager.beginTransaction();
+          // Fragment fragment1 = manager.findFragmentByTag(fragmentTag);
+
+          if (fragmentTag.equals("blackflame.com.zymepro.FragmentSingleCar")){
+
+
+         FragmentTransaction ft = manager.beginTransaction();
             if (bundle!=null) {
               fragment.setArguments(bundle);
             }
+            //  ft.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
+            ft.replace(R.id.singlecarfragment, fragment);
 
-            ft.replace(R.id.singlecarfragment, fragment, fragmentTag);
+            // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             if (addToBackStack)
               ft.addToBackStack(backStateName);
             ft.commitAllowingStateLoss();
@@ -231,17 +253,14 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
     }
   }
 
-
-
-
   @Override
   protected void onResume() {
     super.onResume();
     onPostResume();
 
-
-      fragmentManager =getSupportFragmentManager();
-    Log.e("manager",getSupportFragmentManager()+"");
+//
+//      fragmentManager =getSupportFragmentManager();
+//    Log.e("manager",getSupportFragmentManager()+"");
   }
 
     @Override

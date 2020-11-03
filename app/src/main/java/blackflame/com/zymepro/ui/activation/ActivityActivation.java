@@ -1,6 +1,7 @@
 package blackflame.com.zymepro.ui.activation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.ui.confirmation.ActivityConfirmation;
 import blackflame.com.zymepro.util.Analytics;
 
 import org.json.JSONArray;
@@ -140,11 +142,11 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
         if(array.length()>0){
           isGpsActive=true;
           tv_counter.setText("Zyme Pro activated!");
-//             Intent intent=new Intent(ActivityActivation.this,ActivityConfirmation.class);
-//             intent.putExtra("status",1);
-//             CommonPreference.getInstance().setDeviceActivated(true);
-//             // edit.apply();
-//             startActivity(intent);
+             Intent intent=new Intent(ActivityActivation.this, ActivityConfirmation.class);
+             intent.putExtra("status",1);
+             CommonPreference.getInstance().setDeviceActivated(true);
+             // edit.apply();
+             startActivity(intent);
           finish();
         }else{
           Log.e("TAG", "onRequestCompleted gps status: " +isGpsActive);
@@ -183,11 +185,11 @@ public class ActivityActivation extends BaseActivity implements AppRequest {
           if(array.length()>0){
             isGpsActive=true;
             tv_counter.setText("Zyme Pro activated!");
-//             Intent intent=new Intent(ActivityActivation.this,ActivityConfirmation.class);
-//             intent.putExtra("status",1);
-//             CommonPreference.getInstance().setDeviceActivated(true);
+             Intent intent=new Intent(ActivityActivation.this,ActivityConfirmation.class);
+             intent.putExtra("status",1);
+             CommonPreference.getInstance().setDeviceActivated(true);
 //             // edit.apply();
-//             startActivity(intent);
+             startActivity(intent);
             finish();
           }else{
             isGpsActive=false;

@@ -8,6 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +29,7 @@ import blackflame.com.zymepro.io.http.ApiRequests;
 import blackflame.com.zymepro.io.http.BaseTask;
 import blackflame.com.zymepro.io.http.BaseTaskJson;
 import blackflame.com.zymepro.io.listener.AppRequest;
+import blackflame.com.zymepro.mqtt.MqttHandler;
 import blackflame.com.zymepro.notification.ProFirebaseMessagingService;
 import blackflame.com.zymepro.onesignal.helper.OneSignalUtility;
 import blackflame.com.zymepro.ui.about.AboutUs;
@@ -132,6 +137,64 @@ NavigationFragment navigationFragment;
 
 
 
+  }
+
+
+
+  public void addFragmentWithBackStack(Fragment fragment, boolean addToBackStack, Bundle bundle, String tag){
+    try {
+      String backStateName = fragment.getClass().getName();
+      String fragmentTag = tag;
+      Log.e(TAG, "addFragmentWithBack   Stack: name"+fragmentTag );
+      FragmentManager manager = getSupportFragmentManager();
+      Log.e(TAG, "addFragmentWithBackStack: "+manager );
+      if(manager!=null) {
+
+        Log.e("manager.findFra)", manager.findFragmentByTag(fragmentTag) + "");
+
+        Fragment fragment1 = manager.findFragmentByTag(fragmentTag);
+
+//        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+
+        if (manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
+
+          FragmentTransaction ft = manager.beginTransaction();
+          if (bundle!=null) {
+            fragment.setArguments(bundle);
+          }
+          //  ft.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
+          ft.replace(R.id.singlecarfragment, fragment);
+
+          ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+          if (addToBackStack)
+            ft.addToBackStack(backStateName);
+          ft.commitAllowingStateLoss();
+          Log.e("alreadyyy", "aleadyyy null "+fragment);
+
+        } else {
+          if (fragmentTag.equals("SingleCar")){
+            FragmentTransaction ft = manager.beginTransaction();
+            if (bundle!=null) {
+              fragment.setArguments(bundle);
+            }
+
+            ft.add(R.id.singlecarfragment, fragment);
+//            if (addToBackStack)
+//              ft.addToBackStack(backStateName);
+            ft.commitAllowingStateLoss();
+            Log.e("alreadyyy", "aleadyyy not null");
+
+          }
+
+
+          Log.e("alreadyyy", "aleadyyy");
+        }
+      }
+    }catch (Exception e){
+      e.printStackTrace();
+
+      Log.e(TAG, "addFragmentWithBackStack: "+e.getMessage() );
+    }
   }
 
   private boolean checkPlayServices() {
@@ -263,6 +326,8 @@ NavigationFragment navigationFragment;
           SettingPreferences.getInstance().clear();
           CommonPreference.getInstance().clear();
 
+
+          MqttHandler.unRegisterMqtt();
           Intent intent = new Intent(this, LoginActivity.class);
           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
           intent.putExtra("logout", 1);
@@ -346,12 +411,16 @@ NavigationFragment navigationFragment;
               int  devicecount=CommonPreference.getInstance().getDeviceCount();
                   if(devicecount>1){
                     MulticarFragment f1 = new MulticarFragment();
-                    addFragmentWithBackStack(f1,false,null);
+//                    addFragmentWithBackStack(f1,false,null);
+                    addFragmentWithBackStack(f1,false,null,"MultiCar");
+
 
                   }else{
 
                     SingleCarFragment f1 = new SingleCarFragment();
-                    addFragmentWithBackStack(f1,false,null);
+//                    addFragmentWithBackStack(f1,false,null);
+                    addFragmentWithBackStack(f1,false,null,"SingleCar");
+
 
                   }
 

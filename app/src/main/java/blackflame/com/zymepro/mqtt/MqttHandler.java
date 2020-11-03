@@ -173,5 +173,21 @@ static MqttDataListener listener;
     }
   }
 
+
+  public static void unRegisterMqtt(){
+    if (mqttAndroidClient != null){
+      try {
+        mqttAndroidClient.unsubscribe(subscriptionTopic);
+
+        mqttAndroidClient.disconnectForcibly();
+
+      } catch (MqttException e) {
+        e.printStackTrace();
+        Log.e(TAG, "unRegisterMqtt: "+e.getCause() );
+      }
+    }
+
+  }
+
   }
 

@@ -75,4 +75,18 @@ public class CarcountModel {
   public void setRegistration(String registration) {
     this.registration = registration;
   }
+
+  @Override
+  public String toString() {
+    return "CarcountModel{" +
+            "model='" + model + '\'' +
+            ", brand='" + brand + '\'' +
+            ", registration='" + registration + '\'' +
+            ", latitude=" + latitude +
+            ", longitude=" + longitude +
+            ", nickName='" + nickName + '\'' +
+            ", status='" + status + '\'' +
+            ", imei='" + imei + '\'' +
+            '}';
+  }
 }
