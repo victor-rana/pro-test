@@ -76,7 +76,11 @@ public class PaymentActivity extends BaseActivity implements OnClickListener,App
   private void initViews(){
     Toolbar toolbar=findViewById(R.id.toolbar_common);
     TextView title=findViewById(R.id.toolbar_title);
-    Instamojo.getInstance().initialize(this, Instamojo.Environment.TEST);
+    if (BuildConfig.DEBUG) {
+      Instamojo.getInstance().initialize(this, Instamojo.Environment.TEST);
+    }else{
+      Instamojo.getInstance().initialize(this, Instamojo.Environment.PRODUCTION);
+    }
     GlobalReferences.getInstance().baseActivity.setToolbar(toolbar,title,"Subscription Renewal");
     Intent intent=getIntent();
     String email=intent.getStringExtra("email");

@@ -39,6 +39,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import org.json.JSONObject;
 
+import static blackflame.com.zymepro.util.ActivityUtils.startActivity;
+
 public class ActivityProfile extends BaseActivity implements ProfileCardClickListener,View.OnClickListener,AppRequest ,ProfilePresenter.View{
   Toolbar toolbar_Profile;
   TextView textView_Title;
@@ -148,46 +150,46 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
 
   @Override
   public void onSubscriptionCallback(int position, int days) {
-//    if (days> 120){
-//      int left_days=days-120;
-//      Toast.makeText(context, "You can renew subscription within 3 month of expiration ", Toast.LENGTH_SHORT).show();
-//    } else if(days<=-30){
-//      new AwesomeInfoDialog(this)
-//          .setTitle("Alert")
-//          .setMessage("Your subscription has expired before 1 month, if you want to continue to use Zymepro write to us.")
-//          .setColoredCircle(R.color.colorAccent)
-//          .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
-//          .setCancelable(true)
-//          .setPositiveButtonText("Mail us")
-//          .setPositiveButtonbackgroundColor(R.color.colorAccent)
-//          .setPositiveButtonTextColor(R.color.white)
-//          .setNegativeButtonText("I want to renew later")
-//          .setNegativeButtonbackgroundColor(R.color.colorAccent)
-//          .setNegativeButtonTextColor(R.color.white)
-//          .setPositiveButtonClick(new Closure() {
-//            @Override
-//            public void exec() {
-//              Intent i = new Intent(Intent.ACTION_SEND);
-//              i.setType("message/rfc822");
-//              i.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@getzyme.com"});
-//              try {
-//                startActivity(Intent.createChooser(i, "Send mail..."));
-//
-//              } catch (android.content.ActivityNotFoundException ex) {
-//                Toast.makeText(ActivityProfile.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-//              }
-//            }
-//          })
-//
-//          .setNegativeButtonClick(new Closure() {
-//            @Override
-//            public void exec() {
-//              //click
-//            }
-//          })
-//          .show();
-//
-//    }else {
+    if (days> 120){
+      int left_days=days-120;
+      Toast.makeText(context, "You can renew subscription within 3 month of expiration ", Toast.LENGTH_SHORT).show();
+    } else if(days<=-30){
+      new AwesomeInfoDialog(this)
+          .setTitle("Alert")
+          .setMessage("Your subscription has expired before 1 month, if you want to continue to use Zymepro write to us.")
+          .setColoredCircle(R.color.colorAccent)
+          .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
+          .setCancelable(true)
+          .setPositiveButtonText("Mail us")
+          .setPositiveButtonbackgroundColor(R.color.colorAccent)
+          .setPositiveButtonTextColor(R.color.white)
+          .setNegativeButtonText("I want to renew later")
+          .setNegativeButtonbackgroundColor(R.color.colorAccent)
+          .setNegativeButtonTextColor(R.color.white)
+          .setPositiveButtonClick(new Closure() {
+            @Override
+            public void exec() {
+              Intent i = new Intent(Intent.ACTION_SEND);
+              i.setType("message/rfc822");
+              i.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@getzyme.com"});
+              try {
+                startActivity(Intent.createChooser(i, "Send mail..."));
+
+              } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(ActivityProfile.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+              }
+            }
+          })
+
+          .setNegativeButtonClick(new Closure() {
+            @Override
+            public void exec() {
+              //click
+            }
+          })
+          .show();
+
+    }else {
       ProfileModel model = list_cardata.get(position);
       Intent intent = new Intent(ActivityProfile.this, PaymentActivity.class);
       intent.putExtra("name", tv_name.getText().toString().trim());
@@ -198,7 +200,7 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
       startActivity(intent);
       finish();
 
-//    }
+   }
   }
 
   @Override
