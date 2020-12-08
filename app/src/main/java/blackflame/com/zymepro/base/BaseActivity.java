@@ -342,13 +342,14 @@ public abstract class BaseActivity extends BaseActivityParent implements AppRequ
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
     try {
 
       unregisterReceiver(receiver);
     }catch (Exception ex){
       ex.printStackTrace();
     }
+    super.onDestroy();
+
   }
 
 

@@ -175,11 +175,16 @@ static MqttDataListener listener;
 
 
   public static void unRegisterMqtt(){
+    Log.e(TAG, "unRegisterMqtt: "+"above");
+
     if (mqttAndroidClient != null){
       try {
-        mqttAndroidClient.unsubscribe(subscriptionTopic);
+//        mqttAndroidClient.unsubscribe(subscriptionTopic);
 
-        mqttAndroidClient.disconnectForcibly();
+        mqttAndroidClient.unregisterResources();
+        mqttAndroidClient.disconnect(0);
+
+        Log.e(TAG, "unRegisterMqtt: "+"called");
 
       } catch (MqttException e) {
         e.printStackTrace();
@@ -187,7 +192,13 @@ static MqttDataListener listener;
       }
     }
 
+
+
   }
+
+
+
+
 
   }
 

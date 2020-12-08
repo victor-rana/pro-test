@@ -150,10 +150,11 @@ public class ActivityProfile extends BaseActivity implements ProfileCardClickLis
 
   @Override
   public void onSubscriptionCallback(int position, int days) {
-    if (days> 120){
+
+    if (days > 120){
       int left_days=days-120;
       Toast.makeText(context, "You can renew subscription within 3 month of expiration ", Toast.LENGTH_SHORT).show();
-    } else if(days<=-30){
+    } else if(days <= -30){
       new AwesomeInfoDialog(this)
           .setTitle("Alert")
           .setMessage("Your subscription has expired before 1 month, if you want to continue to use Zymepro write to us.")

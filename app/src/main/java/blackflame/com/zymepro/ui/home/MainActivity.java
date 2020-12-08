@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,6 +50,8 @@ import blackflame.com.zymepro.ui.setting.SettingActivity;
 import blackflame.com.zymepro.util.Analytics;
 import blackflame.com.zymepro.util.NetworkUtils;
 import blackflame.com.zymepro.util.ToastUtils;
+import blackflame.com.zymepro.view.custom.photoview.Util;
+
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.google.android.gms.common.ConnectionResult;
@@ -328,13 +331,22 @@ NavigationFragment navigationFragment;
 
 
           MqttHandler.unRegisterMqtt();
-          Intent intent = new Intent(this, LoginActivity.class);
-          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          intent.putExtra("logout", 1);
+          new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              Util.deleteCache(MainActivity.this);
+
+              Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              intent.putExtra("logout", 1);
 //        OneSignalUtility.removeTags();
 //        OneSignal.setSubscription(false);
-          startActivity(intent);
-          finish();
+              startActivity(intent);
+              finish();
+            }
+          },2000);
+
+
         }
 
       }catch (JSONException ex){
@@ -369,13 +381,22 @@ NavigationFragment navigationFragment;
           SettingPreferences.getInstance().clear();
           CommonPreference.getInstance().clear();
 
-          Intent intent = new Intent(this, LoginActivity.class);
-          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-          intent.putExtra("logout", 1);
+          MqttHandler.unRegisterMqtt();
+          new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+              Util.deleteCache(MainActivity.this);
+
+              Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              intent.putExtra("logout", 1);
 //        OneSignalUtility.removeTags();
 //        OneSignal.setSubscription(false);
-          startActivity(intent);
-          finish();
+              startActivity(intent);
+              finish();
+            }
+          },2000);
+
         }
 
       }catch (JSONException ex){
@@ -533,4 +554,8 @@ NavigationFragment navigationFragment;
       Toast.makeText(this, " Unable to find market app", Toast.LENGTH_LONG).show();
     }
   }
+
+
+
+
 }
