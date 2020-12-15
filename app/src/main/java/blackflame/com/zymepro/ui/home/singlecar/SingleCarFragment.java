@@ -942,6 +942,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
     tv_battery_realtime.setVisibility(View.GONE);
     tv_coolant_realtime.setVisibility(View.GONE);
     textView_parked.setClickable(false);
+    relativeLayout_selectedcar.setVisibility(View.VISIBLE);
     isCardclickable = false;
     if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
       textView_parked.setText(Html.fromHtml(text_unplugged));
@@ -1154,7 +1155,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
       @Override
       public void run() {
 
-        if (CommonPreference.getInstance().getDeviceActivated()) {
+        if (CommonPreference.getInstance().getDeviceActivated() && topic.contains(selectedImei)) {
           presenter.parseRealtimeData(topic, data);
         }
 
