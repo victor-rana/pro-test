@@ -832,7 +832,7 @@ public class SingleCarFragment extends CommonFragment implements GoogleMap.OnMar
 
   @Override
   public void setSingleCar() {
-    iv_more.setVisibility(View.GONE);
+    iv_more.setVisibility(View.VISIBLE);
   }
 
   @Override
