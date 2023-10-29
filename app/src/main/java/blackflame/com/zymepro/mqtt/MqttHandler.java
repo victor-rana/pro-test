@@ -98,7 +98,12 @@ static MqttDataListener listener;
               disconnectedBufferOptions.setBufferSize(100);
               disconnectedBufferOptions.setPersistBuffer(false);
               disconnectedBufferOptions.setDeleteOldestMessages(false);
-              mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+              try {
+                mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
+              }
+              catch (NullPointerException exception){
+
+              }
               System.out.println("success");
               Log.e(TAG, "onSuccess: "+"Success" );
 
